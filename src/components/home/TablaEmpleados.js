@@ -1,31 +1,60 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 
+import { useSelector,useDispatch } from 'react-redux';
 
 
-const baseUrl="http://localhost:4000/empleados";
+import Widget from '../Widget';
+import { store } from '../../redux/store';
+
+
+
+
+const baseUrl="http://192.168.1.2:4000/empleados";
 
 const TablaEmpleados = () => {
 
+const employes = useSelector((state) => state.empleados)    
+
 const [empleados,SetEmpleados]=useState([])
-const [resaltar,SetResaltar]=useState(true)
+const [detalle,SetDetalle]=useState({})
 
 const resaltarFila = ()=>{
 
 }
 
 const getEmpleados =async ()=>{
+
+    
+
     await axios.get(baseUrl)
     .then(res =>{
         const datos=res.data
         console.log(datos);
         SetEmpleados(datos)
+
+
+        store.dispatch({
+            type:'@getEmpleados',
+            payload:datos
+        })
     })
+
+    
 }
 
 useEffect(()=>{
     getEmpleados()
 },[])
+
+const Mostrar =(u)=>{
+    console.log(u)
+
+    store.dispatch({
+        type:'@getEmpleadoId',
+        payload:u
+    })
+} 
     return (
         <div>
            <div className="content-wrapper">
@@ -35,9 +64,10 @@ useEffect(()=>{
         <div className="col-sm-6">
           <h1>DataTable</h1>
           <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-success">Nuevo</button>
+          {/* <button type="button" class="btn btn-success">Nuevo</button>
           <button type="button" class="btn btn-primary">Actualizar</button>
-          <button type="button" class="btn btn-danger">Eliminar</button>
+          <button type="button" class="btn btn-danger">Eliminar</button> */}
+          <Widget detalle={detalle} />
           </div>
         </div>
         <div className="col-sm-6">
@@ -68,6 +98,7 @@ useEffect(()=>{
                                         </div>
                                     </div>
                                     <div className="card-body table-responsive p-0">
+                                        
                                         <table className="table table-hover text-nowrap">
                                             <thead>
                                                 <tr>
@@ -80,8 +111,8 @@ useEffect(()=>{
                                             </thead>
                                             <tbody>
                                                      {
-                                                    empleados.map((u)=>
-                                                <tr key="u.fb_empleado_id">
+                                                    employes.map((u)=>
+                                                <tr key="u.fb_empleado_id" onClick={()=>Mostrar(u)}>
                                                     <td>{u.fb_empleado_id}</td>
                                                     <td>{u.codigo}</td>
                                                     <td>{u.email}</td>

@@ -1,31 +1,31 @@
 import './App.css';
+import Login from './components/Login'
+import { Routes, Route } from 'react-router-dom'
+
+
+
+import { store } from './redux/store';
+
 import Navbar from './components/Navbar';
 import Home from './components/home/Home';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
-import { Routes, Route } from 'react-router-dom'
 import TablaEmpleados from './components/home/TablaEmpleados';
-
+import Principal from './components/Principal';
 
 
 
 function App() {
+
   return (
-    <div className="wrapper">
-      <Navbar>
-      </Navbar>
-      <Routes>
-        <Route path='/empleados' element={<TablaEmpleados/>}></Route>
-        <Route path='/' element={<Home/>}></Route>
-      </Routes>
-
-      <Sidebar>
-
-      </Sidebar>
-
-      <Footer></Footer>
-    </div>
-
+  <>
+    <Routes>
+      <Route path='/' element={<Login/>}></Route>
+      <Route path='/principal/*' element={<Principal/>}> </Route>
+    </Routes>
+    <Sidebar>
+    </Sidebar>
+  </>
   );
 }
 

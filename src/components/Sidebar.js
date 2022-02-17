@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Sidenav = () => {
     return (
@@ -274,13 +274,13 @@ const Sidenav = () => {
                   </a>
                   <ul className="nav nav-treeview">
                     <li className="nav-item">
-                      <NavLink to="/empleados" className="nav-link">
+                      <NavLink to="/principal/empleados" className="nav-link">
                         <i className="far fa-circle nav-icon" />
                         <p>Lista Empleados</p>
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink to="/" className="nav-link">
+                      <NavLink to="/principal/home" className="nav-link">
                         <i className="far fa-circle nav-icon" />
                         <p>Home</p>
                       </NavLink>
