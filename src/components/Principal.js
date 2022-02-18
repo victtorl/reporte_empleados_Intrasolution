@@ -10,13 +10,14 @@ import React from 'react';
 
 const Principal = () => {
   
+    const rutaServidor="intrasolution_nodejs"
     return (
         <div className="wrapper">
         <Navbar>
         </Navbar>
         <Routes>
-            <Route path='/empleados/*' element={<TablaEmpleados/>}></Route>
-            <Route path='/home' element={<Home/>}></Route>
+            <Route path={rutaServidor+'/*'} element={<TablaEmpleados/>}></Route>
+            <Route path={rutaServidor+'/home'} element={<Home/>}></Route>
         </Routes>
         <Sidebar>
         </Sidebar>

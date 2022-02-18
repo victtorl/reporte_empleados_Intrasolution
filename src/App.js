@@ -14,14 +14,16 @@ import TablaEmpleados from './components/home/TablaEmpleados';
 import Principal from './components/Principal';
 
 
-
+ const arr=true
 function App() {
+
+  const rutaServidor="intrasolution_nodejs"
 
   return (
   <>
     <Routes>
-      <Route path='/' element={<Login/>}></Route>
-      <Route path='/principal/*' element={<Principal/>}> </Route>
+      <Route path={rutaServidor} element={<Login/>}></Route>
+      <Route path={rutaServidor+'/*'} element={<Principal/>}> </Route>
     </Routes>
     <Sidebar>
     </Sidebar>

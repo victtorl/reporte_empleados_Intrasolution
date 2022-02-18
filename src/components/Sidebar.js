@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const Sidenav = () => {
+  const rutaServidor="intrasolution_nodejs"
     return (
       <div>
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -274,13 +275,13 @@ const Sidenav = () => {
                   </a>
                   <ul className="nav nav-treeview">
                     <li className="nav-item">
-                      <NavLink to="/principal/empleados" className="nav-link">
+                      <NavLink to={'/'+rutaServidor+'/empleados'} className="nav-link">
                         <i className="far fa-circle nav-icon" />
                         <p>Lista Empleados</p>
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink to="/principal/home" className="nav-link">
+                      <NavLink to={'/'+rutaServidor+'/home'} className="nav-link">
                         <i className="far fa-circle nav-icon" />
                         <p>Home</p>
                       </NavLink>
