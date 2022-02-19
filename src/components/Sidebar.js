@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const Sidenav = () => {
-  const rutaServidor="intrasolution_nodejs"
+  const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
     return (
       <div>
         <aside className="main-sidebar sidebar-dark-primary elevation-4">

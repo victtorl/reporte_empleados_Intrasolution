@@ -17,14 +17,14 @@ import Principal from './components/Principal';
  const arr=true
 function App() {
 
-  const rutaServidor="intrasolution_nodejs"
+  const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
 
   return (
   <>
-    <Routes>
-      <Route path={rutaServidor} element={<Login/>}></Route>
-      <Route path={rutaServidor+'/*'} element={<Principal/>}> </Route>
-    </Routes>
+  <Navbar>
+  </Navbar> 
+    <Principal> 
+    </Principal>
     <Sidebar>
     </Sidebar>
   </>

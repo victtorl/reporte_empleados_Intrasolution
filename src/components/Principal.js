@@ -7,20 +7,18 @@ import { Routes, Route } from 'react-router-dom'
 
 
 import React from 'react';
+import Login from './Login';
 
 const Principal = () => {
   
-    const rutaServidor="intrasolution_nodejs"
+    const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
     return (
-        <div className="wrapper">
-        <Navbar>
-        </Navbar>
+        <div className="wrapper"> 
         <Routes>
-            <Route path={rutaServidor+'/*'} element={<TablaEmpleados/>}></Route>
+            <Route path={rutaServidor} element={<Login/>}></Route>
+            <Route path={rutaServidor+'/empleados'} element={<TablaEmpleados/>}></Route>
             <Route path={rutaServidor+'/home'} element={<Home/>}></Route>
         </Routes>
-        <Sidebar>
-        </Sidebar>
         <Footer></Footer> 
         </div>
     );

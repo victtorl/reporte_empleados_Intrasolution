@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
+    const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
     return (
         <div>
             <div className='m-0  vh-100 row justify-content-center align-items-center'>
@@ -40,7 +41,7 @@ const Login = () => {
                                     </div>
                                 </div>
                                 <div className="col-4">
-                                <Link to="/principal/empleados"><button type="submit" className="btn btn-primary btn-block">Sign In</button></Link>
+                                <NavLink to={'/'+rutaServidor+'/home'}><button type="submit" className="btn btn-primary btn-block">Sign In</button></NavLink>
                                     
                                 </div>
                             </div>

@@ -10,7 +10,7 @@ import { store } from '../../redux/store';
 
 
 
-const baseUrl="http://192.168.1.2:4000/empleados";
+const baseUrl="http://192.168.1.184:7777/intrasolution/ws/null/pr_movil_lista_empleado";
 
 const TablaEmpleados = () => {
 
@@ -27,7 +27,7 @@ const getEmpleados =async ()=>{
 
     
 
-    await axios.get(baseUrl)
+    await axios.post(baseUrl)
     .then(res =>{
         const datos=res.data
         console.log(datos);
