@@ -12,22 +12,28 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import TablaEmpleados from './components/home/TablaEmpleados';
 import Principal from './components/Principal';
+import { IsLogin } from './utils/islogin';
+import {useEffect} from 'react'
+
+import {useSelector} from 'react-redux'
+import GrupoPrincipal from './components/GrupoPrincipal';
 
 
- const arr=true
+ 
 function App() {
 
   const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
 
+  const statusLogin = useSelector((state) => state.statusLog)
+  
+    
+    
+
   return (
-  <>
-  <Navbar>
-  </Navbar> 
-    <Principal> 
-    </Principal>
-    <Sidebar>
-    </Sidebar>
-  </>
+    (!statusLogin)
+    ? <><Navbar/><Login/><Sidebar/></>
+    :<GrupoPrincipal/>
+
   );
 }
 

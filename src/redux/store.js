@@ -3,8 +3,9 @@ import {getEmpleadoReducer} from '../redux/reducers/empleadosReducer'
 import { empF } from '../services/empleadosFake'
 
 const initialState ={
-    empleados:empF,
-    empleadoSelect:[]
+    empleados:[],
+    empleadoSelect:[],
+    statusLog:false
 }
 
 export const store =createStore(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-const Sidenav = () => {
+const Sidebar = (props) => {
   const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
     return (
       <div>
@@ -19,7 +19,7 @@ const Sidenav = () => {
                 <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
               </div>
               <div className="info">
-                <a href="#" className="d-block">Alexander Pierce</a>
+                <a href="#" className="d-block">{props.name}</a>
               </div>
             </div>
             {/* SidebarSearch Form */}
@@ -680,4 +680,4 @@ const Sidenav = () => {
     );
 }
 
-export default Sidenav;
+export default Sidebar;

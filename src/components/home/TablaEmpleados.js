@@ -3,43 +3,55 @@ import axios from 'axios';
 
 import { useSelector,useDispatch } from 'react-redux';
 
-
 import Widget from '../Widget';
 import { store } from '../../redux/store';
 
+const baseUrl="https://app.safe2biz.com/intrasolution//ws/null/pr_movil_lista_empleado";
 
 
 
-const baseUrl="http://192.168.1.184:7777/intrasolution/ws/null/pr_movil_lista_empleado";
+
 
 const TablaEmpleados = () => {
 
-const employes = useSelector((state) => state.empleados)    
+const employes = useSelector((state) => state.empleados)   
+const params =new URLSearchParams()
+
 
 const [empleados,SetEmpleados]=useState([])
 const [detalle,SetDetalle]=useState({})
 
-const resaltarFila = ()=>{
-
-}
-
-const getEmpleados =async ()=>{
-
-    
-
-    await axios.post(baseUrl)
-    .then(res =>{
-        const datos=res.data
-        console.log(datos);
-        SetEmpleados(datos)
 
 
+const getEmpleados =()=>{
+
+    const datax={
+        dato:0 
+    }
+
+    const params= new URLSearchParams(datax)
+
+     axios.post(baseUrl,
+        params,
+        {
+        headers:{
+            userLogin:'jorge.felix@intrasolution',
+            userPassword:'09079763',
+            systemRoot:'safe2biz',
+            'Content-Type': 'text/plain'    
+        },
+        }   
+     )
+    .then(data =>{
         store.dispatch({
             type:'@getEmpleados',
-            payload:datos
+            payload:data.data.data
         })
     })
-
+    .catch(e=>{
+        console.log('el error es'+e);
+    })
+    
     
 }
 

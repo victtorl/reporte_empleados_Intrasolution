@@ -3,8 +3,25 @@ import { useSelector } from "react-redux"
 
 
 
-export const IsLogin=(credentialState)=>{
-     (credentialState.email === credentials.email && credentialState.password===credentials.password)
-     ? console.log('estas logueado')
-     : console.log('credenciales no coinciden')  
+
+export let IsLogin=()=>{
+
+     const parametrosAcces = window.localStorage.getItem('acces')
+     const par=JSON.parse(parametrosAcces)
+    
+     console.log(par.datos.name);
+     console.log(par.datos.password);
+
+     if(credentials === null){
+          return false
+     }else{
+          if(credentials.name === par.datos.name && credentials.password===par.datos.password )
+          return true
+          return false
+     }
+
+     
+     
+    
+     
 }

@@ -1,7 +1,50 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import {IsLogin} from '../utils/islogin'
+import { store } from '../redux/store';
+ 
 
 const Login = () => {
+ 
+
+    const [datos, setDatos] = useState({
+        name: '',
+        password: ''
+    })
+
+    const handleInputChange = (event) => {
+        console.log(event.target.name)
+        console.log(event.target.value)
+        setDatos({
+            ...datos,
+            [event.target.name] : event.target.value
+        })
+
+        
+         
+                
+            
+    }
+
+    const enviarDatos = (event) => {
+        event.preventDefault()
+        console.log('enviando datos...' + datos.name + ' ' + datos.password)
+        console.log(datos);
+        
+        window.localStorage.setItem(
+            'acces',JSON.stringify({datos})
+        )
+
+        store.dispatch({
+            type:'@statusLogin',
+            payload:IsLogin()
+        }) 
+
+          
+    }
+
+
     const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
     return (
         <div>
@@ -16,7 +59,7 @@ const Login = () => {
                         <p className="login-box-msg">Sign in to start your session</p>
                         <form action="/principal/empleados" method="post">
                             <div className="input-group mb-3">
-                                <input type="email" className="form-control" placeholder="Email" />
+                                <input type="email" className="form-control" placeholder="Email" onKeyUp={handleInputChange} name="name"/>
                                 <div className="input-group-append">
                                     <div className="input-group-text">
                                         <span className="fas fa-envelope" />
@@ -24,7 +67,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="input-group mb-3">
-                                <input type="password" className="form-control" placeholder="Password" />
+                                <input type="password" className="form-control" placeholder="Password" onKeyUp={handleInputChange} name="password" />
                                 <div className="input-group-append">
                                     <div className="input-group-text">
                                         <span className="fas fa-lock" />
@@ -34,32 +77,35 @@ const Login = () => {
                             <div className="row">
                                 <div className="col-8">
                                     <div className="icheck-primary">
-                                        <input type="checkbox" id="remember" />
+                                        {/* <input type="checkbox" id="remember" />
                                         <label htmlFor="remember">
                                             Remember Me
-                                        </label>
+                                        </label> */}
                                     </div>
                                 </div>
-                                <div className="col-4">
-                                <NavLink to={'/'+rutaServidor+'/home'}><button type="submit" className="btn btn-primary btn-block">Sign In</button></NavLink>
+                                <div className="col-12">
+                                <NavLink to={rutaServidor}><button type="submit" className="btn btn-primary btn-block"  onClick={enviarDatos}>Sign In</button></NavLink>
                                     
                                 </div>
                             </div>
                         </form>
-                        <div className="social-auth-links text-center mt-2 mb-3">
+
+                        {/* <div className="social-auth-links text-center mt-2 mb-3">
                             <a href="#" className="btn btn-block btn-primary">
                                 <i className="fab fa-facebook mr-2" /> Sign in using Facebook
                             </a>
                             <a href="#" className="btn btn-block btn-danger">
                                 <i className="fab fa-google-plus mr-2" /> Sign in using Google+
                             </a>
-                        </div>
-                        <p className="mb-1">
+                        </div> */}
+
+                        {/* <p className="mb-1">
                             <a href="forgot-password.html">I forgot my password</a>
                         </p>
                         <p className="mb-0">
                             <a href="register.html" className="text-center">Register a new membership</a>
-                        </p>
+                        </p> */}
+
                     </div>
                 </div>
             </div>

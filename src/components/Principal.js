@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import React from 'react';
 import Login from './Login';
+import TareasUsuario from './TareasUsuario';
 
 const Principal = () => {
   
@@ -15,7 +16,7 @@ const Principal = () => {
     return (
         <div className="wrapper"> 
         <Routes>
-            <Route path={rutaServidor} element={<Login/>}></Route>
+            <Route path={rutaServidor} element={<TareasUsuario/>}></Route>
             <Route path={rutaServidor+'/empleados'} element={<TablaEmpleados/>}></Route>
             <Route path={rutaServidor+'/home'} element={<Home/>}></Route>
         </Routes>

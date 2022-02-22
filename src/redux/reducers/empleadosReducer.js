@@ -12,6 +12,12 @@ export const getEmpleadoReducer =(state,action) => {
                 empleadoSelect:action.payload
                      
                  }
+            case '@statusLogin':
+             return{
+                 ...state,       
+                statusLog:action.payload
+  
+                 }
                 
              } 
              return state      

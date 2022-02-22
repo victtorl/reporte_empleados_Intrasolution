@@ -1802,3 +1802,8 @@ export const empF=[
         "telefono_contacto": ""
     }
 ]
+
+export const credentials={
+    name:'admin',
+    password:'admin123'
+}
