@@ -8,7 +8,7 @@ const Widget = () => {
         <div>
             {/* Button trigger modal */}
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-                Ver informacion completa
+                 Ver informacion de empleado
             </button>
             {/* Modal */}
             <div className="modal fade" id="exampleModalScrollable" tabIndex={-1} role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">

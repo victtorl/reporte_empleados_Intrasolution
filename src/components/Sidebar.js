@@ -1,14 +1,41 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+// import { useSelector,useDispatch } from 'react-redux';
+import { store } from '../redux/store';
+
+import logo from '../img/AdminLTELogo.png'
+import user1 from '../img/user2-160x160.jpg'
+
+
 
 const Sidebar = (props) => {
+
+  
+  // const statuslog = useSelector((state) => state.statusLog) 
+
+  //cuando has el login resetea el sandwich de menu
+  const Salir = () => {
+    store.dispatch({
+      type:'@statusLogin',
+      payload:false
+  }) 
+  
+  }
+
+  const OcultarMenu =() => {
+    
+  }
+
   const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
+
+   
+
     return (
-      <div>
-        <aside className="main-sidebar sidebar-dark-primary elevation-4">
+      <div className={props.className}>
+        <aside className="main-sidebar sidebar-dark-primary elevation-4 " data-widget="tree">
           {/* Brand Logo */}
           <a href="index3.html" className="brand-link">
-            <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
+            <img src={logo} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
             <span className="brand-text font-weight-light">AdminLTE 3</span>
           </a>
           {/* Sidebar */}
@@ -16,7 +43,7 @@ const Sidebar = (props) => {
             {/* Sidebar user panel (optional) */}
             <div className="user-panel mt-3 pb-3 mb-3 d-flex">
               <div className="image">
-                <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
+                <img src={user1} className="img-circle elevation-2" alt="User Image" />
               </div>
               <div className="info">
                 <a href="#" className="d-block">{props.name}</a>
@@ -38,7 +65,7 @@ const Sidebar = (props) => {
               <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 {/* Add icons to the links using the .nav-icon class
           with font-awesome or any other icon font library */}
-                <li className="nav-item menu-open">
+                {/* <li className="nav-item menu-open">
                   <a href="#" className="nav-link active">
                     <i className="nav-icon fas fa-tachometer-alt" />
                     <p>
@@ -264,7 +291,7 @@ const Sidebar = (props) => {
                       </a>
                     </li>
                   </ul>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <a href="#" className="nav-link">
                     <i className="nav-icon fas fa-table" />
@@ -287,14 +314,82 @@ const Sidebar = (props) => {
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <a href="pages/tables/jsgrid.html" className="nav-link">
+                      <NavLink to={'/'+rutaServidor+'/tareaspendientes'} className="nav-link">
                         <i className="far fa-circle nav-icon" />
-                        <p>jsGrid</p>
-                      </a>
+                        <p>Tareas Pendientes</p>
+                      </NavLink>
+                    </li>
+                    
+                  </ul>
+                </li>
+
+
+                <li className="nav-item">
+                  <a href="#" className="nav-link">
+                    <i className="nav-icon far fa-calendar-alt" />
+                    <p>
+                       Registro de Tareas
+                      <i className="fas fa-angle-left right" />
+                    </p>
+                  </a>
+                  <ul className="nav nav-treeview">
+                   
+                    <li className="nav-item">
+                      <NavLink to={'/'+rutaServidor+'/calendario'} className="nav-link">
+                        <i className="far fa-circle nav-icon" />
+                        <p>Calendario</p>
+                      </NavLink>
+                    </li>
+ 
+                  </ul>
+                </li>
+
+                <li className="nav-item">
+                  <a href="#" className="nav-link">
+                    <i className="nav-icon fas fa-chart-pie" />
+                    <p>
+                       Charts
+                      <i className="fas fa-angle-left right" />
+                    </p>
+                  </a>
+                  <ul className="nav nav-treeview">
+                    <li className="nav-item">
+                      <NavLink to={'/'+rutaServidor+'/barchart'} className="nav-link">
+                        <i className="far fa-circle nav-icon" />
+                        <p>Barchart</p>
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink to={'/'+rutaServidor+'/barchartx'} className="nav-link">
+                        <i className="far fa-circle nav-icon" />
+                        <p>Barchart2</p>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>
-                <li className="nav-header">EXAMPLES</li>
+              
+
+
+               
+
+                <li className="nav-item" onClick={Salir} >
+                  <NavLink  to={'/'+rutaServidor} className="nav-link">
+                    <i className="nav-icon far fa-circle text-danger" />
+                    <p className="text"  >SALIR</p>
+                  </NavLink>
+                </li>
+
+                {/* <li className="nav-item" onClick={OcultarMenu} >
+                  <a className="nav-link">
+                    <i className="nav-icon far fa-circle text-danger" />
+                    <p className="text"  >OCULTAR MENU</p>
+                  </a>
+                </li> */}
+
+              
+
+
+              {/* <li className="nav-header">EXAMPLES</li> 
                 <li className="nav-item">
                   <a href="pages/calendar.html" className="nav-link">
                     <i className="nav-icon fas fa-calendar-alt" />
@@ -649,15 +744,16 @@ const Sidebar = (props) => {
                     <i className="fas fa-circle nav-icon" />
                     <p>Level 1</p>
                   </a>
-                </li>
-                <li className="nav-header">LABELS</li>
-                <li className="nav-item">
-                  <a href="#" className="nav-link">
-                    <i className="nav-icon far fa-circle text-danger" />
-                    <p className="text">Important</p>
-                  </a>
-                </li>
-                <li className="nav-item">
+                </li> */}
+
+
+               
+
+
+               
+
+
+                {/* <li className="nav-item">
                   <a href="#" className="nav-link">
                     <i className="nav-icon far fa-circle text-warning" />
                     <p>Warning</p>
@@ -668,7 +764,12 @@ const Sidebar = (props) => {
                     <i className="nav-icon far fa-circle text-info" />
                     <p>Informational</p>
                   </a>
-                </li>
+                </li> */}
+
+
+
+
+
               </ul>
             </nav>
             {/* /.sidebar-menu */}

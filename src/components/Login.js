@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import {IsLogin} from '../utils/islogin'
+import {IsLogin, getDataUser} from '../utils/islogin'
 import { store } from '../redux/store';
  
 
@@ -14,33 +14,54 @@ const Login = () => {
     })
 
     const handleInputChange = (event) => {
-        console.log(event.target.name)
-        console.log(event.target.value)
+        // console.log(event.target.name)
+        // console.log(event.target.value)
         setDatos({
             ...datos,
             [event.target.name] : event.target.value
         })
-
-        
-         
-                
-            
+     
     }
 
-    const enviarDatos = (event) => {
+    const validarlogin =()=>{
+
+        getDataUser()
+        .then(data =>{
+        const parametrosAcces = window.localStorage.getItem('acces')
+        const par=JSON.parse(parametrosAcces)
+        // console.log(par.datos);
+
+        const infoUser =data.data.data[0]
+        // console.log(infoUser);
+         
+        if(par.datos.name === infoUser.USER_LOGIN && par.datos.password ===infoUser.USER_LOGIN){
+            store.dispatch({
+                type:'@statusLogin',
+                payload:true
+            }) 
+        }else{
+            store.dispatch({
+                type:'@statusLogin',
+                payload:false
+            }) 
+        }
+           
+         }) 
+
+    }
+
+    const   enviarDatos = async(event) => {
         event.preventDefault()
-        console.log('enviando datos...' + datos.name + ' ' + datos.password)
-        console.log(datos);
+        validarlogin()
         
+          
         window.localStorage.setItem(
             'acces',JSON.stringify({datos})
         )
 
-        store.dispatch({
-            type:'@statusLogin',
-            payload:IsLogin()
-        }) 
+        
 
+        
           
     }
 
@@ -59,7 +80,7 @@ const Login = () => {
                         <p className="login-box-msg">Sign in to start your session</p>
                         <form action="/principal/empleados" method="post">
                             <div className="input-group mb-3">
-                                <input type="email" className="form-control" placeholder="Email" onKeyUp={handleInputChange} name="name"/>
+                                <input type="nombre" className="form-control" placeholder="User" onKeyUp={handleInputChange} name="name"/>
                                 <div className="input-group-append">
                                     <div className="input-group-text">
                                         <span className="fas fa-envelope" />

@@ -3,11 +3,10 @@ import axios from 'axios';
 
 import { useSelector,useDispatch } from 'react-redux';
 
-import Widget from '../Widget';
+import Widget from './Widget';
 import { store } from '../../redux/store';
 
 const baseUrl="https://app.safe2biz.com/intrasolution//ws/null/pr_movil_lista_empleado";
-
 
 
 
@@ -60,7 +59,7 @@ useEffect(()=>{
 },[])
 
 const Mostrar =(u)=>{
-    console.log(u)
+    // console.log(u)
 
     store.dispatch({
         type:'@getEmpleadoId',
@@ -75,7 +74,7 @@ const Mostrar =(u)=>{
       <div className="row mb-2">
         <div className="col-sm-6">
           <h1>DataTable</h1>
-          <div class="btn-group" role="group" aria-label="Basic example">
+          <div className="btn-group" role="group" aria-label="Basic example">
           {/* <button type="button" class="btn btn-success">Nuevo</button>
           <button type="button" class="btn btn-primary">Actualizar</button>
           <button type="button" class="btn btn-danger">Eliminar</button> */}
@@ -124,7 +123,7 @@ const Mostrar =(u)=>{
                                             <tbody>
                                                      {
                                                     employes.map((u)=>
-                                                <tr key="u.fb_empleado_id" onClick={()=>Mostrar(u)}>
+                                                <tr key={u.fb_empleado_id} onClick={()=>Mostrar(u)}>
                                                     <td>{u.fb_empleado_id}</td>
                                                     <td>{u.codigo}</td>
                                                     <td>{u.email}</td>

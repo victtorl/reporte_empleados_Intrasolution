@@ -18,7 +18,16 @@ export const getEmpleadoReducer =(state,action) => {
                 statusLog:action.payload
   
                  }
-                
+            case  '@dataUserSesion':
+              return{
+                  ...state,
+                 dataUserSesion:action.payload 
+              }       
+            case  '@getfechaSelect':
+              return{
+                ...state,
+                fechaSelect:action.payload 
+                }        
              } 
              return state      
        }
