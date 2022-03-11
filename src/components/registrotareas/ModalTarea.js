@@ -19,7 +19,7 @@ const ModalTarea = () => {
                 Nueva Tarea
             </a>
             {/* Modal */}
-            <div className="modal fade" id="exampleModalScrollable" tabIndex={-1} role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+            <div className="modal fade " id="exampleModalScrollable" tabIndex={-1} role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-scrollable" role="document">
                     <div className="modal-content">
                         <div className="modal-header">

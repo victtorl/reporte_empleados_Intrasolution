@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 
 import 'react-calendar/dist/Calendar.css';
 import Agenda from './Agenda';
@@ -9,6 +9,10 @@ import Registrotareas from './RegistroTareas';
 import { store } from '../../redux/store';
 import ModalTarea from './ModalTarea';
 import { render } from '@testing-library/react';
+
+
+
+
 
     const convertStringData=(cadena) => {
     const variable=JSON.stringify(cadena)   
@@ -21,6 +25,13 @@ import { render } from '@testing-library/react';
     const str = anio
     const newStr = str.slice(1)
     const  fecharender =`${dia}/${mes}/${newStr}`
+    // const  fecharender={
+    //     hour:0,
+    //     day:dia,
+    //     month:mes,
+    //     year:newStr
+    // }
+
     return fecharender
 } 
 
@@ -57,6 +68,10 @@ const Calendario = () => {
         
             
    }
+
+   const tareasend =() => {
+     
+   }
  
 
     return (
@@ -75,15 +90,16 @@ const Calendario = () => {
                 <section className="content">
                     <div className="container-fluid">
                         <div className="m-0 row justify-content-center">
-                        <div className='col-md-3 col-sm-6' >
+                        {/* <div className='col-md-3 col-sm-6' >
+                          <Registrotareas/>
                           <Calendar locale="es-PE" onChange={onChange} value={value}  onClickDay={processDate(value) } 
                             
                           />
-                        </div>
-                        <div className='col-md-9 col-sm-6' >
-                            
-                            <Registrotareas/>
+                        </div> */}
+                        <div className='col-md-9 col-sm-9' >
                             <Agenda/>
+                            
+                            
                             
                         </div>
                         </div>

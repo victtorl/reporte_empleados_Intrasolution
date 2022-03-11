@@ -23,14 +23,15 @@ const Principal = () => {
         <div className="wrapper"> 
         <Routes>
             
-            <Route path={rutaServidor} element={<TareasUsuario/>}></Route>
-            <Route path={rutaServidor+'/*'} element={<Default/>}></Route>
+            
             <Route path={rutaServidor+'/tareaspendientes'} element={<TareasUsuario/>}></Route>
             <Route path={rutaServidor+'/empleados'} element={<TablaEmpleados/>}></Route>
             <Route path={rutaServidor+'/home'} element={<Home/>}></Route>
             <Route path={rutaServidor+'/calendario'} element={<Calendario/>}></Route>
             <Route path={rutaServidor+'/barchart'} element={<BarChart/>}></Route>
             <Route path={rutaServidor+'/barchartx'} element={<BarChartx/>}></Route>
+            <Route path={rutaServidor} element={<Calendario/>}></Route>
+            <Route path={rutaServidor+'/*'} element={<Default/>}></Route>
         </Routes>
         <Footer></Footer> 
         </div>

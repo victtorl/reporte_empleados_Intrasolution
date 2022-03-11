@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { TimePicker } from 'antd';
 
-import 'antd/dist/antd.css';
 
 import Incidente from './tipotarea/Incidente';
 import Pase from './tipotarea/Pase';
@@ -9,11 +7,20 @@ import Otro from './tipotarea/Otro';
 import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 
+import Datetime from 'react-datetime';
+import "react-datetime/css/react-datetime.css";
+import Hora from './Hora';
+
+
+
+
 
 
 
 
 const Estructuratarea = () => {
+
+    
 
     const fechaS = useSelector((state) => state.fechaSelect)  
     
@@ -56,6 +63,19 @@ const Estructuratarea = () => {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="form-group">
+                                    <div className="d-flex justify-content-around">
+                                         <div >
+                                             <label>fecha inicio</label>
+                                             <Hora/>
+                                         </div>
+                                         <div>
+                                             <label>fecha fin</label>
+                                             <Hora/>
+                                         </div> 
+                                    </div>
+   
+                                </div>  
+                                <div className="form-group">
                                     <label>Tipo tarea</label>
                                     <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
                                         { optTareas.map(u=>(
@@ -85,7 +105,6 @@ const Estructuratarea = () => {
                                              <h5 className='text-center' >Inicio</h5>
                                         </div>
                                         <div className='row'>
-                                        <TimePicker use12Hours format="h:mm a"  />
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +117,6 @@ const Estructuratarea = () => {
                                              <h5 className='text-center' >Fin</h5>
                                         </div>
                                         <div className='row'>
-                                        <TimePicker use12Hours format="h:mm a"  />
                                         </div>
                                     </div>
                                 </div>

@@ -15,7 +15,15 @@ const Navbar = () => {
               <a href="#" className="nav-link">Contact</a>
             </li>
           </ul>
-          <ul className="navbar-nav ml-auto">
+          <ul className='navbar-nav ml-auto'>
+            <li className='nav-item'>
+              <a className="nav-link" data-widget="fullscreen" href="#" role="button">
+                <i className="fas fa-expand-arrows-alt" />
+              </a>
+            </li>  
+          </ul>
+
+          {/* <ul className="navbar-nav ml-auto">
             <li className="nav-item">
             
              
@@ -127,7 +135,8 @@ const Navbar = () => {
                 <i className="fas fa-th-large" />
               </a>
             </li>
-          </ul>
+          </ul> */}
+
         </nav>
 
 

@@ -28,11 +28,24 @@ function App() {
 
   const estilo='d-none'
 
+  // useEffect(() => {
+  //   if (statusLogin) return
+  //   store.dispatch({
+  //     type:'@statusLogin',
+  //     payload:localStorage.getItem('islogged')
+  //   })
+
+     
+  // }, []);
+
   return (
-    (!statusLogin)
+    <>
+    {
+    (statusLogin)
     ? <><Navbar/><Login/><Sidebar className={estilo} /></>
     :<GrupoPrincipal/>
-
+    }
+    </>
   );
 }
 

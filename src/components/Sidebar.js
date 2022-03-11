@@ -5,6 +5,7 @@ import { store } from '../redux/store';
 
 import logo from '../img/AdminLTELogo.png'
 import user1 from '../img/user2-160x160.jpg'
+import { useSelector } from 'react-redux';
 
 
 
@@ -14,11 +15,20 @@ const Sidebar = (props) => {
   // const statuslog = useSelector((state) => state.statusLog) 
 
   //cuando has el login resetea el sandwich de menu
+
+  const islogged = useSelector((state) => state.statusLog) 
+
   const Salir = () => {
     store.dispatch({
       type:'@statusLogin',
       payload:false
   }) 
+
+  window.localStorage.setItem(
+    'islogged',JSON.stringify(!islogged)
+)
+console.log(!islogged);
+
   
   }
 

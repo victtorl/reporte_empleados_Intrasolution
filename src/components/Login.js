@@ -3,10 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import {IsLogin, getDataUser} from '../utils/islogin'
 import { store } from '../redux/store';
+import { useSelector } from 'react-redux';
  
 
 const Login = () => {
  
+    const islogged = useSelector((state) => state.statusLog)   
 
     const [datos, setDatos] = useState({
         name: '',
@@ -39,11 +41,21 @@ const Login = () => {
                 type:'@statusLogin',
                 payload:true
             }) 
+            window.localStorage.setItem(
+                'islogged',JSON.stringify(!islogged)
+                
+            )
+            console.log(!islogged);
         }else{
             store.dispatch({
                 type:'@statusLogin',
                 payload:false
-            }) 
+            })
+            
+            window.localStorage.setItem(
+                'islogged',JSON.stringify(islogged)
+            )
+            console.log(islogged);
         }
            
          }) 
@@ -59,10 +71,7 @@ const Login = () => {
             'acces',JSON.stringify({datos})
         )
 
-        
 
-        
-          
     }
 
 
