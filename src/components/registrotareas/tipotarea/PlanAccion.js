@@ -9,24 +9,26 @@ import { useSelector } from 'react-redux';
 const notify = () => toast("Tarea evaluada para enviar");
 
 
-const Pase = () => {
 
-    const combopase = useSelector((state) => state.combopase) 
+const Planaccion = () => {
+
+    //cambiar por combo plan aacion
+    const comboplandeaccion = useSelector((state) => state.comboplandeaccion) 
     const dataUserSesion =useSelector((state)=>state.dataUserSesion)
     
-    // campo pase
-    const [opTarea, SetoptTarea] = useState(combopase[0])
+    // campo plan accion
+     const [opTarea, SetoptTarea] = useState(comboplandeaccion[0])
     const setOption = (e) => {
         //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
-        const elem=combopase.filter((u)=>u.codigo === e.target.value)
+        const elem=comboplandeaccion.filter((u)=>u.codigo_accion_correctiva === e.target.value)
         console.log(e.target.value);
-        console.log(elem[0].id)  
-        SetoptTarea(elem.id)    
+        // console.log(elem[0].sac_accion_correctiva_id)  
+        SetoptTarea(elem.codigo_accion_correctiva)    
         //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso 
         store.dispatch({
             type:'@pushsegundotipo_tarea',
             payload:{
-                pase_id:elem[0].id
+                planaccion_id:elem[0].codigo_accion_correctiva
             }
             
         })
@@ -61,19 +63,20 @@ const Pase = () => {
         })
         notify()
     }
+    var  i=0
     return (
         <>
 
             <div className="row">
                 <div className="col-md-12">
                     <div className="form-group">
-                        <label>Pase</label>
+                        <label>Plan Accion</label>
                        
                         <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} >
-                        <option selected>--Seleccione un pase--</option>
+                        <option selected>--Seleccione Plan de Accion--</option>
 
-                                 { combopase.map(u=>(
-                                             <option key={u.id} >{u.codigo}</option>
+                                 { comboplandeaccion.map(u=>(
+                                             <option key={i++} >{u.codigo_accion_correctiva}</option>
                                         ))
                                   }
                         </select>
@@ -121,4 +124,5 @@ const Pase = () => {
     );
 }
 
-export default Pase;
+export default Planaccion;
+

@@ -1,61 +1,27 @@
 import React,{useEffect,useState} from 'react';
-import axios from 'axios';
 
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Widget from './Widget';
 import { store } from '../../redux/store';
 
-const baseUrl="https://app.safe2biz.com/intrasolution//ws/null/pr_movil_lista_empleado";
 
 
-
+// webservices a usar
+import { getEmpleados } from '../../utils/webservices';
+import { getcomboSubtipoTarea } from '../../utils/webservices';
 
 const TablaEmpleados = () => {
 
 const employes = useSelector((state) => state.empleados)   
-const params =new URLSearchParams()
-
-
-const [empleados,SetEmpleados]=useState([])
 const [detalle,SetDetalle]=useState({})
 
 
 
-const getEmpleados =()=>{
-
-    const datax={
-        dato:0 
-    }
-
-    const params= new URLSearchParams(datax)
-
-     axios.post(baseUrl,
-        params,
-        {
-        headers:{
-            userLogin:'jorge.felix@intrasolution',
-            userPassword:'09079763',
-            systemRoot:'safe2biz',
-            'Content-Type': 'text/plain'    
-        },
-        }   
-     )
-    .then(data =>{
-        store.dispatch({
-            type:'@getEmpleados',
-            payload:data.data.data
-        })
-    })
-    .catch(e=>{
-        console.log('el error es'+e);
-    })
-    
-    
-}
 
 useEffect(()=>{
     getEmpleados()
+
 },[])
 
 const Mostrar =(u)=>{
@@ -149,3 +115,8 @@ const Mostrar =(u)=>{
 }
 
 export default TablaEmpleados;
+
+
+
+
+  

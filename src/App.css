@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+/* todo referente a login */
+
+.btn-login{
+  background-color: #9B0707;
+  color: white;
+}
+.cuerpo-login{
+  padding-bottom:30px ;
+}
+.marco-login{
+  border: solid 2px #9B0707;
+}
+
+.footer-login{
+  background-color: #9B0707;
+  text-align: center;
+  color: white;
+  padding:20px;
+}

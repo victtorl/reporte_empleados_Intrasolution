@@ -41,7 +41,7 @@ function App() {
   return (
     <>
     {
-    (statusLogin)
+    (!statusLogin)
     ? <><Navbar/><Login/><Sidebar className={estilo} /></>
     :<GrupoPrincipal/>
     }

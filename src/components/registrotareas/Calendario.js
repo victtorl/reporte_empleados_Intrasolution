@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import Calendar from 'react-calendar';
 
 import 'react-calendar/dist/Calendar.css';
 import Agenda from './Agenda';
-import Registrotareas from './RegistroTareas';
 
-import { store } from '../../redux/store';
-import ModalTarea from './ModalTarea';
-import { render } from '@testing-library/react';
-
-
-
+import PruebaEnviocomp from './PruebaEnvio';
 
 
     const convertStringData=(cadena) => {
@@ -44,45 +37,23 @@ export const  reordenarFecha=(v)=>{
     let anio= g[2]
     dia<=9? dia=`0${dia}`:dia=dia
     mes<=9? mes=`0${mes}`:mes=mes
-     return `${dia}/${mes}/${anio}`
+     return `${anio}-${mes}-${dia} ${fff[1]}`
     }
 
 const Calendario = () => {
 
     const fechaSelect = useSelector((state) => state.fechaSelect)
+    const diaSelect = useSelector((state) => state.diaSelect)
+
    
-
-    const [value, onChange] = useState(new Date());
-
-   const processDate =(v) => {
-        
-     let f= new Date()
-     console.log(f.toLocaleString('es-PE'))
-     
-     console.log(convertStringData(v))
-  
-        store.dispatch({
-            type:'@getfechaSelect',
-            payload:convertStringData(v)
-        })
-        
-            
-   }
-
-   const tareasend =() => {
-     
-   }
- 
-
     return (
-
         <>
             <div className="content-wrapper">
                 <section className="content-header">
                     <div className="container-fluid ">
                         <div className="m-0 row justify-content-center">
                             
-                                <h1>{fechaSelect}</h1>
+                                <h1>{diaSelect}</h1>
                             
                         </div>
                     </div>
@@ -98,9 +69,6 @@ const Calendario = () => {
                         </div> */}
                         <div className='col-md-9 col-sm-9' >
                             <Agenda/>
-                            
-                            
-                            
                         </div>
                         </div>
                     </div>
