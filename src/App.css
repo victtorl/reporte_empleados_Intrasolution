@@ -56,3 +56,26 @@
   color: white;
   padding:20px;
 }
+
+@media only screen and (min-width: 600px)  {  
+  
+  .navegacion-login{
+    display: none;
+  }
+  .login-principal{
+    margin-top: 1rem;
+    
+  }
+  .calendario-pantalla-grande{
+    /* height: 600px; */
+    /* border: solid red 1px; */
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .contenido-calendario-section{
+    overflow-y: scroll;
+    border: solid 5px #343A40 10%;
+    height: 500px;
+  }
+
+} 

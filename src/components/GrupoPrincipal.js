@@ -8,20 +8,25 @@ import { events } from './registrotareas/Agenda';
 import { getcomboIncidencia, getcomboPase, getcomboSubtipoTarea, getcomboTipoTarea,getallTareas, getcomboPlandeAccion, getDataUsuario } from '../utils/webservices';
 
 import {tratarTareas} from '../utils/metodos';
+import { getInfoLocal } from './Login';
+import Footer from './Footer';
 
 
 
 const GrupoPrincipal = () => {
 
-    const alltareas = useSelector((state) => state.alltareas) 
+    const alltareas = useSelector((state) => state.alltareas)
+    const dataUserSesion = useSelector((state) => state.dataUserSesion) 
+
+  
     
 
     useEffect(() => {
 
-        getDataUsuario()
+        getDataUsuario(dataUserSesion.USER_LOGIN,dataUserSesion.password)
             .then(data => {
                 const infoUser = data.data.data[0]
-                //    console.log(infoUser);
+                console.log(infoUser);
                 // store.dispatch({
                 //     type: '@dataUserSesion',
                 //     payload: infoUser
@@ -32,8 +37,13 @@ const GrupoPrincipal = () => {
                 //     payload:tratarTareas(alltareas)
                 // })
                 //llenar combos  
-
+                // getcomboIncidencia(infoUser.USER_LOGIN,infoUser.password,infoUser.SC_USER_ID)
             })
+            .then(
+                window.localStorage.setItem(
+                    'accesws',JSON.stringify({namews:dataUserSesion.USER_LOGIN,passws:dataUserSesion.password,idws:dataUserSesion.SC_USER_ID})
+                ) 
+            )
             .then(
                 getcomboIncidencia()
             )
@@ -55,8 +65,6 @@ const GrupoPrincipal = () => {
             .then(
                 tratarTareas(alltareas)
             )
-           
-            
 
             .catch(e => {
                 console.log('el error es' + e);
@@ -67,6 +75,7 @@ const GrupoPrincipal = () => {
     const estilo = 'd-none'
     const estilosidebar = "sidebar-mini sidebar-open"
     const estilocerradosidebar = "sidebar-mini sidebar-closed sidebar-collapse"
+    const style="min-height: 908.391px;"
 
     const dat = useSelector((state) => state.dataUserSesion)
 
@@ -75,7 +84,6 @@ const GrupoPrincipal = () => {
             <Navbar />
             <Principal />
             <Sidebar name={dat.USER_LOGIN}
-
             />
         </>
     );

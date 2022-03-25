@@ -17,6 +17,7 @@ import {useEffect} from 'react'
 
 import {useSelector} from 'react-redux'
 import GrupoPrincipal from './components/GrupoPrincipal';
+import Navbarlogin from './components/Navbarlogin';
 
 
  
@@ -42,7 +43,7 @@ function App() {
     <>
     {
     (!statusLogin)
-    ? <><Navbar/><Login/><Sidebar className={estilo} /></>
+    ? <><Navbarlogin/><Login/><Sidebar estilo={estilo} /></>
     :<GrupoPrincipal/>
     }
     </>

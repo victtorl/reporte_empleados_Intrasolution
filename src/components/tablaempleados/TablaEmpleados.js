@@ -35,16 +35,14 @@ const Mostrar =(u)=>{
     return (
         <div>
            <div className="content-wrapper">
-  <section className="content-header">
+  {/* <section className="content-header">
     <div className="container-fluid">
       <div className="row mb-2">
         <div className="col-sm-6">
-          <h1>DataTable</h1>
           <div className="btn-group" role="group" aria-label="Basic example">
-          {/* <button type="button" class="btn btn-success">Nuevo</button>
+          <button type="button" class="btn btn-success">Nuevo</button>
           <button type="button" class="btn btn-primary">Actualizar</button>
-          <button type="button" class="btn btn-danger">Eliminar</button> */}
-          <Widget detalle={detalle} />
+          <button type="button" class="btn btn-danger">Eliminar</button>
           </div>
         </div>
         <div className="col-sm-6">
@@ -55,8 +53,10 @@ const Mostrar =(u)=>{
         </div>
       </div>
     </div>
-  </section>
-  <section className="content">
+  </section> */}
+  <section className="content contenido-calendario-section">
+          <h1>DataTable</h1>
+          <Widget detalle={detalle} />
     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">

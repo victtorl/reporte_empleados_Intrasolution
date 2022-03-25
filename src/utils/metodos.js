@@ -13,10 +13,9 @@ export const reordenarFechaForMapCalendar = (v) => {
 export const tratarTareas = (alltareas) => {
 
     var i=0
-    console.log('alltareas')
-    console.log(alltareas)
+    
     const allT= alltareas.map((u) => {
-        console.log(u.hora_inicio)
+        
         return {
             id: i++,
             idtareacrud: u.id,
@@ -40,8 +39,7 @@ export const tratarTareas = (alltareas) => {
     }
     
     )
-    console.log('tareas tratadas')
-    console.log(allT)
+    
    return allT
   
 

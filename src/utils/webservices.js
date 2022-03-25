@@ -2,6 +2,23 @@ import axios from "axios";
 import { store } from "../redux/store";
 import { tratarTareas } from "./metodos";
 
+
+
+export const getInfoLocal=() => {
+    const parametrosAcces = window.localStorage.getItem('accesws')
+    const par=JSON.parse(parametrosAcces)
+    
+    
+    let dataLocal={
+        name:par.namews,
+        pass:par.passws,
+        idus:par.idws
+    }
+    // console.log(dataLocal)
+    return dataLocal
+}
+
+
 export const getEmpleados = () => {
     const baseUrl = "https://app.safe2biz.com/intrasolution//ws/null/pr_movil_lista_empleado";
     const datax = {
@@ -12,8 +29,8 @@ export const getEmpleados = () => {
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolution',
-                userPassword: '09079763',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword:getInfoLocal().pass,
                 systemRoot: 'safe2biz',
                 'Content-Type': 'text/plain'
             },
@@ -31,68 +48,8 @@ export const getEmpleados = () => {
 
 }
 
-
-export const getcomboSubtipoTarea = () => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/calendario_subtipo_tarea_combo";
-    const datax = {
-        dato: 0
-    }
-    const params = new URLSearchParams()
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'safe2biz',
-                'Content-Type': 'text/plain'
-            },
-        },
-
-    )
-        .then(data => {
-            store.dispatch({
-                type: '@getcombosubtipotarea',
-                payload: data.data.data
-            })
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-
-export const getcomboPase = () => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/calendario_pase_combo";
-    const datax = {
-        sc_user_id:16
-    }
-    const params = new URLSearchParams(datax)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'safe2biz',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-        }
-    )
-        .then(data => {
-            store.dispatch({
-                type: '@getcombopase',
-                payload: data.data.data
-            })
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-
 export const getcomboTipoTarea = () => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/tipo_tarea_combo";
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/tipo_tarea_combo";
     const datax = {
         dato:0
     }
@@ -101,8 +58,8 @@ export const getcomboTipoTarea = () => {
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
                 systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -120,20 +77,82 @@ export const getcomboTipoTarea = () => {
 
 }
 
-
-export const getcomboIncidencia = () => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/calendario_incidencia_combo";
+export const getcomboSubtipoTarea = () => {
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_subtipo_tarea_combo";
     const datax = {
-        sc_user_id:16
+        dato: 0
+    }
+    const params = new URLSearchParams()
+    axios.post(baseUrl,
+        params,
+        {
+            headers: {
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword:getInfoLocal().pass,
+                systemRoot: 'safe2biz',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        },
+
+    )
+        .then(data => {
+            store.dispatch({
+                type: '@getcombosubtipotarea',
+                payload: data.data.data
+            })
+        })
+        .catch(e => {
+            console.log('el error es' + e);
+        })
+
+}
+
+export const getcomboPase = () => {
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_pase_combo";
+    const datax = {
+        sc_user_id:getInfoLocal().idus
     }
     const params = new URLSearchParams(datax)
     axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword:getInfoLocal().pass,
+                systemRoot: 'safe2biz',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        }
+    )
+        .then(data => {
+            store.dispatch({
+                type: '@getcombopase',
+                payload: data.data.data
+            })
+        })
+        .catch(e => {
+            console.log('el error es' + e);
+        })
+
+}
+
+
+
+
+export const getcomboIncidencia = () => {
+    
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_incidencia_combo";
+    const bodyform = {
+        sc_user_id:getInfoLocal().idus
+    }
+    const params = new URLSearchParams(bodyform)
+    axios.post(baseUrl,
+        params,
+        {
+            headers: {
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             
@@ -153,18 +172,18 @@ export const getcomboIncidencia = () => {
 }
 
 export const getcomboPlandeAccion = () => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/calendario_planes_accion_combo";
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_planes_accion_combo";
     const datax = {
-        sc_user_id:13
+        sc_user_id:getInfoLocal().idus
     }
     const params = new URLSearchParams(datax)
     axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: 'guillermo.vergel@intrasolutiondesarrollo',
-                userPassword: 'gv22384714',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             
@@ -184,18 +203,18 @@ export const getcomboPlandeAccion = () => {
 }
 
 export const getallTareas = () => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tareas_horas";
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tareas_horas";
     const datax = {
-        usuario_id:16
+        usuario_id:getInfoLocal().idus
     }
     const params = new URLSearchParams(datax)
     axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },   
         }
@@ -205,9 +224,7 @@ export const getallTareas = () => {
                 type: '@getalltareas',
                  payload: data.data.data
             })
-            console.log('tres datas');
-            console.log(data.data.data);
-            console.log(tratarTareas(data.data.data))
+           console.log(data.data.data);
             store.dispatch({
                     type: '@settasks',
                     payload:[tratarTareas(data.data.data)]
@@ -221,7 +238,7 @@ export const getallTareas = () => {
 
 }
 
-///registros
+///REGISTRO  
 
 export const registroTarea = () => {
     const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tarea_horas_crud";
@@ -260,7 +277,7 @@ export const registroTarea = () => {
 }
 
 export const registroIncidencia = (tipo_tarea,incidente_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
     const bodyform = {
         type:1,
         id:1,
@@ -277,9 +294,9 @@ export const registroIncidencia = (tipo_tarea,incidente_id,observacion,fecha_ini
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -297,7 +314,7 @@ export const registroIncidencia = (tipo_tarea,incidente_id,observacion,fecha_ini
 }
 
 export const registroPase= (tipo_tarea,pase_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
     const bodyform = {
         type:1,
         id:1,
@@ -314,9 +331,9 @@ export const registroPase= (tipo_tarea,pase_id,observacion,fecha_inicio,fecha_fi
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -332,7 +349,7 @@ export const registroPase= (tipo_tarea,pase_id,observacion,fecha_inicio,fecha_fi
 
 
 export const registroOtro = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
     const bodyform = {
         type:1,
         id:1,
@@ -349,9 +366,9 @@ export const registroOtro = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,f
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -367,7 +384,7 @@ export const registroOtro = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,f
 
 
 export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
     const bodyform = {
         type:1,
         id:1,
@@ -384,9 +401,9 @@ export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,observacion,fecha_
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -432,23 +449,24 @@ export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha
             console.log('el error es' + e);
         })
 
-
-
 }
 
-export const getDataUsuario = async(name,password) => {
+
+     
+export const getDataUsuario = async(usuario,passs) => {
     const baseUrl = "https://app.safe2biz.com/intrasolution//ws/null/pr_ws_sc_user";
     const bodyform = {
-        user_login:name,
-        password:password,
+        user_login:usuario,
+        password:passs,
     }
     const params = new URLSearchParams(bodyform)
   const respuesta= await axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: `${bodyform.user_login}@intrasolution`,
-                userPassword: bodyform.password,
+                
+                userLogin: `${usuario}@intrasolution`,
+                userPassword:passs,
                 systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -462,19 +480,9 @@ export const getDataUsuario = async(name,password) => {
         payload: respuesta.data.data[0]
      })
   
-      let nam=respuesta.data.data[0].USER_LOGIN
-      let pas=respuesta.data.data[0].password
-     
-
-    window.localStorage.setItem(
-        'accesws',JSON.stringify({namews:nam,passws:pas})
-    )    
-      
-     
     
-        return respuesta
-        
-
+      
+    return respuesta
 
 }
 

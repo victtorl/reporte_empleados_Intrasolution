@@ -22,8 +22,7 @@ const Principal = () => {
     return (
         <div className="wrapper"> 
         <Routes>
-            
-            
+                        
             <Route path={rutaServidor+'/tareaspendientes'} element={<TareasUsuario/>}></Route>
             <Route path={rutaServidor+'/empleados'} element={<TablaEmpleados/>}></Route>
             <Route path={rutaServidor+'/home'} element={<Home/>}></Route>

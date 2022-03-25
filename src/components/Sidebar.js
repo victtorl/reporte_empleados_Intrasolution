@@ -3,9 +3,11 @@ import { Link, NavLink } from 'react-router-dom';
 // import { useSelector,useDispatch } from 'react-redux';
 import { store } from '../redux/store';
 
-import logo from '../img/AdminLTELogo.png'
+import safe from '../img/safe.png'
 import user1 from '../img/user2-160x160.jpg'
 import { useSelector } from 'react-redux';
+import ReactDOM from 'react-dom';
+
 
 
 
@@ -28,25 +30,32 @@ const Sidebar = (props) => {
     'islogged',JSON.stringify(!islogged)
 )
 console.log(!islogged);
-
+    OcultarMenu()
   
   }
 
   const OcultarMenu =() => {
+    console.log('ocultar menu')
     
+    setTimeout(function(){
+      window.location.reload(false);
+   }, 1);
+
+  //  ReactDOM.unmountComponentAtNode(document.getElementsByClassName('sidebar-mini')); 
+
+
   }
 
   const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
 
    
-
     return (
-      <div className={props.className}>
+      <div className={props.estilo }>
         <aside className="main-sidebar sidebar-dark-primary elevation-4 " data-widget="tree">
           {/* Brand Logo */}
           <a href="index3.html" className="brand-link">
-            <img src={logo} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
-            <span className="brand-text font-weight-light">AdminLTE 3</span>
+            <img src={safe} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
+            <span className="brand-text font-weight-light">Intrasolution</span>
           </a>
           {/* Sidebar */}
           <div className="sidebar">

@@ -48,27 +48,31 @@ const Calendario = () => {
    
     return (
         <>
-            <div className="content-wrapper">
-                <section className="content-header">
+            <div className="content-wrapper p-0 calendario-pantalla-grande">
+                {/* <section className="content-header">
                     <div className="container-fluid ">
-                        <div className="m-0 row justify-content-center">
+                        <div className=" row justify-content-center">
                             
                                 <h1>{diaSelect}</h1>
                             
                         </div>
                     </div>
-                </section>
-                <section className="content">
-                    <div className="container-fluid">
-                        <div className="m-0 row justify-content-center">
+                </section> */}
+                <section className="content contenido-calendario-section ">
+                    <div className="container-fluid ">
+                        <div className=" row justify-content-center">
                         {/* <div className='col-md-3 col-sm-6' >
                           <Registrotareas/>
                           <Calendar locale="es-PE" onChange={onChange} value={value}  onClickDay={processDate(value) } 
                             
                           />
                         </div> */}
-                        <div className='col-md-9 col-sm-9' >
+                        
+                        <div className='col-md-6 col-sm-9  '  >
                             <Agenda/>
+                        </div>
+                        <div className='col-md-6 col-sm-9' >
+                            <h3></h3>
                         </div>
                         </div>
                     </div>

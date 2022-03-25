@@ -34,7 +34,6 @@ export let IsLogin=()=>{
      const par=JSON.parse(parametrosAcces)
 
      const parametrosAccesWS = window.localStorage.getItem('accesws')
-     const parws=JSON.parse(parametrosAccesWS)
     
      console.log(par.datos.name);
      console.log(par.datos.password);
@@ -42,7 +41,7 @@ export let IsLogin=()=>{
      if(datax === null){
           return false
      }else{
-          if(parws.namews=== par.datos.name && parws.passws===par.datos.password )
+          if(datax.user_login === par.datos.name && datax.password===par.datos.password )
           return true
           return false
      }
