@@ -31,6 +31,8 @@ const Estructuratarea = () => {
 
 
     const diaSelect = useSelector((state) => state.diaSelect)
+    const diaSelectmuestramodal = useSelector((state) => state.diaSelectmuestramodal)
+
     const [opTarea, SetoptTarea] = useState('Incidencia')
 
     const setOption = (e) => {
@@ -64,7 +66,7 @@ const Estructuratarea = () => {
         switch (opTarea) {
             case 'Incidencia':
                 return <Incidente />
-            case 'Plan de Accion':
+            case 'Planes de Accion':
                 return <Planaccion/>    
             case 'Pase':
                 return <Pase />
@@ -72,7 +74,7 @@ const Estructuratarea = () => {
                 return <Otro />
         }
     }
-     var reordenarFecha = (diax) => {
+    var reordenarFecha = (diax) => {
         let fff = diax.split(' ')
         let g = fff[0].split('/')
         let dia = g[0]
@@ -97,6 +99,12 @@ const Estructuratarea = () => {
             return `${diaSelect}T${h}.318Z`
         }
     }
+    
+    
+    
+    
+
+   
 
 
     const [startDatei, setStartDatei] = useState(new Date());
@@ -201,7 +209,7 @@ const Estructuratarea = () => {
             <div className="card card-primary">
                 <div className="card-header">
                     <div className="m-0 row justify-content-center">
-                        <h3 className="card-title">{diaSelect}</h3>
+                        <h3 className="card-title">{diaSelectmuestramodal}</h3>
                     </div>
                 </div>
                 <form  >

@@ -8,7 +8,6 @@ import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import ModalTarea from './ModalTarea';
 
-import Modaleditdel from './tipotarea/ModalEditDel'; 
 export const events = [{
     id: 1,
     color: '#fd3153',
@@ -88,6 +87,11 @@ const Agenda = () => {
         type: '@getdiaSelect',
         payload: fechapickeada
       })
+      store.dispatch({
+        type: '@muestrafechamodal',
+        payload: fechapickeada
+      })
+      
 
     }
 
@@ -101,10 +105,42 @@ const Agenda = () => {
     }, []);
 
 
+
 const [nrotarea,Setnrotarea]=useState('#')
-   
+
+const alltareas = useSelector((state) => state.alltareas) 
+const dataUserSesion = useSelector((state) => state.dataUserSesion)   
+
     const activeDelEdit=(ev)=>{
         Setnrotarea(ev)
+        //traer  la tarea numero 'ev' de alltareas
+        const tareaRecuperada=alltareas[ev]
+
+        console.log('#'+ev)
+        console.log(tareaRecuperada)
+        //setear el estado de dataEditDelete
+        store.dispatch({
+            type:'@pushdataEditDelete',
+            payload:{
+            id_bd:{id_bd:tareaRecuperada.id},   
+            tipo_tarea:{tipo_tarea:tareaRecuperada.tipo_tarea_id},
+            segundotipo_tarea:{subtipo_tarea_id:tareaRecuperada.incidencia_id},
+            hora_inicio:{hora_inicio:tareaRecuperada.hora_inicio},
+            hora_fin:{hora_fin:tareaRecuperada.hora_fin},
+            observacion:{observacion:tareaRecuperada.observacion},
+            responsable:{responsable:dataUserSesion.SC_USER_ID},
+            nombre_tipo_tarea:{nombre_tipo_tarea:tareaRecuperada.nombre_tipo_tarea}
+
+            
+            }
+          })
+
+        //alertar si se pickeo un dia
+        store.dispatch({
+        type: '@setalertselectevent',
+        payload:true
+      })
+        
     }
     
 
@@ -115,7 +151,7 @@ const [nrotarea,Setnrotarea]=useState('#')
     return (
         <>
             <Registrotareas dat={dat} />
-            <Modaleditdel tryId={nrotarea}/>
+            
             <Calendar
                 ref={calendar}
                 onClickEvent={(event) => activeDelEdit(event)}

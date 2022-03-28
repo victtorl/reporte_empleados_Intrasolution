@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 import { getEmpleadoReducer } from '../redux/reducers/empleadosReducer'
 import { empF } from '../services/empleadosFake'
 
-import { reordenarFecha } from '../components/registrotareas/Calendario'
+import { reordenarFecha,reordenarFechaparamostrarmodal } from '../components/registrotareas/Calendario'
 
 
 let fecha = new Date()
@@ -16,6 +16,7 @@ const initialState = {
     statusLog: false,
     fechaSelect: reordenarFecha(fecha),
     diaSelect: [],
+    diaSelectmuestramodal:reordenarFechaparamostrarmodal(fecha),
     events: [
         {
             id: 2,
@@ -40,13 +41,25 @@ const initialState = {
     comboincid: [],
     comboplandeaccion:[],
     dataregistro:{
-        tipo_tarea:'',
-        segundotipo_tarea:'',
+        tipo_tarea:{tipo_tarea:''},
+        segundotipo_tarea:{subtipo_tarea_id:''},
         hora_inicio:{hora_inicio:reordenarFecha(fecha)},
         hora_fin:{hora_fin:reordenarFecha(fecha)},
-        observacion:'',
-        responsable:''
+        observacion:{observacion:''},
+        responsable:{responsable:''}
     },
+    dataEditDelete:{
+        id_bd:{id_bd:''},
+        tipo_tarea:{tipo_tarea:''},
+        segundotipo_tarea:{subtipo_tarea_id:''},
+        hora_inicio:{hora_inicio:''},
+        hora_fin:{hora_fin:''},
+        observacion:{observacion:''},
+        responsable:{responsable:''},
+        nombre_tipo_tarea:{nombre_tipo_tarea:''}
+
+    },
+    alertselectevent:false
     
 }
 

@@ -37,7 +37,7 @@ const Otro = () => {
     }
 
     //campo Observacion
-    const [optObservacion, SetObservacion] = useState(' ')
+    const [optObservacion, SetObservacion] = useState('')
     const setOptionObs = (e) => {
         console.log(e.target.value);
         SetObservacion(e.target.value)

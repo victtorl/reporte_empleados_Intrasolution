@@ -33,7 +33,7 @@ const Incidente = () => {
     }
 
     //campo Observacion
-    const [optObservacion, SetObservacion] = useState(' ')
+    const [optObservacion, SetObservacion] = useState('ASD')
     const setOptionObs = (e) => {
         console.log(e.target.value);
         SetObservacion(e.target.value)
@@ -48,29 +48,10 @@ const Incidente = () => {
     }
  
 
-    const registrarDatos = (e) => {
-        e.preventDefault()
-        store.dispatch({
-            type: '@setdatatarea',
-            payload: {
-                tipo_tarea: 'incidencia',
-                incidente: opTarea,
-                observacion: optObservacion,
-                responsable: dataUserSesion.SC_USER_ID
-            }
-        })
-        notify()
-    }
-
-    useEffect(() => {
-        
-    }, []);
 
     return (
 
         <>
-           
-
             <div className="row">
                 <div className="col-md-12">
                     <div className="form-group">
@@ -90,7 +71,7 @@ const Incidente = () => {
 
                     <div className="form-group">
                         <label>Observacion</label>
-                        <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={""} />
+                        <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={optObservacion} />
                     </div>
 
                 </div>
@@ -104,7 +85,6 @@ const Incidente = () => {
                         <label>Responsable : </label> 
                         <label>{dataUserSesion.nombre_empleado}</label>
                         <hr></hr>
-                        {/* <button onClick={registrarDatos} type="button" class="btn btn-outline-warning">confirmar informacion del form</button> */}
 
                         <ToastContainer
                             position="top-center"
@@ -121,9 +101,6 @@ const Incidente = () => {
 
                 </div>
             </div>
-
-
-
         </>
 
     );

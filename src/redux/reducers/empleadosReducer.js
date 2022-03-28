@@ -11,6 +11,11 @@ export const getEmpleadoReducer = (state, action) => {
         ...state,
         empleadoSelect: action.payload
       }
+    case '@muestrafechamodal':
+      return {
+        ...state,
+        diaSelectmuestramodal: action.payload
+      }
     case '@getalltareas':
       return {
         ...state,
@@ -87,7 +92,7 @@ export const getEmpleadoReducer = (state, action) => {
         ...state,
         combotipotarea: action.payload
       }
-      case '@getcomboplandeaccion':
+    case '@getcomboplandeaccion':
       return {
         ...state,
         comboplandeaccion: action.payload
@@ -123,6 +128,60 @@ export const getEmpleadoReducer = (state, action) => {
       return {
         ...state,
         dataregistro: Object.assign(state.dataregistro, { hora_fin: action.payload })
+      }
+
+
+    case '@pushdataEditDelete':
+      return {
+        ...state,
+        dataEditDelete: action.payload
+      }
+
+
+
+    case '@pushtipo_tareaED':
+      return {
+        ...state,
+        // dataregistro: state.dataregistro.tipo_tarea = action.payload
+        dataEditDelete: Object.assign(state.dataEditDelete, { tipo_tarea: action.payload })
+      }
+    case '@pushresponsableED':
+      return {
+        ...state,
+        // dataregistro: state.dataregistro.tipo_tarea = action.payload
+        dataEditDelete: Object.assign(state.dataEditDelete, { responsable: action.payload })
+      }
+    case '@pushsegundotipo_tareaED':
+      return {
+        ...state,
+        dataEditDelete: Object.assign(state.dataEditDelete, { segundotipo_tarea: action.payload })
+      }
+    case '@pushobservacionED':
+      return {
+        ...state,
+        dataEditDelete: Object.assign(state.dataEditDelete, { observacion: action.payload })
+      }
+    case '@pushhorainicioED':
+      return {
+        ...state,
+        dataEditDelete: Object.assign(state.dataEditDelete, { hora_inicio: action.payload })
+      }
+    case '@pushhorafinED':
+      return {
+        ...state,
+        dataEditDelete: Object.assign(state.dataEditDelete, { hora_fin: action.payload })
+      }
+
+    case '@pushnombretipotareaED':
+      return {
+        ...state,
+        dataEditDelete: Object.assign(state.dataEditDelete, { nombre_tipo_tarea: action.payload })
+      }
+
+    case '@setalertselectevent':
+      return {
+        ...state,
+        alertselectevent: action.payload
       }
   }
   return state

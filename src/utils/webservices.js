@@ -304,12 +304,13 @@ export const registroIncidencia = (tipo_tarea,incidente_id,observacion,fecha_ini
     )
         .then(data => {
             console.log(data);
+            getallTareas()
         })
         .catch(e => {
             console.log('el error es' + e);
         })
 
-
+        
 
 }
 
@@ -416,9 +417,10 @@ export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,observacion,fecha_
         })
 
 }
-//EDICION DE TAREAS
-export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha_inicio,fecha_fin) => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+//EDICION 
+
+export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
     const bodyform = {
         type:2,
         id:idbd,
@@ -428,15 +430,16 @@ export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha
         fecha_inicio: fecha_inicio,
         fecha_fin: fecha_fin,
         uea: 1,
+        usuario_id:usuario_id
     }
     const params = new URLSearchParams(bodyform)
     axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -444,12 +447,61 @@ export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha
     )
         .then(data => {
             console.log(data);
+            getallTareas()
+            store.dispatch({
+                type: '@setalertselectevent',
+                payload: false
+            })
         })
         .catch(e => {
             console.log('el error es' + e);
         })
 
 }
+
+//ELIMINACION
+
+export const eliminacionIncidencia = (idbd) => {
+    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const bodyform = {
+        type:3,
+        id:idbd,
+        // tipo_tarea: tipo_tarea,
+        // incidente_id:incidente_id,
+        // observacion:observacion,
+        // fecha_inicio: fecha_inicio,
+        // fecha_fin: fecha_fin,
+        // uea: 1,
+        // usuario_id:usuario_id
+    }
+    const params = new URLSearchParams(bodyform)
+    axios.post(baseUrl,
+        params,
+        {
+            headers: {
+                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: 'safe2biz',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        },
+
+    )
+        .then(data => {
+            console.log(data);
+            getallTareas()
+            store.dispatch({
+                type: '@setalertselectevent',
+                payload: false
+            })
+
+        })
+        .catch(e => {
+            console.log('el error es' + e);
+        })
+
+}
+
 
 
      

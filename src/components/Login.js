@@ -19,7 +19,7 @@ export const getInfoLocal = () => {
         pass: par.passws,
         idus: par.idws
     }
-    
+
     return dataLocal
 }
 
@@ -50,7 +50,7 @@ const Login = () => {
         const par = JSON.parse(parametrosAcces)
         getDataUsuario(par.datos.name, par.datos.password)
             .then(data => {
-                
+
                 const infoUser = data.data.data[0]
                 console.log(infoUser);
 
@@ -71,7 +71,7 @@ const Login = () => {
                         type: '@statusLogin',
                         payload: false
                     })
-                    
+
                     window.localStorage.setItem(
                         'islogged', JSON.stringify(islogged)
                         )
@@ -88,17 +88,17 @@ const Login = () => {
 
     }
 
-    
+
     const enviarDatos = async (event) => {
         event.preventDefault()
 
         window.localStorage.setItem(
             'acces', JSON.stringify({ datos })
         )
-      
+
         validarlogin()
-  
-        
+
+
     }
     const [vercredetial, Setvercredential] = useState('Ingrese Credenciales')
     const [colortext,Setcolortext]=useState('text-primary')
@@ -112,11 +112,9 @@ const Login = () => {
                         <img src={safe} class="img-fluid" alt="Responsive image"></img>
                         <div className="card-header text-center">
                             <img src={logosafe} class="img-fluid" alt="Responsive image"></img>
-                            {/* <a href="../../index2.html" className="h1"><b>Intrasolution</b></a> */}
                         </div>
                         <div className="card-body ">
 
-                            {/* <p className="login-box-msg">El portal de negocios de su empresa</p> */}
                             <p className="login-box-msg"><label>INTRANET</label></p>
                             <p className="login-box-msg"><label className={colortext}>{vercredetial}</label></p>
 

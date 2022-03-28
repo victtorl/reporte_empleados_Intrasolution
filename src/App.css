@@ -77,5 +77,10 @@
     border: solid 5px #343A40 10%;
     height: 500px;
   }
+  .sidebar-principal{
+    border: solid red 1px;
+    position: sticky;
+    margin-top: -100;
+  }
 
 } 
