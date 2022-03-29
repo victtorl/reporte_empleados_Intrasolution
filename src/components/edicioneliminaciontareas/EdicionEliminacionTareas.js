@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { ToastContainer, toast } from 'react-toastify';
 import { setDefaultLocale } from "react-datepicker";
-import { registroIncidencia, registroPase, registroOtro, edicionIncidencia,eliminacionIncidencia } from '../../utils/webservices';
+import {  edicionIncidencia, eliminacionIncidencia,eliminacionPase,eliminacionOtro,edicionPase, edicionOtro } from '../../utils/webservices';
 
 
 
@@ -317,8 +317,9 @@ const Edicioneliminaciontareas = () => {
             }
             case "Pase": {
                 //   return  console.log('registrar un pase')
-                return registroPase(
+                return edicionPase(
                     dataregistro.tipo_tarea.tipo_tarea,
+                    dataEditDelete.id_bd.id_bd,
                     dataregistro.segundotipo_tarea.pase_id,
                     dataregistro.observacion.observacion,
                     dataregistro.hora_inicio.hora_inicio,
@@ -327,8 +328,9 @@ const Edicioneliminaciontareas = () => {
             }
             case "Otro": {
                 //    return  console.log('registrar Otro');
-                return registroOtro(
+                return edicionOtro(
                     dataregistro.tipo_tarea.tipo_tarea,
+                    dataEditDelete.id_bd.id_bd,
                     dataregistro.segundotipo_tarea.subtipo_tarea_id,
                     dataregistro.observacion.observacion,
                     dataregistro.hora_inicio.hora_inicio,
@@ -350,24 +352,16 @@ const Edicioneliminaciontareas = () => {
                 )
             }
             case "Pase": {
-                //   return  console.log('registrar un pase')
-                return registroPase(
-                    dataregistro.tipo_tarea.tipo_tarea,
-                    dataregistro.segundotipo_tarea.pase_id,
-                    dataregistro.observacion.observacion,
-                    dataregistro.hora_inicio.hora_inicio,
-                    dataregistro.hora_fin.hora_fin,
-                    dataUserSesion.SC_USER_ID)
+                console.log('eliminar un pase')
+                return eliminacionPase(
+                    dataEditDelete.id_bd.id_bd,
+                )
             }
             case "Otro": {
-                //    return  console.log('registrar Otro');
-                return registroOtro(
-                    dataregistro.tipo_tarea.tipo_tarea,
-                    dataregistro.segundotipo_tarea.subtipo_tarea_id,
-                    dataregistro.observacion.observacion,
-                    dataregistro.hora_inicio.hora_inicio,
-                    dataregistro.hora_fin.hora_fin,
-                    dataUserSesion.SC_USER_ID)
+                console.log('eliminar Otro');
+                return eliminacionOtro(
+                    dataEditDelete.id_bd.id_bd,
+                )
             }
         }
 
@@ -387,25 +381,32 @@ const Edicioneliminaciontareas = () => {
                             <div className="col-md-12">
                                 <div className="form-group">
                                     <div className="d-flex justify-content-around">
-                                        <DatePicker
-                                            selected={startDatei}
-                                            onChange={(date) => cambiarDatos(date)}
-                                            showTimeSelect
-                                            showTimeSelectOnly
-                                            timeIntervals={30}
-                                            timeCaption="Time"
-                                            dateFormat="h:mm aa"
-                                        />
-
-                                        <DatePicker
-                                            selected={startDatef}
-                                            onChange={(date) => cambiarDatosf(date)}
-                                            showTimeSelect
-                                            showTimeSelectOnly
-                                            timeIntervals={30}
-                                            timeCaption="Time"
-                                            dateFormat="h:mm aa"
-                                        />
+                                    <div className='datepicker'>
+                                        <label>inicio</label>
+                                            <DatePicker
+                                                className='datepicker'
+                                                selected={startDatei}
+                                                onChange={(date) => cambiarDatos(date)}
+                                                showTimeSelect
+                                                showTimeSelectOnly
+                                                timeIntervals={30}
+                                                timeCaption="Time"
+                                                dateFormat="h:mm aa"
+                                            />
+                                        </div>
+                                        <div className='datepicker'>
+                                        <label>fin</label>
+                                            <DatePicker
+                                               className='datepicker'
+                                                selected={startDatef}
+                                                onChange={(date) => cambiarDatosf(date)}
+                                                showTimeSelect
+                                                showTimeSelectOnly
+                                                timeIntervals={30}
+                                                timeCaption="Time"
+                                                dateFormat="h:mm aa"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <p className='parra'>inicioTarea: {hi}</p>

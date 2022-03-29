@@ -66,9 +66,7 @@ const Calendario = () => {
                 {/* <section className="content-header">
                     <div className="container-fluid ">
                         <div className=" row justify-content-center">
-                            
                                 <h1>{diaSelect}</h1>
-                            
                         </div>
                     </div>
                 </section> */}
@@ -78,10 +76,8 @@ const Calendario = () => {
                             {/* <div className='col-md-3 col-sm-6' >
                           <Registrotareas/>
                           <Calendar locale="es-PE" onChange={onChange} value={value}  onClickDay={processDate(value) } 
-                            
                           />
                         </div> */}
-
                             <div className='col-md-6 col-sm-9  '  >
                                 <Agenda />
                             </div>
@@ -89,7 +85,7 @@ const Calendario = () => {
 
                                 {(alertselectevent === true)
                                 ? <Edicioneliminaciontareas/>
-                                :<p>hola</p>}
+                                :<p></p>}
                             </div>
                         </div>
                     </div>

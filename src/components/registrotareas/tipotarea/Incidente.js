@@ -33,7 +33,7 @@ const Incidente = () => {
     }
 
     //campo Observacion
-    const [optObservacion, SetObservacion] = useState('ASD')
+    const [optObservacion, SetObservacion] = useState('')
     const setOptionObs = (e) => {
         console.log(e.target.value);
         SetObservacion(e.target.value)
@@ -55,11 +55,11 @@ const Incidente = () => {
             <div className="row">
                 <div className="col-md-12">
                     <div className="form-group">
-                        <label>Incidente</label>
+                        <label>Incidencia</label>
                         <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
-                        <option selected>--Seleccione Incidente--</option>
+                        <option selected>--Seleccione Incidencia--</option>
                             {comboincid.map(u => (
-                                <option key={u.id}   >{u.codigo_ticket}</option>
+                                <option key={u.id}  >{u.codigo_ticket}</option>
                             ))
                             }
                         </select>

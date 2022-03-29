@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 import Incidente from './tipotarea/Incidente';
@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 import { setDefaultLocale } from "react-datepicker";
-import { registroIncidencia, registroPase,registroOtro } from '../../utils/webservices';
+import { registroIncidencia, registroPase, registroOtro } from '../../utils/webservices';
 import Planaccion from './tipotarea/PlanAccion';
 
 
@@ -26,8 +26,8 @@ const Estructuratarea = () => {
     const nuevaTarea = useSelector((state) => state.nuevaTarea)
     const dataTarea = useSelector((state) => state.dataTarea)
     const tasks = useSelector((state) => state.tasks)
-    const dataregistro =useSelector((state)=>state.dataregistro)
-    const dataUserSesion =useSelector((state)=>state.dataUserSesion)
+    const dataregistro = useSelector((state) => state.dataregistro)
+    const dataUserSesion = useSelector((state) => state.dataUserSesion)
 
 
     const diaSelect = useSelector((state) => state.diaSelect)
@@ -37,27 +37,27 @@ const Estructuratarea = () => {
 
     const setOption = (e) => {
         //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
-        const elem=combotipotarea.filter((u)=>u.tipo_tarea === e.target.value)
+        const elem = combotipotarea.filter((u) => u.tipo_tarea === e.target.value)
         console.log(e.target.value);
-        console.log(elem[0].id)  
-        SetoptTarea(elem.id)    
+        console.log(elem[0].id)
+        SetoptTarea(elem.id)
         //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso 
         console.log(e.target.value);
         SetoptTarea(e.target.value)
         store.dispatch({
-            type:'@pushtipo_tarea',
-            payload:{
-                tipo_tarea:elem[0].id
+            type: '@pushtipo_tarea',
+            payload: {
+                tipo_tarea: elem[0].id
             }
-            
+
         })
         //setear el responsable
         store.dispatch({
-            type:'@pushresponsable',
-            payload:{
-                responsable:dataUserSesion.SC_USER_ID
+            type: '@pushresponsable',
+            payload: {
+                responsable: dataUserSesion.SC_USER_ID
             }
-            
+
         })
 
     }
@@ -67,7 +67,7 @@ const Estructuratarea = () => {
             case 'Incidencia':
                 return <Incidente />
             case 'Planes de Accion':
-                return <Planaccion/>    
+                return <Planaccion />
             case 'Pase':
                 return <Pase />
             case 'Otro':
@@ -99,12 +99,12 @@ const Estructuratarea = () => {
             return `${diaSelect}T${h}.318Z`
         }
     }
-    
-    
-    
-    
 
-   
+
+
+
+
+
 
 
     const [startDatei, setStartDatei] = useState(new Date());
@@ -117,11 +117,11 @@ const Estructuratarea = () => {
         console.log('el dato d es:' + d)
         setStartDatei(d)
         store.dispatch({
-            type:'@pushhorainicio',
-            payload:{
-                hora_inicio:(reordenarFecha(d.toLocaleString('es-PE')))
+            type: '@pushhorainicio',
+            payload: {
+                hora_inicio: (reordenarFecha(d.toLocaleString('es-PE')))
             }
-        }) 
+        })
     }
     const cambiarDatosf = (d) => {
         console.log('cambiando la hora de fin');
@@ -129,11 +129,11 @@ const Estructuratarea = () => {
         console.log('el dato d es:' + d)
         setStartDatef(d)
         store.dispatch({
-            type:'@pushhorafin',
-            payload:{
-                hora_fin:(reordenarFecha(d.toLocaleString('es-PE')))
+            type: '@pushhorafin',
+            payload: {
+                hora_fin: (reordenarFecha(d.toLocaleString('es-PE')))
             }
-        }) 
+        })
     }
 
     const traerCuerpo = async () => {
@@ -142,7 +142,7 @@ const Estructuratarea = () => {
         await store.dispatch({
             type: '@nuevatarea',
             payload: {
-                tipo_tarea:combotipotarea.filter((u)=>u.tipo_tarea===opTarea)[0].id, 
+                tipo_tarea: combotipotarea.filter((u) => u.tipo_tarea === opTarea)[0].id,
                 horaInicio: horai,
                 horaFin: horaf,
                 cuerpoTarea: dataTarea
@@ -163,44 +163,44 @@ const Estructuratarea = () => {
         })
     }
 
-   
+
     const enviarDatos = async (e) => {
         e.preventDefault()
 
-       switch (opTarea) {
-        case "Incidencia":{
-        // return  console.log('registrar una incidencia')
-         return  registroIncidencia(
-             dataregistro.tipo_tarea.tipo_tarea,
-             dataregistro.segundotipo_tarea.incidente_id,
-             dataregistro.observacion.observacion,
-             dataregistro.hora_inicio.hora_inicio,
-             dataregistro.hora_fin.hora_fin,
-             dataUserSesion.SC_USER_ID)    
+        switch (opTarea) {
+            case "Incidencia": {
+                // return  console.log('registrar una incidencia')
+                return registroIncidencia(
+                    dataregistro.tipo_tarea.tipo_tarea,
+                    dataregistro.segundotipo_tarea.incidente_id,
+                    dataregistro.observacion.observacion,
+                    dataregistro.hora_inicio.hora_inicio,
+                    dataregistro.hora_fin.hora_fin,
+                    dataUserSesion.SC_USER_ID)
+            }
+            case "Pase": {
+                //   return  console.log('registrar un pase')
+                return registroPase(
+                    dataregistro.tipo_tarea.tipo_tarea,
+                    dataregistro.segundotipo_tarea.pase_id,
+                    dataregistro.observacion.observacion,
+                    dataregistro.hora_inicio.hora_inicio,
+                    dataregistro.hora_fin.hora_fin,
+                    dataUserSesion.SC_USER_ID)
+            }
+            case "Otro": {
+                //    return  console.log('registrar Otro');
+                return registroOtro(
+                    dataregistro.tipo_tarea.tipo_tarea,
+                    dataregistro.segundotipo_tarea.subtipo_tarea_id,
+                    dataregistro.observacion.observacion,
+                    dataregistro.hora_inicio.hora_inicio,
+                    dataregistro.hora_fin.hora_fin,
+                    dataUserSesion.SC_USER_ID)
+            }
         }
-        case "Pase":{
-        //   return  console.log('registrar un pase')
-         return registroPase(
-            dataregistro.tipo_tarea.tipo_tarea,
-            dataregistro.segundotipo_tarea.pase_id,
-            dataregistro.observacion.observacion,
-            dataregistro.hora_inicio.hora_inicio,
-            dataregistro.hora_fin.hora_fin,
-            dataUserSesion.SC_USER_ID)
-        }
-        case "Otro":{
-        //    return  console.log('registrar Otro');
-         return registroOtro(
-            dataregistro.tipo_tarea.tipo_tarea,
-            dataregistro.segundotipo_tarea.subtipo_tarea_id,
-            dataregistro.observacion.observacion,
-            dataregistro.hora_inicio.hora_inicio,
-            dataregistro.hora_fin.hora_fin,
-            dataUserSesion.SC_USER_ID)
-        }
-    }
-        
-       //recien al seleccioar el tipo de tarea se  llena dataTarea[] y ahi puedo capturar la data
+
+        //recien al seleccioar el tipo de tarea se  llena dataTarea[] y ahi puedo capturar la data
 
     }
 
@@ -218,30 +218,38 @@ const Estructuratarea = () => {
                             <div className="col-md-12">
                                 <div className="form-group">
                                     <div className="d-flex justify-content-around">
-                                        <DatePicker
-                                            selected={startDatei}
-                                            onChange={(date) => cambiarDatos(date)}
-                                            showTimeSelect
-                                            showTimeSelectOnly
-                                            timeIntervals={30}
-                                            timeCaption="Time"
-                                            dateFormat="h:mm aa"
-                                        />
-                                        <DatePicker
-                                            selected={startDatef}
-                                            onChange={(date) => cambiarDatosf(date)}
-                                            showTimeSelect
-                                            showTimeSelectOnly
-                                            timeIntervals={30}
-                                            timeCaption="Time"
-                                            dateFormat="h:mm aa"
-                                        />
+                                        <div className='datepicker'>
+                                        <label>inicio</label>
+                                            <DatePicker
+                                                className='datepicker'
+                                                selected={startDatei}
+                                                onChange={(date) => cambiarDatos(date)}
+                                                showTimeSelect
+                                                showTimeSelectOnly
+                                                timeIntervals={30}
+                                                timeCaption="Time"
+                                                dateFormat="h:mm aa"
+                                            />
+                                        </div>
+                                        <div className='datepicker'>
+                                        <label>fin</label>
+                                            <DatePicker
+                                               className='datepicker'
+                                                selected={startDatef}
+                                                onChange={(date) => cambiarDatosf(date)}
+                                                showTimeSelect
+                                                showTimeSelectOnly
+                                                timeIntervals={30}
+                                                timeCaption="Time"
+                                                dateFormat="h:mm aa"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label>Tipo tarea</label>
                                     <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
-                                        <option selected>Seleccione un tipo tarea</option>
+                                        <option selected>--Seleccione un tipo tarea--</option>
                                         {combotipotarea.map(u => (
                                             <option key={u.id}   >{u.tipo_tarea}</option>
                                         ))
