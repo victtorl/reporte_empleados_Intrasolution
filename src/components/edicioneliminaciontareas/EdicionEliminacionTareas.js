@@ -23,9 +23,9 @@ const FuncionIncidente = (props) => {
     const comboincid = useSelector((state) => state.comboincid)
     const dataUserSesion = useSelector((state) => state.dataUserSesion)
 
-    const dataEditDelete = useSelector((state) => state.dataEditDelete)
+    const dataEditDeleteInc = useSelector((state) => state.dataEditDeleteInc)
 
-    let subtipotareeaidED = dataEditDelete.segundotipo_tarea.subtipo_tarea_id
+    let subtipotareeaidED = dataEditDeleteInc.segundotipo_tarea.incidente_id
 
 
 
@@ -37,7 +37,7 @@ const FuncionIncidente = (props) => {
         const elem = comboincid.filter((u) => u.codigo_ticket === e.target.value)
         //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso
         store.dispatch({
-            type: '@pushsegundotipo_tareaED',
+            type: '@pushsegundotipo_tareaEDInc',
             payload: {
                 incidente_id: elem[0].id
             }
@@ -45,17 +45,14 @@ const FuncionIncidente = (props) => {
         })
     }
 
-    const [optObservacion, SetObservacion] = useState(dataEditDelete.observacion.observacion)
 
-    // const eleRef= useRef(null)
 
     const setOptionObs = (e) => {
         console.log(e.target.value);
-        // SetObservacion(e.target.value)
-        SetObservacion(dataEditDelete.observacion.observacion)
+    //   SetObservacion(dataEditDeleteInc.observacion.observacion)
         // eleRef.current.value('remplazo')
         store.dispatch({
-            type: '@pushobservacionED',
+            type: '@pushobservacionEDInc',
             payload: {
                 observacion: e.target.value
             }
@@ -66,7 +63,6 @@ const FuncionIncidente = (props) => {
 
 
 
-    const [val, setVal] = useState(dataEditDelete.observacion.observacion);
 
 
     return (
@@ -88,7 +84,7 @@ const FuncionIncidente = (props) => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Observacion Anterior:</label> <p>{dataEditDelete.observacion.observacion}</p>
+                        <label>Observacion Anterior:</label> <p>{dataEditDeleteInc.observacion.observacion}</p>
                         <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
                         </textarea>
                     </div>
@@ -155,11 +151,11 @@ const Edicioneliminaciontareas = () => {
     const tasks = useSelector((state) => state.tasks)
     const dataregistro = useSelector((state) => state.dataregistro)
     const dataUserSesion = useSelector((state) => state.dataUserSesion)
-    const dataEditDelete = useSelector((state) => state.dataEditDelete)
+    const dataEditDeleteInc = useSelector((state) => state.dataEditDeleteInc)
 
     //DATA POR DEFECTO QUE SE ENVIA AL PRESIONAR UNEVENTO DEL CALENDARIO
-    let nombreTareadataED = dataEditDelete.nombre_tipo_tarea.nombre_tipo_tarea
-    let idtipoTarea = dataEditDelete.tipo_tarea.tipo_tarea
+    let nombreTareadataED = dataEditDeleteInc.nombre_tipo_tarea.nombre_tipo_tarea
+    let idtipoTarea = dataEditDeleteInc.tipo_tarea.tipo_tarea
 
 
 
@@ -177,7 +173,7 @@ const Edicioneliminaciontareas = () => {
         console.log(e.target.value);
         SetoptTareaED(e.target.value)
         store.dispatch({
-            type: '@pushtipo_tareaED',
+            type: '@pushtipo_tareaEDInc',
             payload: {
                 tipo_tarea: elem[0].id
             }
@@ -185,7 +181,7 @@ const Edicioneliminaciontareas = () => {
         })
         //setear el responsable
         store.dispatch({
-            type: '@pushresponsableED',
+            type: '@pushresponsableEDInc',
             payload: {
                 responsable: dataUserSesion.SC_USER_ID
             }
@@ -261,8 +257,8 @@ const Edicioneliminaciontareas = () => {
 
     }
 
-    let hi = dataEditDelete.hora_inicio.hora_inicio
-    let hf = dataEditDelete.hora_fin.hora_fin
+    let hi = dataEditDeleteInc.hora_inicio.hora_inicio
+    let hf = dataEditDeleteInc.hora_fin.hora_fin
 
     // ro(hi).anio,ro(hi).mes,ro(hi).dia,ro(hi).hora,ro(hi).min,ro(hi).seg 
     // ro(hf).anio,ro(hf).mes,ro(hf).dia,ro(hf).hora,ro(hf).min,ro(hf).seg
@@ -279,7 +275,7 @@ const Edicioneliminaciontareas = () => {
         console.log('el dato d es:' + d)
         setStartDatei(d)
         store.dispatch({
-            type: '@pushhorainicioED',
+            type: '@pushhorainicioEDInc',
             payload: {
                 hora_inicio: (reordenarFecha(d.toLocaleString('es-PE')))
             }
@@ -291,7 +287,7 @@ const Edicioneliminaciontareas = () => {
         console.log('el dato d es:' + d)
         setStartDatef(d)
         store.dispatch({
-            type: '@pushhorafinED',
+            type: '@pushhorafinEDInc',
             payload: {
                 hora_fin: (reordenarFecha(d.toLocaleString('es-PE')))
             }
@@ -307,19 +303,19 @@ const Edicioneliminaciontareas = () => {
             case "Incidencia": {
                 console.log('editar una incidencia')
                 return edicionIncidencia(
-                    dataEditDelete.tipo_tarea.tipo_tarea,
-                    dataEditDelete.id_bd.id_bd,
-                    dataEditDelete.segundotipo_tarea.subtipo_tarea_id,
-                    dataEditDelete.observacion.observacion,
-                    dataEditDelete.hora_inicio.hora_inicio,
-                    dataEditDelete.hora_fin.hora_fin,
+                    dataEditDeleteInc.tipo_tarea.tipo_tarea,
+                    dataEditDeleteInc.id_bd.id_bd,
+                    dataEditDeleteInc.segundotipo_tarea.incidente_id,
+                    dataEditDeleteInc.observacion.observacion,
+                    dataEditDeleteInc.hora_inicio.hora_inicio,
+                    dataEditDeleteInc.hora_fin.hora_fin,
                     dataUserSesion.SC_USER_ID)
             }
             case "Pase": {
                 //   return  console.log('registrar un pase')
                 return edicionPase(
                     dataregistro.tipo_tarea.tipo_tarea,
-                    dataEditDelete.id_bd.id_bd,
+                    dataEditDeleteInc.id_bd.id_bd,
                     dataregistro.segundotipo_tarea.pase_id,
                     dataregistro.observacion.observacion,
                     dataregistro.hora_inicio.hora_inicio,
@@ -330,7 +326,7 @@ const Edicioneliminaciontareas = () => {
                 //    return  console.log('registrar Otro');
                 return edicionOtro(
                     dataregistro.tipo_tarea.tipo_tarea,
-                    dataEditDelete.id_bd.id_bd,
+                    dataEditDeleteInc.id_bd.id_bd,
                     dataregistro.segundotipo_tarea.subtipo_tarea_id,
                     dataregistro.observacion.observacion,
                     dataregistro.hora_inicio.hora_inicio,
@@ -348,19 +344,19 @@ const Edicioneliminaciontareas = () => {
             case "Incidencia": {
                 console.log('eliminar una incidencia')
                 return eliminacionIncidencia(
-                    dataEditDelete.id_bd.id_bd,
+                    dataEditDeleteInc.id_bd.id_bd,
                 )
             }
             case "Pase": {
                 console.log('eliminar un pase')
                 return eliminacionPase(
-                    dataEditDelete.id_bd.id_bd,
+                    dataEditDeleteInc.id_bd.id_bd,
                 )
             }
             case "Otro": {
                 console.log('eliminar Otro');
                 return eliminacionOtro(
-                    dataEditDelete.id_bd.id_bd,
+                    dataEditDeleteInc.id_bd.id_bd,
                 )
             }
         }

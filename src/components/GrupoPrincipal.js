@@ -21,57 +21,57 @@ const GrupoPrincipal = () => {
   
     
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        getDataUsuario(dataUserSesion.USER_LOGIN,dataUserSesion.password)
-            .then(data => {
-                const infoUser = data.data.data[0]
-                console.log(infoUser);
-                // store.dispatch({
-                //     type: '@dataUserSesion',
-                //     payload: infoUser
-                // })
-                //llenar la data de tareas de paso
-                // store.dispatch({
-                //     type: '@settasks',
-                //     payload:tratarTareas(alltareas)
-                // })
-                //llenar combos  
-                // getcomboIncidencia(infoUser.USER_LOGIN,infoUser.password,infoUser.SC_USER_ID)
-            })
-            .then(
-                window.localStorage.setItem(
-                    'accesws',JSON.stringify({namews:dataUserSesion.USER_LOGIN,passws:dataUserSesion.password,idws:dataUserSesion.SC_USER_ID})
-                ) 
-            )
-            .then(
-                getcomboIncidencia()
-            )
-            .then(
-                getcomboPase()
-            )
-            .then(
-                getcomboSubtipoTarea()
-            )
-            .then(
-                getcomboTipoTarea()
-            )
-            .then(
-                getallTareas()
-            )
-            .then(
-                getcomboPlandeAccion()
-            )
-            .then(
-                tratarTareas(alltareas)
-            )
+    //     getDataUsuario(dataUserSesion.USER_LOGIN,dataUserSesion.password)
+    //         .then(data => {
+    //             const infoUser = data.data.data[0]
+    //             console.log(infoUser);
+                
 
-            .catch(e => {
-                console.log('el error es' + e);
-            })
+    //         })
+    //         .then(
+    //             window.localStorage.setItem(
+    //                 'accesws',JSON.stringify({namews:dataUserSesion.USER_LOGIN,passws:dataUserSesion.password,idws:dataUserSesion.SC_USER_ID,tokenws:dataUserSesion.token})
+    //             ) 
+    //         )
+    //         .then(
+    //             getcomboIncidencia()
+    //         )
+    //         .then(
+    //             getcomboPase()
+    //         )
+    //         .then(
+    //             getcomboSubtipoTarea()
+    //         )
+    //         .then(
+    //             getcomboTipoTarea()
+    //         )
+    //         .then(
+    //             getallTareas()
+    //         )
+    //         .then(
+    //             getcomboPlandeAccion()
+    //         )
+    //         .then(
+    //             tratarTareas(alltareas)
+    //         )
 
-    }, []);
+    //         .catch(e => {
+    //             console.log('el error es' + e);
+    //         })
 
+    // }, []);
+
+ 
+  useEffect(() => {
+      
+      getallTareas()
+      .then(()=>{
+          console.log('hola mundo');
+      })
+  }, []);  
+ 
     const estilo = 'd-none'
     const estilosidebar = "sidebar-mini sidebar-open"
     const estilocerradosidebar = "sidebar-mini sidebar-closed sidebar-collapse"

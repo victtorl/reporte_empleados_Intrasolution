@@ -59,7 +59,19 @@ const initialState = {
         nombre_tipo_tarea:{nombre_tipo_tarea:''}
 
     },
-    alertselectevent:false
+    dataEditDeleteInc:{
+        id_bd:{id_bd:''},
+        tipo_tarea:{tipo_tarea:''},
+        segundotipo_tarea:{incidente_id:''},
+        hora_inicio:{hora_inicio:''},
+        hora_fin:{hora_fin:''},
+        observacion:{observacion:''},
+        responsable:{responsable:''},
+        nombre_tipo_tarea:{nombre_tipo_tarea:''}
+
+    },
+    alertselectevent:false,
+    newacces:{}
     
 }
 

@@ -120,11 +120,11 @@ const dataUserSesion = useSelector((state) => state.dataUserSesion)
         console.log(tareaRecuperada)
         //setear el estado de dataEditDelete
         store.dispatch({
-            type:'@pushdataEditDelete',
+            type:'@pushdataEditDeleteInc',
             payload:{
             id_bd:{id_bd:tareaRecuperada.id},   
             tipo_tarea:{tipo_tarea:tareaRecuperada.tipo_tarea_id},
-            segundotipo_tarea:{subtipo_tarea_id:tareaRecuperada.incidencia_id},
+            segundotipo_tarea:{incidente_id:tareaRecuperada.incidencia_id},
             hora_inicio:{hora_inicio:tareaRecuperada.hora_inicio},
             hora_fin:{hora_fin:tareaRecuperada.hora_fin},
             observacion:{observacion:tareaRecuperada.observacion},
@@ -132,6 +132,21 @@ const dataUserSesion = useSelector((state) => state.dataUserSesion)
             nombre_tipo_tarea:{nombre_tipo_tarea:tareaRecuperada.nombre_tipo_tarea}
 
             
+            }
+          })
+
+          store.dispatch({
+            type:'@pushdataEditDelete',
+            payload:{
+            id_bd:{id_bd:tareaRecuperada.id},   
+            tipo_tarea:{tipo_tarea:tareaRecuperada.tipo_tarea_id},
+            segundotipo_tarea:{subtipo_tarea_id:tareaRecuperada.subtipo_tarea_id},
+            hora_inicio:{hora_inicio:tareaRecuperada.hora_inicio},
+            hora_fin:{hora_fin:tareaRecuperada.hora_fin},
+            observacion:{observacion:tareaRecuperada.observacion},
+            responsable:{responsable:dataUserSesion.SC_USER_ID},
+            nombre_tipo_tarea:{nombre_tipo_tarea:tareaRecuperada.nombre_tipo_tarea}
+
             }
           })
 

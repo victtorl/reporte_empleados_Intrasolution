@@ -7,21 +7,10 @@ import { useSelector } from 'react-redux';
 
 import safe from '../img/safe.png'
 import logosafe from '../img/logo-safe.png'
-import { getDataUsuario } from '../utils/webservices';
-
-export const getInfoLocal = () => {
-    const parametrosAcces = window.localStorage.getItem('accesws')
-    const par = JSON.parse(parametrosAcces)
+import { getcomboIncidencia, getcomboPase, getcomboSubtipoTarea, getcomboTipoTarea,getallTareas, getcomboPlandeAccion, getDataUsuario } from '../utils/webservices';
 
 
-    let dataLocal = {
-        name: par.namews,
-        pass: par.passws,
-        idus: par.idws
-    }
 
-    return dataLocal
-}
 
 const Login = () => {
 
@@ -46,15 +35,14 @@ const Login = () => {
     }
     const validarlogin = () => {
 
-        const parametrosAcces = window.localStorage.getItem('acces')
-        const par = JSON.parse(parametrosAcces)
-        getDataUsuario(par.datos.name, par.datos.password)
+        
+        getDataUsuario(datos.name,datos.password)
             .then(data => {
 
                 const infoUser = data.data.data[0]
                 console.log(infoUser);
 
-                if (par.datos.name === infoUser.USER_LOGIN && par.datos.password === infoUser.password) {
+                if (datos.name === infoUser.USER_LOGIN && datos.password === infoUser.password) {
                     store.dispatch({
                         type: '@statusLogin',
                         payload: true
@@ -63,6 +51,7 @@ const Login = () => {
                         'islogged', JSON.stringify(!islogged)
 
                     )
+                    
                     console.log(!islogged);
                     console.log('estas logueado');
                 } else {
@@ -79,7 +68,26 @@ const Login = () => {
 
                 }
                 Setvercredential('Bienvenido')
+                console.log('asdsad'+JSON.stringify(infoUser))
+                return infoUser
             })
+            .then((infoUser) => {
+                window.localStorage.setItem(
+                    'accesws',JSON.stringify({namews:infoUser.USER_LOGIN,passws:infoUser.password,idws:infoUser.SC_USER_ID,tokenws:infoUser.token})
+                ) 
+            }
+               
+            )
+            .then(() => {
+                console.log('asdsadsadsadsad')
+                getcomboTipoTarea()
+                getcomboSubtipoTarea()
+                getcomboPase()
+                getcomboPlandeAccion()
+                getcomboIncidencia()
+                getallTareas()
+            }
+            )
             .catch((e)=>{
                 console.log('error'+e)
                 Setvercredential('Usuario o Contraseña Incorrectos')

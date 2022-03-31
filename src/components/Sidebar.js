@@ -30,6 +30,10 @@ const Sidebar = (props) => {
     'islogged',JSON.stringify(!islogged)
 )
 console.log(!islogged);
+
+window.localStorage.setItem(
+  'accesws',JSON.stringify(null)
+) 
     OcultarMenu()
   
   }

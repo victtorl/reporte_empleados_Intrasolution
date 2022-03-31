@@ -12,9 +12,10 @@ export const getInfoLocal=() => {
     let dataLocal={
         name:par.namews,
         pass:par.passws,
-        idus:par.idws
+        idus:par.idws,
+        token:par.tokenws,
     }
-    // console.log(dataLocal)
+    console.log(dataLocal)
     return dataLocal
 }
 
@@ -48,19 +49,21 @@ export const getEmpleados = () => {
 
 }
 
-export const getcomboTipoTarea = () => {
+export const getcomboTipoTarea = async() => {
     const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/tipo_tarea_combo";
     const datax = {
         dato:0
     }
     const params = new URLSearchParams(datax)
-    axios.post(baseUrl,
+  let respuesta= await  axios.post(baseUrl,
         params,
         {
             headers: {
                 userLogin: `${getInfoLocal().name}@intrasolution`,
                 userPassword: getInfoLocal().pass,
                 systemRoot: 'safe2biz',
+                //   flagLogin:1,
+                //  sessionString:getInfoLocal().token,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }
@@ -75,15 +78,16 @@ export const getcomboTipoTarea = () => {
             console.log('el error es' + e);
         })
 
+    return respuesta
 }
 
-export const getcomboSubtipoTarea = () => {
+export const getcomboSubtipoTarea =async () => {
     const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_subtipo_tarea_combo";
     const datax = {
         dato: 0
     }
     const params = new URLSearchParams()
-    axios.post(baseUrl,
+    let respuesta=  await  axios.post(baseUrl,
         params,
         {
             headers: {
@@ -104,16 +108,16 @@ export const getcomboSubtipoTarea = () => {
         .catch(e => {
             console.log('el error es' + e);
         })
-
+    return respuesta
 }
 
-export const getcomboPase = () => {
+export const getcomboPase = async() => {
     const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_pase_combo";
     const datax = {
         sc_user_id:getInfoLocal().idus
     }
     const params = new URLSearchParams(datax)
-    axios.post(baseUrl,
+    let respuesta=  await    axios.post(baseUrl,
         params,
         {
             headers: {
@@ -133,20 +137,21 @@ export const getcomboPase = () => {
         .catch(e => {
             console.log('el error es' + e);
         })
+    return respuesta
 
 }
 
 
 
 
-export const getcomboIncidencia = () => {
+export const getcomboIncidencia =async () => {
     
     const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_incidencia_combo";
     const bodyform = {
         sc_user_id:getInfoLocal().idus
     }
     const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
+    let respuesta=  await    axios.post(baseUrl,
         params,
         {
             headers: {
@@ -168,16 +173,17 @@ export const getcomboIncidencia = () => {
         .catch(e => {
             console.log('el error es' + e);
         })
+        return respuesta
 
 }
 
-export const getcomboPlandeAccion = () => {
+export const getcomboPlandeAccion = async() => {
     const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_planes_accion_combo";
     const datax = {
         sc_user_id:getInfoLocal().idus
     }
     const params = new URLSearchParams(datax)
-    axios.post(baseUrl,
+    let respuesta=  await   axios.post(baseUrl,
         params, 
         {
             headers: {
@@ -199,16 +205,16 @@ export const getcomboPlandeAccion = () => {
         .catch(e => {
             console.log('el error es' + e);
         })
-
+    return respuesta
 }
 
-export const getallTareas = () => {
+export const getallTareas = async() => {
     const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tareas_horas";
     const datax = {
         usuario_id:getInfoLocal().idus
     }
     const params = new URLSearchParams(datax)
-    axios.post(baseUrl,
+    let respuesta=  await    axios.post(baseUrl,
         params,
         {
             headers: {
@@ -235,6 +241,7 @@ export const getallTareas = () => {
         .catch(e => {
             console.log('el error es' + e);
         })
+        return respuesta
 
 }
 
@@ -684,13 +691,16 @@ export const getDataUsuario = async(usuario,passs) => {
 
     )
     //mejor guardar el localstorage user y pw del ws
-    
-    await store.dispatch({
+    store.dispatch({
         type: '@dataUserSesion',
-        payload: respuesta.data.data[0]
+        payload: {
+            SC_USER_ID: respuesta.data.data[0].SC_USER_ID,
+            USER_LOGIN: respuesta.data.data[0].USER_LOGIN,
+            usuario: respuesta.data.data[0].usuario,
+            password: respuesta.data.data[0].password,
+            token:respuesta.data.data[0].token
+        }
      })
-  
-    
       
     return respuesta
 
