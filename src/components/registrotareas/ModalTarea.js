@@ -3,7 +3,7 @@ import EstructuraTarea from './EstructuraTarea'
 import { useSelector } from 'react-redux';
 
 import { store } from '../../redux/store';
-import { getalltareas, registroTarea } from '../../utils/webservices';
+import { getalltareas, getcomboTipoTarea, registroTarea } from '../../utils/webservices';
 
 
 const ModalTarea = () => {
@@ -21,6 +21,13 @@ const registrarTarea = async () => {
 
 }   
 
+const traerCombo=() => {
+   getcomboTipoTarea()
+   .then((res) => {
+     console.log(res);
+   })
+}
+
     return (
         <div>
             {/* Button trigger modal */}
@@ -32,6 +39,7 @@ const registrarTarea = async () => {
             <a  className="btn btn-outline-success  " data-toggle="modal" data-target="#exampleModalScrollable">
                 Nueva Tarea
             </a>
+            <button type="button" className="btn btn-danger" onClick={traerCombo}>traer combo tipo tarea</button>
             {/* Modal */}
             <div className="modal fade " id="exampleModalScrollable" tabIndex={-1} role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-scrollable" role="document">

@@ -173,6 +173,7 @@ const Estructuratarea = () => {
                 return registroIncidencia(
                     dataregistro.tipo_tarea.tipo_tarea,
                     dataregistro.segundotipo_tarea.incidente_id,
+                    dataregistro.accion_correctiva_id.accion_correctiva_id,
                     dataregistro.observacion.observacion,
                     dataregistro.hora_inicio.hora_inicio,
                     dataregistro.hora_fin.hora_fin,

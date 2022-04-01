@@ -125,6 +125,7 @@ const dataUserSesion = useSelector((state) => state.dataUserSesion)
             id_bd:{id_bd:tareaRecuperada.id},   
             tipo_tarea:{tipo_tarea:tareaRecuperada.tipo_tarea_id},
             segundotipo_tarea:{incidente_id:tareaRecuperada.incidencia_id},
+            accion_correctiva_id:{accion_correctiva_id:777},
             hora_inicio:{hora_inicio:tareaRecuperada.hora_inicio},
             hora_fin:{hora_fin:tareaRecuperada.hora_fin},
             observacion:{observacion:tareaRecuperada.observacion},

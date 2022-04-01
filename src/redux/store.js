@@ -43,6 +43,7 @@ const initialState = {
     dataregistro:{
         tipo_tarea:{tipo_tarea:''},
         segundotipo_tarea:{subtipo_tarea_id:''},
+        accion_correctiva_id:{accion_correctiva_id:''},
         hora_inicio:{hora_inicio:reordenarFecha(fecha)},
         hora_fin:{hora_fin:reordenarFecha(fecha)},
         observacion:{observacion:''},
@@ -52,6 +53,7 @@ const initialState = {
         id_bd:{id_bd:''},
         tipo_tarea:{tipo_tarea:''},
         segundotipo_tarea:{subtipo_tarea_id:''},
+        accion_correctiva_id:{accion_correctiva_id:''},
         hora_inicio:{hora_inicio:''},
         hora_fin:{hora_fin:''},
         observacion:{observacion:''},
@@ -63,6 +65,7 @@ const initialState = {
         id_bd:{id_bd:''},
         tipo_tarea:{tipo_tarea:''},
         segundotipo_tarea:{incidente_id:''},
+        accion_correctiva_id:{accion_correctiva_id:''},
         hora_inicio:{hora_inicio:''},
         hora_fin:{hora_fin:''},
         observacion:{observacion:''},

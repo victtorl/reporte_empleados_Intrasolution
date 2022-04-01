@@ -2,7 +2,9 @@ import axios from "axios";
 import { store } from "../redux/store";
 import { tratarTareas } from "./metodos";
 
-
+const dominio='http://192.168.1.184:7777'
+const emaildominio='@intrasolutiondesarrollo'
+const systemrootdominio='intrasolution'
 
 export const getInfoLocal=() => {
     const parametrosAcces = window.localStorage.getItem('accesws')
@@ -21,7 +23,7 @@ export const getInfoLocal=() => {
 
 
 export const getEmpleados = () => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution//ws/null/pr_movil_lista_empleado";
+    const baseUrl = `${dominio}/intrasolution//ws/null/pr_movil_lista_empleado`;
     const datax = {
         dato: 0
     }
@@ -30,9 +32,9 @@ export const getEmpleados = () => {
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
-                userPassword:getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'text/plain'
             },
         }
@@ -50,21 +52,19 @@ export const getEmpleados = () => {
 }
 
 export const getcomboTipoTarea = async() => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/tipo_tarea_combo";
-    const datax = {
-        dato:0
-    }
-    const params = new URLSearchParams(datax)
+    const baseUrl = `${dominio}/intrasolution/ws/null/tipo_tarea_combo`;
+   
+    const params = new URLSearchParams()
   let respuesta= await  axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
-                //   flagLogin:1,
-                //  sessionString:getInfoLocal().token,
-                'Content-Type': 'application/x-www-form-urlencoded'
+                systemRoot: `${systemrootdominio}`,
+                // flagLogin:1,
+                // sessionString:'OBG2MB4FQGIU9AQZEMSFSXMCZC2SK32G',
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
         }
     )
@@ -82,7 +82,7 @@ export const getcomboTipoTarea = async() => {
 }
 
 export const getcomboSubtipoTarea =async () => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_subtipo_tarea_combo";
+    const baseUrl = `${dominio}/intrasolution/ws/null/calendario_subtipo_tarea_combo`;
     const datax = {
         dato: 0
     }
@@ -91,9 +91,9 @@ export const getcomboSubtipoTarea =async () => {
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
-                userPassword:getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         },
@@ -112,7 +112,7 @@ export const getcomboSubtipoTarea =async () => {
 }
 
 export const getcomboPase = async() => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_pase_combo";
+    const baseUrl = `${dominio}/intrasolution/ws/null/calendario_pase_combo`;
     const datax = {
         sc_user_id:getInfoLocal().idus
     }
@@ -121,9 +121,9 @@ export const getcomboPase = async() => {
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
-                userPassword:getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }
@@ -146,7 +146,7 @@ export const getcomboPase = async() => {
 
 export const getcomboIncidencia =async () => {
     
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_incidencia_combo";
+    const baseUrl = `${dominio}/intrasolution/ws/null/calendario_incidencia_combo`;
     const bodyform = {
         sc_user_id:getInfoLocal().idus
     }
@@ -155,9 +155,9 @@ export const getcomboIncidencia =async () => {
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             
@@ -178,7 +178,7 @@ export const getcomboIncidencia =async () => {
 }
 
 export const getcomboPlandeAccion = async() => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/calendario_planes_accion_combo";
+    const baseUrl = `${dominio}/intrasolution/ws/null/calendario_planes_accion_combo`;
     const datax = {
         sc_user_id:getInfoLocal().idus
     }
@@ -187,9 +187,9 @@ export const getcomboPlandeAccion = async() => {
         params, 
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             
@@ -209,7 +209,8 @@ export const getcomboPlandeAccion = async() => {
 }
 
 export const getallTareas = async() => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tareas_horas";
+    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tareas_horas`  
+                      
     const datax = {
         usuario_id:getInfoLocal().idus
     }
@@ -218,9 +219,9 @@ export const getallTareas = async() => {
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },   
         }
@@ -248,7 +249,7 @@ export const getallTareas = async() => {
 ///REGISTRO  
 
 export const registroTarea = () => {
-    const baseUrl = "http://192.168.1.184:7777/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:1,
         id:1,
@@ -267,9 +268,9 @@ export const registroTarea = () => {
         params,
         {
             headers: {
-                userLogin: 'jorge.felix@intrasolutiondesarrollo',
-                userPassword: '09079763',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -283,13 +284,14 @@ export const registroTarea = () => {
 
 }
 
-export const registroIncidencia = (tipo_tarea,incidente_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+export const registroIncidencia = (tipo_tarea,incidente_id,accion_correctiva_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
+    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:1,
         id:1,
         tipo_tarea: tipo_tarea,
         incidente_id:incidente_id,
+        accion_correctiva_id:accion_correctiva_id,
         observacion:observacion,
         fecha_inicio: fecha_inicio,
         fecha_fin: fecha_fin,
@@ -301,9 +303,9 @@ export const registroIncidencia = (tipo_tarea,incidente_id,observacion,fecha_ini
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -322,7 +324,7 @@ export const registroIncidencia = (tipo_tarea,incidente_id,observacion,fecha_ini
 }
 
 export const registroPase= (tipo_tarea,pase_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:1,
         id:1,
@@ -339,9 +341,9 @@ export const registroPase= (tipo_tarea,pase_id,observacion,fecha_inicio,fecha_fi
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -357,7 +359,7 @@ export const registroPase= (tipo_tarea,pase_id,observacion,fecha_inicio,fecha_fi
 
 
 export const registroOtro = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:1,
         id:1,
@@ -374,9 +376,9 @@ export const registroOtro = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,f
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -392,7 +394,7 @@ export const registroOtro = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,f
 
 
 export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:1,
         id:1,
@@ -409,9 +411,9 @@ export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,observacion,fecha_
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -427,12 +429,13 @@ export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,observacion,fecha_
 //EDICION 
 
 export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:2,
         id:idbd,
         tipo_tarea: tipo_tarea,
         incidente_id:incidente_id,
+        accion_correctiva_id:0,
         observacion:observacion,
         fecha_inicio: fecha_inicio,
         fecha_fin: fecha_fin,
@@ -444,9 +447,9 @@ export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -467,7 +470,7 @@ export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha
 
 
 export const edicionPase = (tipo_tarea,idbd,pase_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:2,
         id:idbd,
@@ -484,9 +487,9 @@ export const edicionPase = (tipo_tarea,idbd,pase_id,observacion,fecha_inicio,fec
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -507,7 +510,7 @@ export const edicionPase = (tipo_tarea,idbd,pase_id,observacion,fecha_inicio,fec
 }
 
 export const edicionOtro = (tipo_tarea,idbd,subtipo_tarea_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:2,
         id:idbd,
@@ -524,9 +527,9 @@ export const edicionOtro = (tipo_tarea,idbd,subtipo_tarea_id,observacion,fecha_i
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -547,26 +550,20 @@ export const edicionOtro = (tipo_tarea,idbd,subtipo_tarea_id,observacion,fecha_i
 //ELIMINACION
 
 export const eliminacionIncidencia = (idbd) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:3,
         id:idbd,
-        // tipo_tarea: tipo_tarea,
-        // incidente_id:incidente_id,
-        // observacion:observacion,
-        // fecha_inicio: fecha_inicio,
-        // fecha_fin: fecha_fin,
-        // uea: 1,
-        // usuario_id:usuario_id
+      
     }
     const params = new URLSearchParams(bodyform)
     axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -587,7 +584,8 @@ export const eliminacionIncidencia = (idbd) => {
 
 }
 export const eliminacionPase = (idbd) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
+                    
     const bodyform = {
         type:3,
         id:idbd,
@@ -604,9 +602,9 @@ export const eliminacionPase = (idbd) => {
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -627,26 +625,20 @@ export const eliminacionPase = (idbd) => {
 
 }
 export const eliminacionOtro = (idbd) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution/ws/null/pr_ws_tarea_horas_crud";
+    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
+                        
     const bodyform = {
         type:3,
         id:idbd,
-        // tipo_tarea: tipo_tarea,
-        // incidente_id:incidente_id,
-        // observacion:observacion,
-        // fecha_inicio: fecha_inicio,
-        // fecha_fin: fecha_fin,
-        // uea: 1,
-        // usuario_id:usuario_id
     }
     const params = new URLSearchParams(bodyform)
     axios.post(baseUrl,
         params,
         {
             headers: {
-                userLogin: `${getInfoLocal().name}@intrasolution`,
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
                 userPassword: getInfoLocal().pass,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
@@ -671,7 +663,7 @@ export const eliminacionOtro = (idbd) => {
 
      
 export const getDataUsuario = async(usuario,passs) => {
-    const baseUrl = "https://app.safe2biz.com/intrasolution//ws/null/pr_ws_sc_user";
+    const baseUrl = `${dominio}/intrasolution//ws/null/pr_ws_sc_user`;
     const bodyform = {
         user_login:usuario,
         password:passs,
@@ -682,9 +674,9 @@ export const getDataUsuario = async(usuario,passs) => {
         {
             headers: {
                 
-                userLogin: `${usuario}@intrasolution`,
+                userLogin: `${usuario}${emaildominio}`,
                 userPassword:passs,
-                systemRoot: 'safe2biz',
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },
