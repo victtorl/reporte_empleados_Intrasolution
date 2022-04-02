@@ -10,6 +10,7 @@ const ModalTarea = () => {
 
 const nuevaTarea = useSelector((state) => state.nuevaTarea)
 const alltareas = useSelector((state) => state.alltareas)
+const diaSelectmuestramodal = useSelector((state) => state.diaSelectmuestramodal)
 
 const registrarTarea = async () => {
 
@@ -21,12 +22,37 @@ const registrarTarea = async () => {
 
 }   
 
-const traerCombo=() => {
-   getcomboTipoTarea()
-   .then((res) => {
-     console.log(res);
-   })
+const reiniciarhoras =() => {
+    const reordenarFechabtnnuevatarea = (v) => {
+        let ff = v.toLocaleString('es-PE')
+        let fff = ff.split(' ')
+        let g = fff[0].split('/')
+        let dia = g[0]
+        let mes = g[1]
+        let anio = g[2]
+        dia <= 9 ? dia = `0${dia}` : dia = dia
+        mes <= 9 ? mes = `0${mes}` : mes = mes
+        
+          return `${diaSelectmuestramodal} ${fff[1]}`
+        
+    }
+
+    //reiniciar el dataregistro
+    store.dispatch({
+        type: '@pushhorainicio',
+        payload: {
+            hora_inicio: (reordenarFechabtnnuevatarea((new Date()).toLocaleString('es-PE')))
+        }
+    })
+    console.log(reordenarFechabtnnuevatarea((new Date()).toLocaleString('es-PE')));
+    store.dispatch({
+        type: '@pushhorafin',
+        payload: {
+            hora_fin: (reordenarFechabtnnuevatarea((new Date()).toLocaleString('es-PE')))
+        }
+    })
 }
+
 
     return (
         <div>
@@ -36,10 +62,9 @@ const traerCombo=() => {
                 Nueva Tarea
             </a> */}
 
-            <a  className="btn btn-outline-success  " data-toggle="modal" data-target="#exampleModalScrollable">
+            <a  className="btn btn-outline-success" data-toggle="modal" onClick={reiniciarhoras} data-target="#exampleModalScrollable">
                 Nueva Tarea
             </a>
-            <button type="button" className="btn btn-danger" onClick={traerCombo}>traer combo tipo tarea</button>
             {/* Modal */}
             <div className="modal fade " id="exampleModalScrollable" tabIndex={-1} role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-scrollable" role="document">

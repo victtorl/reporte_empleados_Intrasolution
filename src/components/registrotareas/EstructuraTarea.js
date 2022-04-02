@@ -184,6 +184,7 @@ const Estructuratarea = () => {
                 return registroPase(
                     dataregistro.tipo_tarea.tipo_tarea,
                     dataregistro.segundotipo_tarea.pase_id,
+                    dataregistro.accion_correctiva_id.accion_correctiva_id,
                     dataregistro.observacion.observacion,
                     dataregistro.hora_inicio.hora_inicio,
                     dataregistro.hora_fin.hora_fin,
@@ -202,6 +203,7 @@ const Estructuratarea = () => {
         }
 
         //recien al seleccioar el tipo de tarea se  llena dataTarea[] y ahi puedo capturar la data
+       
 
     }
 

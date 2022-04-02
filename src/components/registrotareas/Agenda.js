@@ -7,6 +7,7 @@ import Registrotareas from './RegistroTareas';
 import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import ModalTarea from './ModalTarea';
+import { reordenarFecha } from './Calendario';
 
 export const events = [{
     id: 1,
@@ -32,6 +33,8 @@ export const events = [{
 const Agenda = () => {
     
     const tasks = useSelector((state) => state.tasks)
+    const diaSelect = useSelector((state) => state.diaSelect)
+
     
     const [dat, setdate] = useState('seleccione hora de inicio')
     
@@ -78,6 +81,8 @@ const Agenda = () => {
 
     }
 
+
+  
     const capturarFechaPick =(date) => {
         const { day, month, year } = date
        const fechapickeada= formatDatMonthly(day,month,year)
@@ -91,7 +96,8 @@ const Agenda = () => {
         type: '@muestrafechamodal',
         payload: fechapickeada
       })
-      
+      //poner en la hora inicial del modal la hora del sistema y el dia del sistema 
+
 
     }
 

@@ -30,6 +30,14 @@ const Pase = () => {
             }
             
         })
+        //como es pase entonces el campo es nulll asi que le pasamos al estado redux campo vacio es igual a null
+        store.dispatch({
+            type:'@pushaccion_correctiva_id',
+            payload:{
+                accion_correctiva_id:''
+            }
+            
+        })   
     }
 
     //campo Observacion

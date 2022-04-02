@@ -2,9 +2,9 @@ import axios from "axios";
 import { store } from "../redux/store";
 import { tratarTareas } from "./metodos";
 
-const dominio='http://192.168.1.184:7777'
-const emaildominio='@intrasolutiondesarrollo'
-const systemrootdominio='intrasolution'
+const dominio='https://app.safe2biz.com'
+const emaildominio='@intrasolution'
+const systemrootdominio='safe2biz'
 
 export const getInfoLocal=() => {
     const parametrosAcces = window.localStorage.getItem('accesws')
@@ -323,13 +323,14 @@ export const registroIncidencia = (tipo_tarea,incidente_id,accion_correctiva_id,
 
 }
 
-export const registroPase= (tipo_tarea,pase_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
+export const registroPase= (tipo_tarea,pase_id,accion_correctiva_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
     const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:1,
         id:1,
         tipo_tarea: tipo_tarea,
         pase_id:pase_id,
+        accion_correctiva_id:accion_correctiva_id,
         observacion:observacion,
         fecha_inicio: fecha_inicio,
         fecha_fin:fecha_fin,
@@ -435,7 +436,7 @@ export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha
         id:idbd,
         tipo_tarea: tipo_tarea,
         incidente_id:incidente_id,
-        accion_correctiva_id:0,
+        accion_correctiva_id:'',
         observacion:observacion,
         fecha_inicio: fecha_inicio,
         fecha_fin: fecha_fin,
