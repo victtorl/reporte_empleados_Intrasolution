@@ -117,6 +117,9 @@ const [nrotarea,Setnrotarea]=useState('#')
 const alltareas = useSelector((state) => state.alltareas) 
 const dataUserSesion = useSelector((state) => state.dataUserSesion)   
 
+//LLENO LOS TRES ESTADOS Y ESCOJO EL QUE SE LLENE CON LA DATA ADECUADA PARA
+// INCIDENTE SI TIENE INCIDENTE ID PARA PASE SI TIENE PASE ID Y PARA OTRO SU TIENE SUBTIPOTAREA EN SU CASO
+
     const activeDelEdit=(ev)=>{
         Setnrotarea(ev)
         //traer  la tarea numero 'ev' de alltareas
@@ -124,7 +127,9 @@ const dataUserSesion = useSelector((state) => state.dataUserSesion)
 
         console.log('#'+ev)
         console.log(tareaRecuperada)
-        //setear el estado de dataEditDelete
+
+        
+//para incidente
         store.dispatch({
             type:'@pushdataEditDeleteInc',
             payload:{
@@ -136,12 +141,25 @@ const dataUserSesion = useSelector((state) => state.dataUserSesion)
             hora_fin:{hora_fin:tareaRecuperada.hora_fin},
             observacion:{observacion:tareaRecuperada.observacion},
             responsable:{responsable:dataUserSesion.SC_USER_ID},
-            nombre_tipo_tarea:{nombre_tipo_tarea:tareaRecuperada.nombre_tipo_tarea}
-
-            
+            nombre_tipo_tarea:{nombre_tipo_tarea:tareaRecuperada.nombre_tipo_tarea}         
             }
           })
-//hola
+//para pase
+store.dispatch({
+  type:'@pushdataEditDeletePase',
+  payload:{
+  id_bd:{id_bd:tareaRecuperada.id},   
+  tipo_tarea:{tipo_tarea:tareaRecuperada.tipo_tarea_id},
+  segundotipo_tarea:{pase_id:tareaRecuperada.pase_id},
+  accion_correctiva_id:{accion_correctiva_id:777},
+  hora_inicio:{hora_inicio:tareaRecuperada.hora_inicio},
+  hora_fin:{hora_fin:tareaRecuperada.hora_fin},
+  observacion:{observacion:tareaRecuperada.observacion},
+  responsable:{responsable:dataUserSesion.SC_USER_ID},
+  nombre_tipo_tarea:{nombre_tipo_tarea:tareaRecuperada.nombre_tipo_tarea}         
+  }
+})          
+//para Otro
           store.dispatch({
             type:'@pushdataEditDelete',
             payload:{

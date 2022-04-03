@@ -351,6 +351,7 @@ export const registroPase= (tipo_tarea,pase_id,accion_correctiva_id,observacion,
     )
         .then(data => {
             console.log(data);
+            getallTareas()
         })
         .catch(e => {
             console.log('el error es' + e);
@@ -386,6 +387,7 @@ export const registroOtro = (tipo_tarea,subtipo_tarea,observacion,fecha_inicio,f
     )
         .then(data => {
             console.log(data);
+            getallTareas()
         })
         .catch(e => {
             console.log('el error es' + e);
@@ -421,6 +423,7 @@ export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,observacion,fecha_
     )
         .then(data => {
             console.log(data);
+            getallTareas()
         })
         .catch(e => {
             console.log('el error es' + e);
@@ -477,6 +480,7 @@ export const edicionPase = (tipo_tarea,idbd,pase_id,observacion,fecha_inicio,fec
         id:idbd,
         tipo_tarea: tipo_tarea,
         pase_id:pase_id,
+        accion_correctiva_id:'',
         observacion:observacion,
         fecha_inicio: fecha_inicio,
         fecha_fin: fecha_fin,

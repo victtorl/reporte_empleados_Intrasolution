@@ -135,7 +135,8 @@ export const getEmpleadoReducer = (state, action) => {
         dataregistro: Object.assign(state.dataregistro, { hora_fin: action.payload })
       }
 
-    // edicion de tareas con subtipo_tarea_id
+
+    // EDICION DE TAREAS CON SUBTIPO_TAREA_ID
     case '@pushdataEditDelete':
       return {
         ...state,
@@ -145,13 +146,11 @@ export const getEmpleadoReducer = (state, action) => {
     case '@pushtipo_tareaED':
       return {
         ...state,
-        // dataregistro: state.dataregistro.tipo_tarea = action.payload
         dataEditDelete: Object.assign(state.dataEditDelete, { tipo_tarea: action.payload })
       }
     case '@pushresponsableED':
       return {
         ...state,
-        // dataregistro: state.dataregistro.tipo_tarea = action.payload
         dataEditDelete: Object.assign(state.dataEditDelete, { responsable: action.payload })
       }
     case '@pushobservacionED':
@@ -180,6 +179,7 @@ export const getEmpleadoReducer = (state, action) => {
         ...state,
         dataEditDelete: Object.assign(state.dataEditDelete, { nombre_tipo_tarea: action.payload })
       }
+
     // edicion de tareas con INCIDENTE_ID
     case '@pushdataEditDeleteInc':
       return {
@@ -188,17 +188,14 @@ export const getEmpleadoReducer = (state, action) => {
       }
 
 
-
     case '@pushtipo_tareaEDInc':
       return {
         ...state,
-        // dataregistro: state.dataregistro.tipo_tarea = action.payload
         dataEditDeleteInc: Object.assign(state.dataEditDeleteInc, { tipo_tarea: action.payload })
       }
     case '@pushresponsableEDInc':
       return {
         ...state,
-        // dataregistro: state.dataregistro.tipo_tarea = action.payload
         dataEditDeleteInc: Object.assign(state.dataEditDeleteInc, { responsable: action.payload })
       }
     case '@pushobservacionEDInc':
@@ -228,6 +225,53 @@ export const getEmpleadoReducer = (state, action) => {
         dataEditDeleteInc: Object.assign(state.dataEditDeleteInc, { nombre_tipo_tarea: action.payload })
       }
     //fin incidente edit
+
+
+     // edicion de tareas con PASE_ID
+     case '@pushdataEditDeletePase':
+      return {
+        ...state,
+        dataEditDeletePase: action.payload
+      }
+
+
+    case '@pushtipo_tareaEDPase':
+      return {
+        ...state,
+        dataEditDeletePase: Object.assign(state.dataEditDeletePase, { tipo_tarea: action.payload })
+      }
+    case '@pushresponsableEDPase':
+      return {
+        ...state,
+        dataEditDeletePase: Object.assign(state.dataEditDeletePase, { responsable: action.payload })
+      }
+    case '@pushobservacionEDPase':
+      return {
+        ...state,
+        dataEditDeletePase: Object.assign(state.dataEditDeletePase, { observacion: action.payload })
+      }
+    case '@pushsegundotipo_tareaEDPase':
+      return {
+        ...state,
+        dataEditDeletePase: Object.assign(state.dataEditDeletePase, { segundotipo_tarea: action.payload })
+      }
+    case '@pushhorainicioEDPase':
+      return {
+        ...state,
+        dataEditDeletePase: Object.assign(state.dataEditDeletePase, { hora_inicio: action.payload })
+      }
+    case '@pushhorafinEDPase':
+      return {
+        ...state,
+        dataEditDeletePase: Object.assign(state.dataEditDeletePase, { hora_fin: action.payload })
+      }
+
+    case '@pushnombretipotareaEDPase':
+      return {
+        ...state,
+        dataEditDeletePase: Object.assign(state.dataEditDeletePase, { nombre_tipo_tarea: action.payload })
+      }
+    //fin pase edit
 
     case '@setalertselectevent':
       return {

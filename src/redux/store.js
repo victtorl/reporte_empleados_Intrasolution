@@ -71,8 +71,18 @@ const initialState = {
         observacion:{observacion:''},
         responsable:{responsable:''},
         nombre_tipo_tarea:{nombre_tipo_tarea:''}
-
     },
+    dataEditDeletePase:{
+        id_bd:{id_bd:''},
+        tipo_tarea:{tipo_tarea:''},
+        segundotipo_tarea:{pase_id:''},
+        accion_correctiva_id:{accion_correctiva_id:''},
+        hora_inicio:{hora_inicio:''},
+        hora_fin:{hora_fin:''},
+        observacion:{observacion:''},
+        responsable:{responsable:''},
+        nombre_tipo_tarea:{nombre_tipo_tarea:''}
+    },  
     alertselectevent:false,
     newacces:{}
     

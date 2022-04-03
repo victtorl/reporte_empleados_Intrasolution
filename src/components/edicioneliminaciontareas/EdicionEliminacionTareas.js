@@ -27,9 +27,6 @@ const FuncionIncidente = (props) => {
 
     let subtipotareeaidED = dataEditDeleteInc.segundotipo_tarea.incidente_id
 
-
-
-
     const indiceSubtipotareaId = comboincid.map(u => u.id).indexOf(subtipotareeaidED)
 
     const setOption = (e) => {
@@ -60,10 +57,6 @@ const FuncionIncidente = (props) => {
         })
 
     }
-
-
-
-
 
     return (
         <>
@@ -121,20 +114,198 @@ const FuncionIncidente = (props) => {
 }
 
 
+const FuncionPase = (props) => {
+
+    const combopase = useSelector((state) => state.combopase)
+    const dataUserSesion = useSelector((state) => state.dataUserSesion)
+
+    const dataEditDeletePase = useSelector((state) => state.dataEditDeletePase)
+
+    let subtipotareeaidED = dataEditDeletePase.segundotipo_tarea.subtipo_tarea_id
+
+    const indiceSubtipotareaId = combopase.map(u => u.id).indexOf(subtipotareeaidED)
+
+    const setOption = (e) => {
+        //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
+        const elem = combopase.filter((u) => u.codigo === e.target.value)
+        //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso
+        store.dispatch({
+            type: '@pushsegundotipo_tareaEDPase',
+            payload: {
+                subtipo_tarea_id: elem[0].id
+            }
+
+        })
+    }
 
 
-function FuncionPase() {
+
+    const setOptionObs = (e) => {
+        console.log(e.target.value);
+    //   SetObservacion(dataEditDeleteInc.observacion.observacion)
+        // eleRef.current.value('remplazo')
+        store.dispatch({
+            type: '@pushobservacionEDPase',
+            payload: {
+                observacion: e.target.value
+            }
+
+        })
+
+    }
 
     return (
-        <div>PASE</div>
+        <>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="form-group">
+                        <label>Pase</label>
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
+                            {combopase.map((u, index) => (
+                                <option key={u.id} selected={index === indiceSubtipotareaId} >{u.codigo}</option>
+                            ))
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+                        <label>Observacion Anterior:</label> <p>{dataEditDeletePase.observacion.observacion}</p>
+                        <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
+                        </textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+
+                        <label>Responsable : </label>
+                        <label>{dataUserSesion.nombre_empleado}</label>
+                        <hr></hr>
+
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </>
     )
 }
-function FuncionOtro() {
+
+const FuncionOtro = (props) => {
+
+    const combopase = useSelector((state) => state.combopase)
+    const combosubtipotarea = useSelector((state) => state.combosubtipotarea)
+    const dataUserSesion = useSelector((state) => state.dataUserSesion)
+
+    const dataEditDelete = useSelector((state) => state.dataEditDelete)
+
+    let subtipotareeaidED = dataEditDelete.segundotipo_tarea.subtipo_tarea_id
+
+    const indiceSubtipotareaId = combopase.map(u => u.id).indexOf(subtipotareeaidED)
+
+    const setOption = (e) => {
+        //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
+        const elem = combosubtipotarea.filter((u) => u.subtipo_tarea === e.target.value)
+        //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso
+        store.dispatch({
+            type: '@pushsegundotipo_tareaED',
+            payload: {
+                subtipo_tarea_id: elem[0].id
+            }
+
+        })
+    }
+
+
+
+    const setOptionObs = (e) => {
+        console.log(e.target.value);
+    //   SetObservacion(dataEditDeleteInc.observacion.observacion)
+        // eleRef.current.value('remplazo')
+        store.dispatch({
+            type: '@pushobservacionED',
+            payload: {
+                observacion: e.target.value
+            }
+
+        })
+
+    }
 
     return (
-        <div>OTRO</div>
+        <>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="form-group">
+                        <label>Otro</label>
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
+                            {combosubtipotarea.map((u, index) => (
+                                <option key={u.id} selected={index === indiceSubtipotareaId} >{u.subtipo_tarea}</option>
+                            ))
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+                        <label>Observacion Anterior:</label> <p>{dataEditDelete.observacion.observacion}</p>
+                        <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
+                        </textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+
+                        <label>Responsable : </label>
+                        <label>{dataUserSesion.nombre_empleado}</label>
+                        <hr></hr>
+
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </>
     )
 }
+
+
 function FuncionPlandeaccion() {
 
     return (
@@ -152,6 +323,9 @@ const Edicioneliminaciontareas = () => {
     const dataregistro = useSelector((state) => state.dataregistro)
     const dataUserSesion = useSelector((state) => state.dataUserSesion)
     const dataEditDeleteInc = useSelector((state) => state.dataEditDeleteInc)
+    const dataEditDeletePase = useSelector((state) => state.dataEditDeletePase)
+    const dataEditDelete = useSelector((state) => state.dataEditDelete)
+
 
     //DATA POR DEFECTO QUE SE ENVIA AL PRESIONAR UNEVENTO DEL CALENDARIO
     let nombreTareadataED = dataEditDeleteInc.nombre_tipo_tarea.nombre_tipo_tarea
@@ -312,25 +486,25 @@ const Edicioneliminaciontareas = () => {
                     dataUserSesion.SC_USER_ID)
             }
             case "Pase": {
-                //   return  console.log('registrar un pase')
+                    console.log('editar un pase')
                 return edicionPase(
-                    dataregistro.tipo_tarea.tipo_tarea,
-                    dataEditDeleteInc.id_bd.id_bd,
-                    dataregistro.segundotipo_tarea.pase_id,
-                    dataregistro.observacion.observacion,
-                    dataregistro.hora_inicio.hora_inicio,
-                    dataregistro.hora_fin.hora_fin,
+                    dataEditDeletePase.tipo_tarea.tipo_tarea,
+                    dataEditDeletePase.id_bd.id_bd,
+                    dataEditDeletePase.segundotipo_tarea.pase_id,
+                    dataEditDeletePase.observacion.observacion,
+                    dataEditDeleteInc.hora_inicio.hora_inicio,
+                    dataEditDeleteInc.hora_fin.hora_fin,
                     dataUserSesion.SC_USER_ID)
             }
             case "Otro": {
                 //    return  console.log('registrar Otro');
                 return edicionOtro(
-                    dataregistro.tipo_tarea.tipo_tarea,
-                    dataEditDeleteInc.id_bd.id_bd,
-                    dataregistro.segundotipo_tarea.subtipo_tarea_id,
-                    dataregistro.observacion.observacion,
-                    dataregistro.hora_inicio.hora_inicio,
-                    dataregistro.hora_fin.hora_fin,
+                    dataEditDelete.tipo_tarea.tipo_tarea,
+                    dataEditDelete.id_bd.id_bd,
+                    dataEditDelete.segundotipo_tarea.subtipo_tarea_id,
+                    dataEditDelete.observacion.observacion,
+                    dataEditDeleteInc.hora_inicio.hora_inicio,
+                    dataEditDeleteInc.hora_fin.hora_fin,
                     dataUserSesion.SC_USER_ID)
             }
         }
