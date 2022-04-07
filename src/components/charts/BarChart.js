@@ -132,6 +132,8 @@ const Barchart = () => {
                                             </div>
                                         </div>
 
+    
+
 
                                   {/* FIN CONTENIDO NUEVO */}
                                     </div>

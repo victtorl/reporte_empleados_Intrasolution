@@ -13,8 +13,9 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 import { setDefaultLocale } from "react-datepicker";
-import { registroIncidencia, registroPase, registroOtro } from '../../utils/webservices';
+import { registroIncidencia, registroPase, registroOtro, registroPlanDeAccion, registroReunion } from '../../utils/webservices';
 import Planaccion from './tipotarea/PlanAccion';
+import Reuniont from './tipotarea/Reunion';
 
 
 setDefaultLocale('es')
@@ -72,6 +73,8 @@ const Estructuratarea = () => {
                 return <Pase />
             case 'Otro':
                 return <Otro />
+            case 'Reunion':
+                return <Reuniont/>
         }
     }
     var reordenarFecha = (diax) => {
@@ -163,6 +166,11 @@ const Estructuratarea = () => {
         })
     }
 
+    // const rehidratar =() => {
+    //         store.dispatch({
+    //         type: '@reiniciardataRegistro'
+    //     })
+    // }
 
     const enviarDatos = async (e) => {
         e.preventDefault()
@@ -195,15 +203,45 @@ const Estructuratarea = () => {
                 return registroOtro(
                     dataregistro.tipo_tarea.tipo_tarea,
                     dataregistro.segundotipo_tarea.subtipo_tarea_id,
+                    dataregistro.accion_correctiva_id.accion_correctiva_id,
                     dataregistro.observacion.observacion,
                     dataregistro.hora_inicio.hora_inicio,
                     dataregistro.hora_fin.hora_fin,
                     dataUserSesion.SC_USER_ID)
             }
+
+            case "Planes de Accion": {
+                //    return  console.log('registrar Otro');
+                return registroPlanDeAccion(
+                    dataregistro.tipo_tarea.tipo_tarea,
+                    dataregistro.segundotipo_tarea.subtipo_tarea_id,
+                    dataregistro.accion_correctiva_id.accion_correctiva_id,
+                    dataregistro.observacion.observacion,
+                    dataregistro.hora_inicio.hora_inicio,
+                    dataregistro.hora_fin.hora_fin,
+                    dataUserSesion.SC_USER_ID)
+
+            }
+
+            case "Reunion": {
+                //    return  console.log('registrar Otro');
+                return registroReunion(
+                    dataregistro.tipo_tarea.tipo_tarea,
+                    // dataregistro.segundotipo_tarea.subtipo_tarea_id,
+                    0,
+                    dataregistro.accion_correctiva_id.accion_correctiva_id,
+                    dataregistro.observacion.observacion,
+                    dataregistro.hora_inicio.hora_inicio,
+                    dataregistro.hora_fin.hora_fin,
+                    dataUserSesion.SC_USER_ID)
+
+            }
+
+
         }
 
-        //recien al seleccioar el tipo de tarea se  llena dataTarea[] y ahi puedo capturar la data
-       
+        //recien al seleccinoar el tipo de tarea se  llena dataTarea[] y ahi puedo capturar la data
+
 
     }
 
@@ -222,7 +260,7 @@ const Estructuratarea = () => {
                                 <div className="form-group">
                                     <div className="d-flex justify-content-around">
                                         <div className='datepicker'>
-                                        <label>inicio</label>
+                                            <label>Inicio</label>
                                             <DatePicker
                                                 className='datepicker'
                                                 selected={startDatei}
@@ -235,9 +273,9 @@ const Estructuratarea = () => {
                                             />
                                         </div>
                                         <div className='datepicker'>
-                                        <label>fin</label>
+                                            <label>Fin</label>
                                             <DatePicker
-                                               className='datepicker'
+                                                className='datepicker'
                                                 selected={startDatef}
                                                 onChange={(date) => cambiarDatosf(date)}
                                                 showTimeSelect
@@ -251,8 +289,8 @@ const Estructuratarea = () => {
                                 </div>
                                 <div className="form-group">
                                     <label>Tipo tarea</label>
-                                    <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
-                                        <option selected>--Seleccione un tipo tarea--</option>
+                                    <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'}>
+                                        <option value='default'>--Seleccione un tipo tarea--</option>
                                         {combotipotarea.map(u => (
                                             <option key={u.id}   >{u.tipo_tarea}</option>
                                         ))
@@ -270,7 +308,8 @@ const Estructuratarea = () => {
                         </div>
                     </div>
                     <div className="card-footer">
-                        <button className="btn btn-primary" data-dismiss="modal" onClick={enviarDatos} >Enviar Form</button>
+                        <button className="btn btn-primary" data-dismiss="modal" onClick={enviarDatos} >Grabar</button>
+                        {/* <button className="btn btn-primary" data-dismiss="modal" onClick={rehidratar} >Prueba rehidratar estado</button> */}
                     </div>
                 </form>
             </div>

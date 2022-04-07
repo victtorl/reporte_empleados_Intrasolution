@@ -4,7 +4,7 @@ import ModalTarea from './ModalTarea';
 const Registrotareas = (props) => {
     return (
         <>
-                <div class="btn-group">
+                <div className="btn-group">
                     <ModalTarea/>
                     {/* <button type="button" className="btn btn-outline-primary ">{props.dat}</button> */}
                 </div>    

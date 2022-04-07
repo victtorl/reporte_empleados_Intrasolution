@@ -4,43 +4,47 @@ import { useState } from 'react';
 import { IsLogin } from '../utils/islogin'
 import { store } from '../redux/store';
 import { useSelector } from 'react-redux';
-
+import { useEffect } from 'react';
 import safe from '../img/safe.png'
 import logosafe from '../img/logo-safe.png'
-import { getcomboIncidencia, getcomboPase, getcomboSubtipoTarea, getcomboTipoTarea,getallTareas, getcomboPlandeAccion, getDataUsuario } from '../utils/webservices';
-
+import { getcomboIncidencia, getcomboPase, getcomboSubtipoTarea, getcomboTipoTarea,getallTareas, getcomboPlandeAccion, getDataUsuario, getComboallTipoTareas } from '../utils/webservices';
 
 
 
 const Login = () => {
 
-    const islogged = useSelector((state) => state.statusLog)
-    const dataUserSesion = useSelector((state) => state.dataUserSesion)
-
-
+    useEffect(() => {
+        let abortController = new AbortController();
+       
+        return () => {
+            abortController.abort(); 
+        };
+    }, []);
+    
+    
     const [datos, setDatos] = useState({
         name: '',
         password: ''
     })
-
+    
     const handleInputChange = (event) => {
-        console.log(event.target.name)
-        console.log(event.target.value)
+        // console.log(event.target.name)
+        // console.log(event.target.value)
         setDatos({
             ...datos,
             [event.target.name]: event.target.value
         })
-
-
-    }
-    const validarlogin = () => {
-
         
+    }
+
+    const statusLog = useSelector((state) => state.statusLog)
+
+    const validarlogin = () => {
         getDataUsuario(datos.name,datos.password)
             .then(data => {
 
                 const infoUser = data.data.data[0]
-                console.log(infoUser);
+                // console.log(infoUser);
 
                 if (datos.name === infoUser.USER_LOGIN && datos.password === infoUser.password) {
                     store.dispatch({
@@ -48,27 +52,27 @@ const Login = () => {
                         payload: true
                     })
                     window.localStorage.setItem(
-                        'islogged', JSON.stringify(!islogged)
+                        'islogged', JSON.stringify(!statusLog)
 
                     )
                     
-                    console.log(!islogged);
-                    console.log('estas logueado');
+                    // console.log(!islogged);
+                    // console.log('estas logueado');
                 } else {
-                    console.log('usuario o contraseña incorrecta');
+                    // console.log('usuario o contraseña incorrecta');
                     store.dispatch({
                         type: '@statusLogin',
                         payload: false
                     })
 
                     window.localStorage.setItem(
-                        'islogged', JSON.stringify(islogged)
+                        'islogged', JSON.stringify(statusLog)
                         )
-                    console.log(islogged);
+                    
 
                 }
                 Setvercredential('Bienvenido')
-                console.log('asdsad'+JSON.stringify(infoUser))
+                // console.log('asdsad'+JSON.stringify(infoUser))
                 return infoUser
             })
             .then((infoUser) => {
@@ -79,7 +83,7 @@ const Login = () => {
                
             )
             .then(() => {
-                console.log('asdsadsadsadsad')
+                getComboallTipoTareas()
                 getcomboTipoTarea()
                 getcomboSubtipoTarea()
                 getcomboPase()
@@ -108,6 +112,22 @@ const Login = () => {
 
 
     }
+
+    const [Passtoogle, setPassstoogle] =useState('password');
+    const [count,Setcount]=useState(0)
+    const ChangeTooglepassword =(e) => {
+
+        e.preventDefault()
+        Setcount(count+1)
+      if(count%2===0){
+        setPassstoogle('text') 
+        
+      }else{
+        setPassstoogle('password')
+      }
+      
+    }
+
     const [vercredetial, Setvercredential] = useState('Ingrese Credenciales')
     const [colortext,Setcolortext]=useState('text-primary')
 
@@ -117,9 +137,9 @@ const Login = () => {
             <div className='m-0  vh-100 row justify-content-center align-items-center '>
                 <div className="login-box cuerpo-login ">
                     <div className="card card-outline card-danger marco-login">
-                        <img src={safe} class="img-fluid" alt="Responsive image"></img>
+                        <img src={safe} className="img-fluid" alt="Responsive image"></img>
                         <div className="card-header text-center">
-                            <img src={logosafe} class="img-fluid" alt="Responsive image"></img>
+                            <img src={logosafe} className="img-fluid" alt="Responsive image"></img>
                         </div>
                         <div className="card-body ">
 
@@ -128,18 +148,18 @@ const Login = () => {
 
                             <form action="/principal/empleados" method="post">
                                 <div className="input-group mb-3">
-                                    <input autocomplete="off" type="nombre" className="form-control" placeholder="Usuario" onKeyUp={handleInputChange} name="name" />
+                                    <input autoComplete="off" type="nombre" className="form-control" placeholder="Usuario" onKeyUp={handleInputChange} name="name" />
                                     <div className="input-group-append">
                                         <div className="input-group-text">
-                                            <span className="fas fa-envelope" />
+                                            <span className="fas fa-user" />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <input autocomplete="off" type="text" className="form-control" placeholder="Contraseña" onKeyUp={handleInputChange} name="password" />
+                                    <input autoComplete="off" type={Passtoogle} className="form-control" placeholder="Contraseña" onKeyUp={handleInputChange} name="password" />
                                     <div className="input-group-append">
                                         <div className="input-group-text">
-                                            <span className="fas fa-lock" />
+                                            <span className="fas fa-eye" onClick={ChangeTooglepassword} />
                                         </div>
                                     </div>
                                 </div>

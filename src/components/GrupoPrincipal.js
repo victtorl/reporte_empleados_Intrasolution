@@ -68,7 +68,7 @@ const GrupoPrincipal = () => {
       
       getallTareas()
       .then(()=>{
-          console.log('hola mundo');
+        //   console.log('hola mundo');
       })
   }, []);  
  

@@ -64,8 +64,8 @@ const Incidente = () => {
                 <div className="col-md-12">
                     <div className="form-group">
                         <label>Incidencia</label>
-                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
-                        <option selected>--Seleccione Incidencia--</option>
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'}>
+                        <option value='default'>--Seleccione Incidencia--</option>
                             {comboincid.map(u => (
                                 <option key={u.id}  >{u.codigo_ticket}</option>
                             ))
@@ -78,7 +78,7 @@ const Incidente = () => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Observacion</label>
+                        <label>Observación</label>
                         <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={optObservacion} />
                     </div>
 
@@ -90,8 +90,8 @@ const Incidente = () => {
 
                     <div className="form-group">
                        
-                        <label>Responsable : </label> 
-                        <label>{dataUserSesion.nombre_empleado}</label>
+                        <label>Responsable: &nbsp;</label> 
+                        <label>{dataUserSesion.usuario}</label>
                         <hr></hr>
 
                         <ToastContainer

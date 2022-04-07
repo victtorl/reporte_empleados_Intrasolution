@@ -28,10 +28,19 @@ const Planaccion = () => {
         store.dispatch({
             type:'@pushsegundotipo_tarea',
             payload:{
-                planaccion_id:elem[0].codigo_accion_correctiva
+                subtipo_tarea_id:elem[0].sac_accion_correctiva_id
             }
             
         })
+
+         //como es plan de accion entonces el campo si se pasa esta vez asi que le pasamos al estado redux campo que correcponde a accion correctiva
+         store.dispatch({
+            type:'@pushaccion_correctiva_id',
+            payload:{
+                accion_correctiva_id:elem[0].sac_accion_correctiva_id
+            }
+            
+        })  
     }
 
     //campo Observacion
@@ -72,8 +81,8 @@ const Planaccion = () => {
                     <div className="form-group">
                         <label>Plan Accion</label>
                        
-                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} >
-                        <option selected>--Seleccione Plan de Accion--</option>
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'} >
+                        <option value='default'>--Seleccione Plan de Accion--</option>
 
                                  { comboplandeaccion.map(u=>(
                                              <option key={i++} >{u.codigo_accion_correctiva}</option>
@@ -87,7 +96,7 @@ const Planaccion = () => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Observacion</label>
+                    <label>Observación</label>
                         <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={""} />
                     </div>
 
@@ -98,8 +107,8 @@ const Planaccion = () => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Responsable : </label> 
-                        <label>{dataUserSesion.nombre_empleado}</label>
+                        <label>Responsable: &nbsp;</label> 
+                        <label>{dataUserSesion.usuario}</label>
                         <hr></hr>
                         {/* <button onClick={registrarDatos} type="button" class="btn btn-outline-warning">confirmar informacion del form</button> */}
 

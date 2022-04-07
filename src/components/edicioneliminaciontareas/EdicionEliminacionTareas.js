@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { ToastContainer, toast } from 'react-toastify';
 import { setDefaultLocale } from "react-datepicker";
-import {  edicionIncidencia, eliminacionIncidencia,eliminacionPase,eliminacionOtro,edicionPase, edicionOtro } from '../../utils/webservices';
+import { edicionIncidencia, eliminacionIncidencia, eliminacionPase, eliminacionOtro, edicionPase, edicionOtro, eliminacionPlanAccion, eliminacionReunion } from '../../utils/webservices';
 
 
 
@@ -46,7 +46,7 @@ const FuncionIncidente = (props) => {
 
     const setOptionObs = (e) => {
         console.log(e.target.value);
-    //   SetObservacion(dataEditDeleteInc.observacion.observacion)
+        //   SetObservacion(dataEditDeleteInc.observacion.observacion)
         // eleRef.current.value('remplazo')
         store.dispatch({
             type: '@pushobservacionEDInc',
@@ -77,7 +77,7 @@ const FuncionIncidente = (props) => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Observacion Anterior:</label> <p>{dataEditDeleteInc.observacion.observacion}</p>
+                        <label>Observación Anterior:</label> <p>{dataEditDeleteInc.observacion.observacion}</p>
                         <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
                         </textarea>
                     </div>
@@ -90,8 +90,8 @@ const FuncionIncidente = (props) => {
 
                     <div className="form-group">
 
-                        <label>Responsable : </label>
-                        <label>{dataUserSesion.nombre_empleado}</label>
+                        <label>Responsable: &nbsp;</label>
+                        <label>{dataUserSesion.usuario}</label>
                         <hr></hr>
 
                         <ToastContainer
@@ -142,7 +142,7 @@ const FuncionPase = (props) => {
 
     const setOptionObs = (e) => {
         console.log(e.target.value);
-    //   SetObservacion(dataEditDeleteInc.observacion.observacion)
+        //   SetObservacion(dataEditDeleteInc.observacion.observacion)
         // eleRef.current.value('remplazo')
         store.dispatch({
             type: '@pushobservacionEDPase',
@@ -173,7 +173,7 @@ const FuncionPase = (props) => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Observacion Anterior:</label> <p>{dataEditDeletePase.observacion.observacion}</p>
+                        <label>Observación Anterior:</label> <p>{dataEditDeletePase.observacion.observacion}</p>
                         <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
                         </textarea>
                     </div>
@@ -186,8 +186,8 @@ const FuncionPase = (props) => {
 
                     <div className="form-group">
 
-                        <label>Responsable : </label>
-                        <label>{dataUserSesion.nombre_empleado}</label>
+                        <label>Responsable: &nbsp;</label>
+                        <label>{dataUserSesion.usuario}</label>
                         <hr></hr>
 
                         <ToastContainer
@@ -219,11 +219,12 @@ const FuncionOtro = (props) => {
 
     let subtipotareeaidED = dataEditDelete.segundotipo_tarea.subtipo_tarea_id
 
-    const indiceSubtipotareaId = combopase.map(u => u.id).indexOf(subtipotareeaidED)
+    const indiceSubtipotareaId = combosubtipotarea.map(u => u.id).indexOf(subtipotareeaidED)
 
     const setOption = (e) => {
         //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
         const elem = combosubtipotarea.filter((u) => u.subtipo_tarea === e.target.value)
+        console.log('hay id' + elem[0].id)
         //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso
         store.dispatch({
             type: '@pushsegundotipo_tareaED',
@@ -238,7 +239,7 @@ const FuncionOtro = (props) => {
 
     const setOptionObs = (e) => {
         console.log(e.target.value);
-    //   SetObservacion(dataEditDeleteInc.observacion.observacion)
+        //   SetObservacion(dataEditDeleteInc.observacion.observacion)
         // eleRef.current.value('remplazo')
         store.dispatch({
             type: '@pushobservacionED',
@@ -269,7 +270,7 @@ const FuncionOtro = (props) => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Observacion Anterior:</label> <p>{dataEditDelete.observacion.observacion}</p>
+                        <label>Observación Anterior:</label> <p>{dataEditDelete.observacion.observacion}</p>
                         <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
                         </textarea>
                     </div>
@@ -282,8 +283,8 @@ const FuncionOtro = (props) => {
 
                     <div className="form-group">
 
-                        <label>Responsable : </label>
-                        <label>{dataUserSesion.nombre_empleado}</label>
+                        <label>Responsable: &nbsp;</label>
+                        <label>{dataUserSesion.usuario}</label>
                         <hr></hr>
 
                         <ToastContainer
@@ -306,10 +307,193 @@ const FuncionOtro = (props) => {
 }
 
 
-function FuncionPlandeaccion() {
+const FuncionPlandeaccion = (props) => {
+
+    const comboplandeaccion = useSelector((state) => state.comboplandeaccion)
+    const dataUserSesion = useSelector((state) => state.dataUserSesion)
+
+    const dataEditDelete = useSelector((state) => state.dataEditDelete)
+
+    let subtipotareeaidED = dataEditDelete.segundotipo_tarea.subtipo_tarea_id
+
+    const indiceSubtipotareaId = comboplandeaccion.map(u => u.id).indexOf(subtipotareeaidED)
+
+    const setOption = (e) => {
+        //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
+        const elem = comboplandeaccion.filter((u) => u.subtipo_tarea === e.target.value)
+        //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso
+        store.dispatch({
+            type: '@pushsegundotipo_tareaEDAccion',
+            payload: {
+                subtipo_tarea_id: elem[0].id
+            }
+
+        })
+    }
+
+
+
+    const setOptionObs = (e) => {
+        console.log(e.target.value);
+        //   SetObservacion(dataEditDeleteInc.observacion.observacion)
+        // eleRef.current.value('remplazo')
+        store.dispatch({
+            type: '@pushobservacionEDAccion',
+            payload: {
+                observacion: e.target.value
+            }
+
+        })
+
+    }
 
     return (
-        <div>PLAN DE ACCION</div>
+        <>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="form-group">
+                        <label>Plan de  Acción</label>
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
+                            {comboplandeaccion.map((u, index) => (
+                                <option key={u.id} selected={index === indiceSubtipotareaId} >{u.codigo_accion_correctiva}</option>
+                            ))
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+                        <label>Observación Anterior:</label> <p>{dataEditDelete.observacion.observacion}</p>
+                        <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
+                        </textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+
+                        <label>Responsable: &nbsp;</label>
+                        <label>{dataUserSesion.usuario}</label>
+                        <hr></hr>
+
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </>
+    )
+}
+
+const FuncionReunion = (props) => {
+
+    const comboplandeaccion = useSelector((state) => state.comboplandeaccion)
+    const dataUserSesion = useSelector((state) => state.dataUserSesion)
+
+    const dataEditDelete = useSelector((state) => state.dataEditDelete)
+
+    let subtipotareeaidED = dataEditDelete.segundotipo_tarea.subtipo_tarea_id
+
+    const indiceSubtipotareaId = comboplandeaccion.map(u => u.id).indexOf(subtipotareeaidED)
+
+    const setOption = (e) => {
+        //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
+        const elem = comboplandeaccion.filter((u) => u.subtipo_tarea === e.target.value)
+        //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso
+        store.dispatch({
+            type: '@pushsegundotipo_tareaEDAccion',
+            payload: {
+                subtipo_tarea_id: elem[0].id
+            }
+
+        })
+    }
+
+
+
+    const setOptionObs = (e) => {
+        console.log(e.target.value);
+        //   SetObservacion(dataEditDeleteInc.observacion.observacion)
+        // eleRef.current.value('remplazo')
+        store.dispatch({
+            type: '@pushobservacionEDAccion',
+            payload: {
+                observacion: e.target.value
+            }
+
+        })
+
+    }
+
+    return (
+        <>
+            <div className="row">
+                {/* <div className="col-md-12">
+                    <div className="form-group">
+                        <label>Plan de  Acción</label>
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>
+                            {comboplandeaccion.map((u, index) => (
+                                <option key={u.id} selected={index === indiceSubtipotareaId} >{u.codigo_accion_correctiva}</option>
+                            ))
+                            }
+                        </select>
+                    </div>
+                </div> */}
+            </div>
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+                        <label>Observación Anterior:</label> <p>{dataEditDelete.observacion.observacion}</p>
+                        <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} placeholder="Nueva observacion..." >
+                        </textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-12">
+
+                    <div className="form-group">
+
+                        <label>Responsable: &nbsp;</label>
+                        <label>{dataUserSesion.usuario}</label>
+                        <hr></hr>
+
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </>
     )
 }
 
@@ -377,6 +561,8 @@ const Edicioneliminaciontareas = () => {
                 return <FuncionPase />
             case 'Otro':
                 return <FuncionOtro />
+            case 'Reunion':
+                return <FuncionReunion />
         }
     }
     var reordenarFecha = (diax) => {
@@ -486,7 +672,7 @@ const Edicioneliminaciontareas = () => {
                     dataUserSesion.SC_USER_ID)
             }
             case "Pase": {
-                    console.log('editar un pase')
+                console.log('editar un pase')
                 return edicionPase(
                     dataEditDeletePase.tipo_tarea.tipo_tarea,
                     dataEditDeletePase.id_bd.id_bd,
@@ -497,7 +683,19 @@ const Edicioneliminaciontareas = () => {
                     dataUserSesion.SC_USER_ID)
             }
             case "Otro": {
-                //    return  console.log('registrar Otro');
+                console.log('editar Otro');
+                return edicionOtro(
+                    dataEditDelete.tipo_tarea.tipo_tarea,
+                    dataEditDelete.id_bd.id_bd,
+                    dataEditDelete.segundotipo_tarea.subtipo_tarea_id,
+                    dataEditDelete.observacion.observacion,
+                    dataEditDeleteInc.hora_inicio.hora_inicio,
+                    dataEditDeleteInc.hora_fin.hora_fin,
+                    dataUserSesion.SC_USER_ID)
+            }
+
+            case "Planes de Accion": {
+                console.log('editar Reunion');
                 return edicionOtro(
                     dataEditDelete.tipo_tarea.tipo_tarea,
                     dataEditDelete.id_bd.id_bd,
@@ -533,6 +731,19 @@ const Edicioneliminaciontareas = () => {
                     dataEditDeleteInc.id_bd.id_bd,
                 )
             }
+
+            case "Planes de Accion": {
+                console.log('eliminar Plan de accion');
+                return eliminacionPlanAccion(
+                    dataEditDeleteInc.id_bd.id_bd,
+                )
+            }
+            case "Reunion": {
+                console.log('eliminar Reunion');
+                return eliminacionReunion(
+                    dataEditDeleteInc.id_bd.id_bd,
+                )
+            }
         }
 
     }
@@ -551,8 +762,8 @@ const Edicioneliminaciontareas = () => {
                             <div className="col-md-12">
                                 <div className="form-group">
                                     <div className="d-flex justify-content-around">
-                                    <div className='datepicker'>
-                                        <label>inicio</label>
+                                        <div className='datepicker'>
+                                            <label>inicio</label>
                                             <DatePicker
                                                 className='datepicker'
                                                 selected={startDatei}
@@ -565,9 +776,9 @@ const Edicioneliminaciontareas = () => {
                                             />
                                         </div>
                                         <div className='datepicker'>
-                                        <label>fin</label>
+                                            <label>fin</label>
                                             <DatePicker
-                                               className='datepicker'
+                                                className='datepicker'
                                                 selected={startDatef}
                                                 onChange={(date) => cambiarDatosf(date)}
                                                 showTimeSelect
@@ -579,8 +790,8 @@ const Edicioneliminaciontareas = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <p className='parra'>inicioTarea: {hi}</p>
-                                <p className='parra'>finTarea: {hf}</p>
+                                <p className='parra'>Inicio Tarea: {hi}</p>
+                                <p className='parra'>Fin Tarea: {hf}</p>
                                 <div className="form-group">
                                     <label>Tipo tarea</label>
                                     <select className="form-control select2" style={{ width: '100%' }} onChange={setOption}>

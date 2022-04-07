@@ -77,8 +77,8 @@ const Pase = () => {
                     <div className="form-group">
                         <label>Pase</label>
                        
-                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} >
-                        <option selected>--Seleccione un pase--</option>
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'}>
+                        <option value='default'>--Seleccione un pase--</option>
 
                                  { combopase.map(u=>(
                                              <option key={u.id} >{u.codigo}</option>
@@ -92,7 +92,7 @@ const Pase = () => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Observacion</label>
+                    <label>Observación</label>
                         <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={""} />
                     </div>
 
@@ -103,8 +103,8 @@ const Pase = () => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                        <label>Responsable : </label> 
-                        <label>{dataUserSesion.nombre_empleado}</label>
+                    <label>Responsable: &nbsp;</label> 
+                        <label>{dataUserSesion.usuario}</label>
                         <hr></hr>
                         {/* <button onClick={registrarDatos} type="button" class="btn btn-outline-warning">confirmar informacion del form</button> */}
 

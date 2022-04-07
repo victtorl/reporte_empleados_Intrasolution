@@ -11,6 +11,7 @@ let fecha = new Date()
 const initialState = {
     empleados: [],
     alltareas:[],
+    allcombos:[],
     empleadoSelect: [],
     dataUserSesion: [],
     statusLog: false,
@@ -49,6 +50,15 @@ const initialState = {
         observacion:{observacion:''},
         responsable:{responsable:''}
     },
+    dataregistroInit:{
+        tipo_tarea:{tipo_tarea:''},
+        segundotipo_tarea:{subtipo_tarea_id:''},
+        accion_correctiva_id:{accion_correctiva_id:''},
+        hora_inicio:{hora_inicio:reordenarFecha(fecha)},
+        hora_fin:{hora_fin:reordenarFecha(fecha)},
+        observacion:{observacion:''},
+        responsable:{responsable:''}
+    },
     dataEditDelete:{
         id_bd:{id_bd:''},
         tipo_tarea:{tipo_tarea:''},
@@ -76,6 +86,17 @@ const initialState = {
         id_bd:{id_bd:''},
         tipo_tarea:{tipo_tarea:''},
         segundotipo_tarea:{pase_id:''},
+        accion_correctiva_id:{accion_correctiva_id:''},
+        hora_inicio:{hora_inicio:''},
+        hora_fin:{hora_fin:''},
+        observacion:{observacion:''},
+        responsable:{responsable:''},
+        nombre_tipo_tarea:{nombre_tipo_tarea:''}
+    },
+    dataEditDeleteAccion:{
+        id_bd:{id_bd:''},
+        tipo_tarea:{tipo_tarea:''},
+        segundotipo_tarea:{subtipo_tarea_id:''},
         accion_correctiva_id:{accion_correctiva_id:''},
         hora_inicio:{hora_inicio:''},
         hora_fin:{hora_fin:''},

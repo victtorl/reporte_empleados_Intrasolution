@@ -21,6 +21,11 @@ export const getEmpleadoReducer = (state, action) => {
         ...state,
         alltareas: action.payload
       }
+    case '@getallcombos':
+      return {
+        ...state,
+        allcombos: action.payload
+      }
     case '@statusLogin':
       return {
         ...state,
@@ -227,8 +232,8 @@ export const getEmpleadoReducer = (state, action) => {
     //fin incidente edit
 
 
-     // edicion de tareas con PASE_ID
-     case '@pushdataEditDeletePase':
+    // edicion de tareas con PASE_ID
+    case '@pushdataEditDeletePase':
       return {
         ...state,
         dataEditDeletePase: action.payload
@@ -273,6 +278,59 @@ export const getEmpleadoReducer = (state, action) => {
       }
     //fin pase edit
 
+
+    // edicion de tareas con ACCION CORRECTIVA
+    case '@pushdataEditDeleteAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: action.payload
+      }
+
+    case '@pushtipo_tareaEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { tipo_tarea: action.payload })
+      }
+    case '@pushresponsableEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { responsable: action.payload })
+      }
+    case '@pushobservacionEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { observacion: action.payload })
+      }
+    case '@pushaccion_correctiva_idEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { accion_correctiva_id: action.payload })
+      }
+    case '@pushsegundotipo_tareaEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { segundotipo_tarea: action.payload })
+      }
+    case '@pushhorainicioEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { hora_inicio: action.payload })
+      }
+    case '@pushhorafinEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { hora_fin: action.payload })
+      }
+
+    case '@pushnombretipotareaEDAccion':
+      return {
+        ...state,
+        dataEditDeleteAccion: Object.assign(state.dataEditDeleteAccion, { nombre_tipo_tarea: action.payload })
+      }
+    //fin  accion correctiva edit
+
+
+
     case '@setalertselectevent':
       return {
         ...state,
@@ -283,7 +341,13 @@ export const getEmpleadoReducer = (state, action) => {
         ...state,
         newacces: action.payload
       }
+    case '@reiniciardataRegistro':
+      return {
+        ...state,
+        dataregistro: state.dataregistroInit
+      }
   }
+
   return state
 }
 

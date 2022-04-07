@@ -74,7 +74,7 @@
   }
   .contenido-calendario-section{
     overflow-y: scroll;
-    border: solid 5px #343A40 10%;
+    /* border: solid 5px #343A40 10%; */
     height: 500px;
   }
   .sidebar-principal{

@@ -6,47 +6,47 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 
 
-
 const notify = () => toast("Tarea evaluada para enviar");
 
 
-const Otro = () => {
-    
-    const combosubtipotarea = useSelector((state) => state.combosubtipotarea) 
+
+const Reuniont = () => {
+
+    //cambiar por combo plan aacion
+    const comboplandeaccion = useSelector((state) => state.comboplandeaccion) 
     const dataUserSesion =useSelector((state)=>state.dataUserSesion)
     
-
-    // campo subtipo_tarea
-    const [opTarea, SetoptTarea] = useState(combosubtipotarea[0])
+    // campo plan accion
+     const [opTarea, SetoptTarea] = useState(comboplandeaccion[0])
     const setOption = (e) => {
         //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
-        const elem=combosubtipotarea.filter((u)=>u.subtipo_tarea === e.target.value)
+        const elem=comboplandeaccion.filter((u)=>u.codigo_accion_correctiva === e.target.value)
         console.log(e.target.value);
-        SetoptTarea(elem[0].id)    
-        console.log(elem[0].id)  
-        //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso  
-        console.log(e.target.value);
-        SetoptTarea(e.target.value)
+        // console.log(elem[0].sac_accion_correctiva_id)  
+        SetoptTarea(elem.codigo_accion_correctiva)    
+        //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso 
         store.dispatch({
             type:'@pushsegundotipo_tarea',
             payload:{
-                subtipo_tarea_id:elem[0].id
+                subtipo_tarea_id:elem[0].sac_accion_correctiva_id
             }
             
         })
-           //como es  tipo otro entonces el campo es nulll asi que le pasamos al estado redux campo vacio es igual a null
-           store.dispatch({
+
+         //como es plan de accion entonces el campo si se pasa esta vez asi que le pasamos al estado redux campo que correcponde a accion correctiva
+         store.dispatch({
             type:'@pushaccion_correctiva_id',
             payload:{
-                accion_correctiva_id:''
+                accion_correctiva_id:elem[0].sac_accion_correctiva_id
             }
             
-        })    
+        })  
     }
 
     //campo Observacion
-    const [optObservacion, SetObservacion] = useState('')
+    const [optObservacion, SetObservacion] = useState(' ')
     const setOptionObs = (e) => {
+        console.log(dataUserSesion.nombre_empleado);
         console.log(e.target.value);
         SetObservacion(e.target.value)
         store.dispatch({
@@ -54,40 +54,41 @@ const Otro = () => {
             payload:{
                 observacion:e.target.value
             }
-            
         }) 
     }
 
+   
 
-    const registrarDatos = (e) => {
+   const registrarDatos = (e) => {
         e.preventDefault()
         store.dispatch({
             type: '@setdatatarea',
             payload: {
-                tipo: 'Otro',
-                subtipotarea: opTarea,
+                tipo: 'pase',
+                pase: opTarea,
                 observacion: optObservacion,
                 responsable: dataUserSesion.SC_USER_ID
             }
         })
         notify()
     }
-
+    var  i=0
     return (
         <>
-          
 
             <div className="row">
                 <div className="col-md-12">
                     <div className="form-group">
-                        <label>Subtipo Tarea</label>
-                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'} >
-                        <option value='default'>--Seleccione Subtipo Tarea--</option>
-                                 { combosubtipotarea.map(u=>(
-                                            <option key={u.id} >{u.subtipo_tarea}</option>
+                        {/* <label>Reunión</label>
+                       
+                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} >
+                        <option selected>--Seleccione Plan de Accion--</option>
+
+                                 { comboplandeaccion.map(u=>(
+                                             <option key={i++} >{u.codigo_accion_correctiva}</option>
                                         ))
                                   }
-                        </select>
+                        </select> */}
                     </div>
                 </div>
             </div>
@@ -106,7 +107,7 @@ const Otro = () => {
                 <div className="col-md-12">
 
                     <div className="form-group">
-                    <label>Responsable: &nbsp;</label> 
+                        <label>Responsable: &nbsp;</label> 
                         <label>{dataUserSesion.usuario}</label>
                         <hr></hr>
                         {/* <button onClick={registrarDatos} type="button" class="btn btn-outline-warning">confirmar informacion del form</button> */}
@@ -132,4 +133,5 @@ const Otro = () => {
     );
 }
 
-export default Otro;
+export default Reuniont;
+

@@ -56,11 +56,7 @@ const reiniciarhoras =() => {
 
     return (
         <div>
-            {/* Button trigger modal */}
-
-            {/* <a  className="btn btn-outline-success  " data-toggle="modal" data-target="#exampleModalScrollable">
-                Nueva Tarea
-            </a> */}
+           
 
             <a  className="btn btn-outline-success" data-toggle="modal" onClick={reiniciarhoras} data-target="#exampleModalScrollable">
                 Nueva Tarea
@@ -79,11 +75,9 @@ const reiniciarhoras =() => {
                           <EstructuraTarea/>
                                         
                         </div>
-                        <div className="modal-footer">
-                            {/* <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button> */}
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={registrarTarea}>Cerrar modal X</button>
-                            {/* <button type="button" className="btn btn-danger"  onClick={tratarTareas(alltareas)}>getalltareas</button> */}
-                        </div>
+                        {/* <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={registrarTarea}>X</button>
+                        </div> */}
                     </div>
                 </div>
             </div>
