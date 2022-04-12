@@ -54,9 +54,9 @@ export const tratarTareas = (alltareas) => {
         return { 
             id: i++,
             idtareacrud: u.id,
-            color: asignColor(u),
-            from: reordenarFechaForMapCalendar(u.hora_inicio),
-            to: reordenarFechaForMapCalendar(u.hora_fin),
+            color: '#008080',
+            from: reordenarFechaForMapCalendar(u.fecha_inicio),
+            to: reordenarFechaForMapCalendar(u.fecha_fin),
             title:getNombreyTipo(u)
             // title:`#tarea: ${i-1} tipo tarea: ${u.nombre_tipo_tarea} obs:${u.observacion}`
         }

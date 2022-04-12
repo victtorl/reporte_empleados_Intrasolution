@@ -19,7 +19,7 @@ const Reuniont = () => {
     // campo plan accion
      const [opTarea, SetoptTarea] = useState(comboplandeaccion[0])
     const setOption = (e) => {
-        //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
+        //filtrar el elemento del array que coincida con el select actual y llevarlo al setState
         const elem=comboplandeaccion.filter((u)=>u.codigo_accion_correctiva === e.target.value)
         console.log(e.target.value);
         // console.log(elem[0].sac_accion_correctiva_id)  
@@ -79,16 +79,7 @@ const Reuniont = () => {
             <div className="row">
                 <div className="col-md-12">
                     <div className="form-group">
-                        {/* <label>Reunión</label>
                        
-                        <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} >
-                        <option selected>--Seleccione Plan de Accion--</option>
-
-                                 { comboplandeaccion.map(u=>(
-                                             <option key={i++} >{u.codigo_accion_correctiva}</option>
-                                        ))
-                                  }
-                        </select> */}
                     </div>
                 </div>
             </div>

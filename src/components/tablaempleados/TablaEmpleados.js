@@ -9,15 +9,13 @@ import { store } from '../../redux/store';
 
 // webservices a usar
 import { getEmpleados } from '../../utils/webservices';
-import { getcomboSubtipoTarea } from '../../utils/webservices';
 
 const TablaEmpleados = () => {
 
 const employes = useSelector((state) => state.empleados)   
+
+
 const [detalle,SetDetalle]=useState({})
-
-
-
 
 useEffect(()=>{
     getEmpleados()

@@ -1,13 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { IsLogin } from '../utils/islogin'
 import { store } from '../redux/store';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import safe from '../img/safe.png'
 import logosafe from '../img/logo-safe.png'
-import { getcomboIncidencia, getcomboPase, getcomboSubtipoTarea, getcomboTipoTarea,getallTareas, getcomboPlandeAccion, getDataUsuario, getComboallTipoTareas } from '../utils/webservices';
+import { getcomboIncidencia, getcomboPase, getcomboSubtipoTarea, getcomboTipoTarea,getallTareas, getcomboPlandeAccion, getDataUsuario, getComboallTipoTareas, getTipoActividad } from '../utils/webservices';
 
 
 
@@ -28,8 +27,7 @@ const Login = () => {
     })
     
     const handleInputChange = (event) => {
-        // console.log(event.target.name)
-        // console.log(event.target.value)
+       
         setDatos({
             ...datos,
             [event.target.name]: event.target.value
@@ -90,6 +88,7 @@ const Login = () => {
                 getcomboPlandeAccion()
                 getcomboIncidencia()
                 getallTareas()
+                getTipoActividad()
             }
             )
             .catch((e)=>{
@@ -115,6 +114,7 @@ const Login = () => {
 
     const [Passtoogle, setPassstoogle] =useState('password');
     const [count,Setcount]=useState(0)
+
     const ChangeTooglepassword =(e) => {
 
         e.preventDefault()
@@ -164,14 +164,7 @@ const Login = () => {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    {/* <div className="col-8">
-                                    <div className="icheck-primary">
-                                        <input type="checkbox" id="remember" />
-                                        <label htmlFor="remember">
-                                            Remember Me
-                                        </label>
-                                    </div>
-                                </div> */}
+                              
                                     <div className="col-12">
                                         <NavLink to={rutaServidor}><button type="submit" className="btn  btn-login btn-block" onClick={enviarDatos}><label>Aceptar</label></button></NavLink>
                                     </div>

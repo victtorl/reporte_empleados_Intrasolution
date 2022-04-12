@@ -1,14 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
-
-
-
-
-
-
-
-
 const PruebaEnviocomp = () => {
   
   const [formValue, setformValue] = React.useState({

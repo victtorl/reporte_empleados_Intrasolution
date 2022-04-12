@@ -6,19 +6,11 @@ import { store } from '../redux/store';
 import safe from '../img/safe.png'
 import user1 from '../img/user2-160x160.jpg'
 import { useSelector } from 'react-redux';
-import ReactDOM from 'react-dom';
-
-
-
 
 const Sidebar = (props) => {
 
-
-  // const statuslog = useSelector((state) => state.statusLog) 
-
-  //cuando has el login resetea el sandwich de menu
-
   const islogged = useSelector((state) => state.statusLog)
+
 
   const Salir = () => {
     store.dispatch({
@@ -131,18 +123,7 @@ const Sidebar = (props) => {
                       <p>Lista Empleados</p>
                     </NavLink>
                   </li>
-                  {/* <li className="nav-item">
-                    <NavLink to={'/' + rutaServidor + '/home'} className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Home</p>
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink to={'/' + rutaServidor + '/tareaspendientes'} className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Tareas Pendientes</p>
-                    </NavLink>
-                  </li> */}
+                
                 </ul>
               </li>
 

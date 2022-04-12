@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
-
 import "react-datetime/css/react-datetime.css";
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { setDefaultLocale } from "react-datepicker";
 import { edicionIncidencia, eliminacionIncidencia, eliminacionPase, eliminacionOtro, edicionPase, edicionOtro, eliminacionPlanAccion, eliminacionReunion } from '../../utils/webservices';
 

@@ -1,18 +1,9 @@
-import Navbar from '../components/Navbar';
-import Home from './tablaempleados/Home';
-import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import TablaEmpleados from './tablaempleados/TablaEmpleados';
 import { Routes, Route } from 'react-router-dom'
-
 import Calendario from './registrotareas/Calendario';
-
-
-
 import React from 'react';
-import Login from './Login';
 import TareasUsuario from './tablaempleados/TareasUsuario';
-import Default from './tablaempleados/Default';
 import BarChart from './charts/BarChart';
 import BarChartx from './charts/BarChartx';
 

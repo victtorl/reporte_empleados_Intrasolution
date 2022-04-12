@@ -11,6 +11,7 @@ let fecha = new Date()
 const initialState = {
     empleados: [],
     alltareas:[],
+    tipoactividad:[],
     allcombos:[],
     empleadoSelect: [],
     dataUserSesion: [],
@@ -41,15 +42,23 @@ const initialState = {
     combopase: [],
     comboincid: [],
     comboplandeaccion:[],
+
+//REGISTRO UPDATE
     dataregistro:{
-        tipo_tarea:{tipo_tarea:''},
-        segundotipo_tarea:{subtipo_tarea_id:''},
-        accion_correctiva_id:{accion_correctiva_id:''},
-        hora_inicio:{hora_inicio:reordenarFecha(fecha)},
-        hora_fin:{hora_fin:reordenarFecha(fecha)},
+        tipo_tarea_id:{tipo_tarea_id:''},
+        tipo_actividad_id:{tipo_actividad_id:''},    
+        subtipo_tarea_id:{subtipo_tarea_id:''},
+        actividad_id:{actividad_id:''},
         observacion:{observacion:''},
+        fecha_inicio:{fecha_inicio:reordenarFecha(fecha)},
+        fecha_fin:{fecha_fin:reordenarFecha(fecha)},
         responsable:{responsable:''}
     },
+
+
+
+
+
     dataregistroInit:{
         tipo_tarea:{tipo_tarea:''},
         segundotipo_tarea:{subtipo_tarea_id:''},
@@ -59,18 +68,26 @@ const initialState = {
         observacion:{observacion:''},
         responsable:{responsable:''}
     },
+
+
+//EDICION ELIMINACION UPDATE
+
+
+
+
     dataEditDelete:{
         id_bd:{id_bd:''},
-        tipo_tarea:{tipo_tarea:''},
-        segundotipo_tarea:{subtipo_tarea_id:''},
-        accion_correctiva_id:{accion_correctiva_id:''},
-        hora_inicio:{hora_inicio:''},
-        hora_fin:{hora_fin:''},
+        tipo_tarea_id:{tipo_tarea_id:''},
+        tipo_actividad_id:{tipo_actividad_id:''},    
+        subtipo_tarea_id:{subtipo_tarea_id:''},
+        actividad_id:{actividad_id:''},
         observacion:{observacion:''},
-        responsable:{responsable:''},
-        nombre_tipo_tarea:{nombre_tipo_tarea:''}
+        fecha_inicio:{fecha_inicio:reordenarFecha(fecha)},
+        fecha_fin:{fecha_fin:reordenarFecha(fecha)},
+        responsable:{responsable:''}
 
     },
+
     dataEditDeleteInc:{
         id_bd:{id_bd:''},
         tipo_tarea:{tipo_tarea:''},

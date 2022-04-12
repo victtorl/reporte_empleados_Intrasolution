@@ -2,9 +2,9 @@ import axios from "axios";
 import { store } from "../redux/store";
 import { tratarTareas } from "./metodos";
 
-const dominio='https://app.safe2biz.com'
+const dominio='http://179.43.81.213:8989'
 const emaildominio='@intrasolution'
-const systemrootdominio='safe2biz'
+const systemrootdominio='intrasolution'
 
 export const getInfoLocal=() => {
     const parametrosAcces = window.localStorage.getItem('accesws')
@@ -40,6 +40,7 @@ export const getEmpleados = () => {
         }
     )
         .then(data => {
+            
             store.dispatch({
                 type: '@getEmpleados',
                 payload: data.data.data
@@ -208,6 +209,42 @@ export const getcomboPlandeAccion = async() => {
     return respuesta
 }
 
+//NUEVO
+export const getTipoActividad = async() => {
+    const baseUrl = `http://179.43.81.213:8989/intrasolution/ws/null/calendario_tipo_actividad`;
+    const bodyform = {
+        dato:0,
+    
+    }
+    const params = new URLSearchParams(bodyform)
+    let respuesta=  await   axios.post(baseUrl,
+        params, 
+        {
+            headers: {
+                
+                userLogin: 'guillermo.vergel@intrasolution',
+                userPassword:'gv22384714',
+                systemRoot: 'intrasolution',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+            
+        }
+
+    )
+        .then(data => {
+            console.log('hola');
+            console.log(data)
+            store.dispatch({
+                type: '@gettipoactividad',
+                payload: data.data.data
+            })
+        })
+        .catch(e => {
+            console.log('el error es' + e);
+        })
+    return respuesta
+}
+
 export const getallTareas = async() => {
     const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tareas_horas`  
                       
@@ -231,7 +268,7 @@ export const getallTareas = async() => {
                 type: '@getalltareas',
                  payload: data.data.data
             })
-        //    console.log(data.data.data);
+           console.log(data.data.data);
             store.dispatch({
                     type: '@settasks',
                     payload:[tratarTareas(data.data.data)]
@@ -253,10 +290,10 @@ export const registroTarea = () => {
     const bodyform = {
         type:1,
         id:1,
-        tipo_tarea: 1,
-        subtipo_tarea:'',
-        incidente_id:50107,
-        pase_id:'',
+        tipo_tarea_id: 1,
+        tipo_actividad_id:2,
+        subtipo_tarea_id:0,
+        actividad_id:50107,
         observacion:'Prueba web',
         fecha_inicio: '2022-03-16 19:30:00',
         fecha_fin: '2022-03-16 20:00:00',
@@ -284,14 +321,16 @@ export const registroTarea = () => {
 
 }
 
-export const registroIncidencia = (tipo_tarea,incidente_id,accion_correctiva_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
+export const registroTodoTareas = (tipo_tarea_id,tipo_actividad_id,subtipo_tarea_id,actividad_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
     const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
+    
     const bodyform = {
         type:1,
-        id:1,
-        tipo_tarea: tipo_tarea,
-        incidente_id:incidente_id,
-        accion_correctiva_id:accion_correctiva_id,
+        id:0,
+        tipo_tarea_id: tipo_tarea_id,
+        tipo_actividad_id:tipo_actividad_id,
+        subtipo_tarea_id:subtipo_tarea_id,
+        actividad_id:actividad_id,
         observacion:observacion,
         fecha_inicio: fecha_inicio,
         fecha_fin: fecha_fin,
@@ -312,7 +351,7 @@ export const registroIncidencia = (tipo_tarea,incidente_id,accion_correctiva_id,
 
     )
         .then(data => {
-            // console.log(data);
+            console.log(data);
             getallTareas()
         })
         .then(
@@ -753,7 +792,6 @@ export const eliminacionOtro = (idbd) => {
         })
 
 }
-
 export const eliminacionPlanAccion = (idbd) => {
     const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
                         
@@ -788,7 +826,6 @@ export const eliminacionPlanAccion = (idbd) => {
         })
 
 }
-
 export const eliminacionReunion = (idbd) => {
     const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
                         
@@ -823,7 +860,6 @@ export const eliminacionReunion = (idbd) => {
         })
 
 }
-
      
 export const getDataUsuario = async(usuario,passs) => {
     const baseUrl = `${dominio}/intrasolution//ws/null/pr_ws_sc_user`;
@@ -862,7 +898,7 @@ export const getDataUsuario = async(usuario,passs) => {
 }
 
 export const getComboallTipoTareas = async() => {
-    const baseUrl = 'http://179.43.81.213:8989/intrasolution/ws/null/calendario_actividad_combo';
+    const baseUrl = 'http://179.43.81.213:8989/intrasolution/ws/null/calendario_actividad_combos';
     const bodyform = {
         sc_user_id:13,
     
@@ -882,6 +918,8 @@ export const getComboallTipoTareas = async() => {
 
     )
     .then(data => {
+        console.log('todos los combos')
+        console.log(data);
         store.dispatch({
             type: '@getallcombos',
             payload: data.data.data

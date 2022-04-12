@@ -128,18 +128,6 @@ const Agenda = () => {
     console.log('#' + ev)
     console.log(tareaRecuperada)
    
-    // store.dispatch({
-    //   type:'@pushdataEditDeleteInc',
-    //   payload:{}
-    // })
-    // store.dispatch({
-    //   type:'@pushdataEditDeletePase',
-    //   payload:{}
-    // })
-    // store.dispatch({
-    //   type:'@pushdataEditDelete',
-    //   payload:{}
-    // })
 
     //para incidente
     store.dispatch({
@@ -172,17 +160,20 @@ const Agenda = () => {
       }
     })
     //para Otro
+
+
     store.dispatch({
       type: '@pushdataEditDelete',
       payload: {
         id_bd: { id_bd: tareaRecuperada.id },
-        tipo_tarea: { tipo_tarea: tareaRecuperada.tipo_tarea_id },
-        segundotipo_tarea: { subtipo_tarea_id: tareaRecuperada.subtipo_tarea_id },
-        hora_inicio: { hora_inicio: tareaRecuperada.hora_inicio },
-        hora_fin: { hora_fin: tareaRecuperada.hora_fin },
+        tipo_tarea_id: { tipo_tarea_id: tareaRecuperada.tipo_tarea_id },
+        tipo_actividad_id: { tipo_actividad_id: tareaRecuperada.subtipo_tarea_id },
+        subtipo_tarea_id: { subtipo_tarea_id: tareaRecuperada.subtipo_tarea_id },
+        actividad_id: { actividad_id: tareaRecuperada.subtipo_tarea_id },
         observacion: { observacion: tareaRecuperada.observacion },
+        fecha_inicio: { fecha_inicio: tareaRecuperada.hora_inicio },
+        fecha_fin: { fecha_fin: tareaRecuperada.hora_fin },
         responsable: { responsable: dataUserSesion.SC_USER_ID },
-        nombre_tipo_tarea: { nombre_tipo_tarea: tareaRecuperada.nombre_tipo_tarea }
 
       }
     })

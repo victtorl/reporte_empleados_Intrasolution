@@ -15,3 +15,4 @@ const Registrotareas = (props) => {
 }
 
 export default Registrotareas;
+    

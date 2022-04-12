@@ -26,6 +26,11 @@ export const getEmpleadoReducer = (state, action) => {
         ...state,
         allcombos: action.payload
       }
+    case '@gettipoactividad':
+      return {
+        ...state,
+        tipoactividad: action.payload
+      }
     case '@statusLogin':
       return {
         ...state,
@@ -102,11 +107,13 @@ export const getEmpleadoReducer = (state, action) => {
         ...state,
         comboplandeaccion: action.payload
       }
+
+    // TYPES PARA EL REGISTRO DE TAREAS
     case '@pushtipo_tarea':
       return {
         ...state,
         // dataregistro: state.dataregistro.tipo_tarea = action.payload
-        dataregistro: Object.assign(state.dataregistro, { tipo_tarea: action.payload })
+        dataregistro: Object.assign(state.dataregistro, { tipo_tarea_id: action.payload })
       }
     case '@pushresponsable':
       return {
@@ -114,10 +121,20 @@ export const getEmpleadoReducer = (state, action) => {
         // dataregistro: state.dataregistro.tipo_tarea = action.payload
         dataregistro: Object.assign(state.dataregistro, { responsable: action.payload })
       }
-    case '@pushsegundotipo_tarea':
+    case '@pushsubtipo_tarea':
       return {
         ...state,
-        dataregistro: Object.assign(state.dataregistro, { segundotipo_tarea: action.payload })
+        dataregistro: Object.assign(state.dataregistro, { subtipo_tarea_id: action.payload })
+      }
+    case '@pushtipo_actividad':
+      return {
+        ...state,
+        dataregistro: Object.assign(state.dataregistro, { tipo_actividad_id: action.payload })
+      }
+    case '@pushactividad':
+      return {
+        ...state,
+        dataregistro: Object.assign(state.dataregistro, { actividad_id: action.payload })
       }
     case '@pushaccion_correctiva_id':
       return {
@@ -132,12 +149,12 @@ export const getEmpleadoReducer = (state, action) => {
     case '@pushhorainicio':
       return {
         ...state,
-        dataregistro: Object.assign(state.dataregistro, { hora_inicio: action.payload })
+        dataregistro: Object.assign(state.dataregistro, { fecha_inicio: action.payload })
       }
     case '@pushhorafin':
       return {
         ...state,
-        dataregistro: Object.assign(state.dataregistro, { hora_fin: action.payload })
+        dataregistro: Object.assign(state.dataregistro, { fecha_fin: action.payload })
       }
 
 

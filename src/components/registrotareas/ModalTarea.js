@@ -1,26 +1,16 @@
 import React from 'react';
 import EstructuraTarea from './EstructuraTarea'
 import { useSelector } from 'react-redux';
-
 import { store } from '../../redux/store';
-import { getalltareas, getcomboTipoTarea, registroTarea } from '../../utils/webservices';
 
 
 const ModalTarea = () => {
 
-const nuevaTarea = useSelector((state) => state.nuevaTarea)
-const alltareas = useSelector((state) => state.alltareas)
+
+
 const diaSelectmuestramodal = useSelector((state) => state.diaSelectmuestramodal)
 
-const registrarTarea = async () => {
-
-   await store.dispatch({
-        type:'@agregarTarea',
-        payload:nuevaTarea
-    })
- registroTarea()
-
-}   
+  
 
 const reiniciarhoras =() => {
     const reordenarFechabtnnuevatarea = (v) => {
