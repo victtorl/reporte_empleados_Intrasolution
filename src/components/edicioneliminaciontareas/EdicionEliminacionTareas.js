@@ -522,7 +522,7 @@ const Edicioneliminaciontareas = () => {
     const [opTareaED, SetoptTareaED] = useState(nombreTareadataED)
 
     const setOption = (e) => {
-        //filtrar el elemento del array que coincida con el select actual y llevarlo al setStare
+        //filtrar el elemento del array que coincida con el select actual y llevarlo al setState
         const elem = combotipotarea.filter((u) => u.tipo_tarea === e.target.value)
         SetoptTareaED(elem.id)
         //seteo el estado a un arreglo y eso lo envio al final ya solo en un paso 

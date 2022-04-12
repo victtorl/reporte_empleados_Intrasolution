@@ -517,14 +517,15 @@ export const registroReunion = (tipo_tarea,subtipo_tarea,accion_correctiva_id, o
 }
 //EDICION 
 
-export const edicionIncidencia = (tipo_tarea,idbd,incidente_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
+export const wsedicionTarea = (idbd,tipo_tarea_id,tipo_actividad_id,subtipo_tarea_id,actividad_id, observacion,fecha_inicio,fecha_fin,usuario_id) => {
     const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:2,
         id:idbd,
-        tipo_tarea: tipo_tarea,
-        incidente_id:incidente_id,
-        accion_correctiva_id:'',
+        tipo_tarea_id: tipo_tarea_id,
+        tipo_actividad_id:tipo_actividad_id,
+        subtipo_tarea_id:subtipo_tarea_id,
+        actividad_id:actividad_id,
         observacion:observacion,
         fecha_inicio: fecha_inicio,
         fecha_fin: fecha_fin,
@@ -683,11 +684,11 @@ export const edicionPlanAccion = (tipo_tarea,idbd,pase_id,observacion,fecha_inic
 }
 //ELIMINACION
 
-export const eliminacionIncidencia = (idbd) => {
+export const wseliminarTarea = (idbd) => {
     const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:3,
-        id:idbd,
+        id:idbd
       
     }
     const params = new URLSearchParams(bodyform)
@@ -933,4 +934,44 @@ export const getComboallTipoTareas = async() => {
     return respuesta
 
 }
+
+//trer la data de una tarea elegida en el calendario
+export const getDataTaskCalendar = async(x) => {
+    const baseUrl =`${dominio}/intrasolution/ws/null/actividad_hora`;
+    
+    const bodyform = {
+        inc_incidencia_hh_id:x,
+    
+    }
+    const params = new URLSearchParams(bodyform)
+  const respuesta= await axios.post(baseUrl,
+        params,
+        {
+            headers: {
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: `${systemrootdominio}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        },
+
+    )
+    .then(data => {
+        console.log('todos los combos')
+        console.log(data.data.data);
+        store.dispatch({
+            type: '@getdatatareaSelect',
+            payload: data.data.data
+        })
+        
+    })
+    .catch(e => {
+        console.log('el error es' + e);
+    })
+    console.log(respuesta);
+      
+    return respuesta
+
+}
+
 

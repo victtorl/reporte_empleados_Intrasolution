@@ -45,6 +45,7 @@ const initialState = {
 
 //REGISTRO UPDATE
     dataregistro:{
+        idbd:{idbd:''},
         tipo_tarea_id:{tipo_tarea_id:''},
         tipo_actividad_id:{tipo_actividad_id:''},    
         subtipo_tarea_id:{subtipo_tarea_id:''},
@@ -60,6 +61,7 @@ const initialState = {
 
 
     dataregistroInit:{
+        idbd:{idbd:''},
         tipo_tarea:{tipo_tarea:''},
         segundotipo_tarea:{subtipo_tarea_id:''},
         accion_correctiva_id:{accion_correctiva_id:''},
@@ -82,8 +84,8 @@ const initialState = {
         subtipo_tarea_id:{subtipo_tarea_id:''},
         actividad_id:{actividad_id:''},
         observacion:{observacion:''},
-        fecha_inicio:{fecha_inicio:reordenarFecha(fecha)},
-        fecha_fin:{fecha_fin:reordenarFecha(fecha)},
+        fecha_inicio:{hora_inicio:reordenarFecha(fecha)},
+        fecha_fin:{hora_fin:reordenarFecha(fecha)},
         responsable:{responsable:''}
 
     },
@@ -122,8 +124,8 @@ const initialState = {
         nombre_tipo_tarea:{nombre_tipo_tarea:''}
     },  
     alertselectevent:false,
-    newacces:{}
-    
+    newacces:{},
+    datatareaSelect:[]
 }
 
 export const store = createStore(

@@ -8,6 +8,7 @@ import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import ModalTarea from './ModalTarea';
 import { reordenarFecha } from './Calendario';
+import { getDataTaskCalendar } from '../../utils/webservices';
 
 export const events = [{
   id: 1,
@@ -34,6 +35,7 @@ const Agenda = () => {
 
   const tasks = useSelector((state) => state.tasks)
   const diaSelect = useSelector((state) => state.diaSelect)
+  const datatareaSelect = useSelector((state) => state.datatareaSelect)
 
 
   const [dat, setdate] = useState('seleccione hora de inicio')
@@ -129,6 +131,8 @@ const Agenda = () => {
     console.log(tareaRecuperada)
    
 
+    getDataTaskCalendar(tareaRecuperada.id)
+
     //para incidente
     store.dispatch({
       type: '@pushdataEditDeleteInc',
@@ -163,16 +167,23 @@ const Agenda = () => {
 
 
     store.dispatch({
+      type: '@pushidbd',
+      payload: {
+         idbd: tareaRecuperada.id,
+      }
+    })
+
+    store.dispatch({
       type: '@pushdataEditDelete',
       payload: {
-        id_bd: { id_bd: tareaRecuperada.id },
-        tipo_tarea_id: { tipo_tarea_id: tareaRecuperada.tipo_tarea_id },
-        tipo_actividad_id: { tipo_actividad_id: tareaRecuperada.subtipo_tarea_id },
-        subtipo_tarea_id: { subtipo_tarea_id: tareaRecuperada.subtipo_tarea_id },
-        actividad_id: { actividad_id: tareaRecuperada.subtipo_tarea_id },
-        observacion: { observacion: tareaRecuperada.observacion },
-        fecha_inicio: { fecha_inicio: tareaRecuperada.hora_inicio },
-        fecha_fin: { fecha_fin: tareaRecuperada.hora_fin },
+        id_bd: { id_bd:datatareaSelect[0].id },
+        tipo_tarea_id: { tipo_tarea_id: datatareaSelect[0].tipo_tarea_id },
+        tipo_actividad_id: { tipo_actividad_id: datatareaSelect[0].act_tipo_actividad_id },
+        subtipo_tarea_id: { subtipo_tarea_id:datatareaSelect[0].subtipo_tarea_id },
+        actividad_id: { actividad_id: datatareaSelect[0].actividad_id},
+        observacion: { observacion:  datatareaSelect[0].observacion },
+        fecha_inicio: { hora_inicio:datatareaSelect[0].fecha_inicio },
+        fecha_fin: { hora_fin: datatareaSelect[0].fecha_fin},
         responsable: { responsable: dataUserSesion.SC_USER_ID },
 
       }

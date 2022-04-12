@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import 'react-calendar/dist/Calendar.css';
 import Agenda from './Agenda';
-import Edicioneliminaciontareas from '../edicioneliminaciontareas/EdicionEliminacionTareas';
+import Edicioneliminacion from '../edicioneliminaciontareas/EdicionEliminacion';
+
 
 
 
@@ -50,7 +51,7 @@ const Calendario = () => {
                             <div className='col-md-6 col-sm-9' >
 
                                 {(alertselectevent === true)
-                                ? <Edicioneliminaciontareas/>
+                                ? <Edicioneliminacion/>
                                 :<p></p>}
                             </div>
                         </div>

@@ -6,17 +6,20 @@ import "react-datetime/css/react-datetime.css";
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { setDefaultLocale } from "react-datepicker";
-import { registroTodoTareas } from '../../utils/webservices';
+import { registroTodoTareas, wsedicionTarea, wseliminarTarea } from '../../utils/webservices';
 
 
 
 setDefaultLocale('es')
 
 
-const Estructuratarea = () => {
+const Edicioneliminacion = () => {
 
     const dataregistro = useSelector((state) => state.dataregistro)
     const dataUserSesion = useSelector((state) => state.dataUserSesion)
+
+    const datatareaSelect = useSelector((state) => state.datatareaSelect)
+    const dataEditDelete = useSelector((state) => state.dataEditDelete)
 
 
     const diaSelect = useSelector((state) => state.diaSelect)
@@ -71,7 +74,7 @@ const Estructuratarea = () => {
         console.log('el dato d es:' + d)
         setStartDatei(d)
         store.dispatch({
-            type: '@pushhorainicio',
+            type: '@pushhorainicioED',
             payload: {
                 hora_inicio: (reordenarFecha(d.toLocaleString('es-PE')))
             }
@@ -83,7 +86,7 @@ const Estructuratarea = () => {
         console.log('el dato d es:' + d)
         setStartDatef(d)
         store.dispatch({
-            type: '@pushhorafin',
+            type: '@pushhorafinED',
             payload: {
                 hora_fin: (reordenarFecha(d.toLocaleString('es-PE')))
             }
@@ -92,24 +95,35 @@ const Estructuratarea = () => {
 
 
 
-
-    const enviarDatos = async (e) => {
-        e.preventDefault()
+const editarDatos =async(e)=>{
+    e.preventDefault()
+     
+     wsedicionTarea(
+        dataEditDelete.id_bd.id_bd,
+        dataEditDelete.tipo_tarea_id.tipo_tarea_id,
+        dataEditDelete.tipo_actividad_id.tipo_actividad_id,
+        dataEditDelete.subtipo_tarea_id.subtipo_tarea_id,
+        dataEditDelete.actividad_id.actividad_id,
+        dataEditDelete.observacion.observacion,
+        dataEditDelete.fecha_inicio.hora_inicio,
+        dataEditDelete.fecha_fin.hora_fin,
+        dataUserSesion.SC_USER_ID
         
+        )
+}
 
 
-        registroTodoTareas(
-                        dataregistro.tipo_tarea_id.tipo_tarea_id,
-                        dataregistro.tipo_actividad_id.tipo_actividad_id,
-                        dataregistro.subtipo_tarea_id.subtipo_tarea_id,
-                        dataregistro.actividad_id.actividad_id,
-                        dataregistro.observacion.observacion,
-                        dataregistro.fecha_inicio.hora_inicio,
-                        dataregistro.fecha_fin.hora_fin,
-                        dataUserSesion.SC_USER_ID)
 
+   
 
+    const eliminarDatos =async(e)=>{
+        e.preventDefault()
+        console.log(dataregistro.idbd.idbd)
+         wseliminarTarea(datatareaSelect[0].id)
     }
+
+
+
 
 
 
@@ -122,7 +136,7 @@ const Estructuratarea = () => {
         
 
         store.dispatch({
-            type: '@pushtipo_tarea',
+            type: '@pushtipo_tareaED',
             payload: {
                 tipo_tarea_id: e.target.value
             }
@@ -130,7 +144,7 @@ const Estructuratarea = () => {
         })
         //setear el responsable
         store.dispatch({
-            type: '@pushresponsable',
+            type: '@pushresponsableED',
             payload: {
                 responsable: dataUserSesion.SC_USER_ID
             }
@@ -138,7 +152,7 @@ const Estructuratarea = () => {
         })
         if (e.target.value < 4) { //validamos que  el tipo de tareas es OTRO entonces le enviamos el subtipo_tarea_id del subtipo elegido, si no fuese ese el caso le enviamos 0
             store.dispatch({
-                type: '@pushsubtipo_tarea',
+                type: '@pushsubtipo_tareaED',
                 payload: {
                     subtipo_tarea_id: 0
                 }
@@ -146,7 +160,7 @@ const Estructuratarea = () => {
             })
         }else{
             store.dispatch({
-                type: '@pushactividad',
+                type: '@pushactividadED',
                 payload: {
                     actividad_id: 0
                 }
@@ -176,7 +190,7 @@ const Estructuratarea = () => {
         if(idactividad123.length !==0){   //VALIDAMOS QUE EL ARRAY idactividad123 TENGA CONTENIDO, SI ESTO SE CUMPLE GUARDAMOS EL subtipo_tarea_id EN EL STORE
             console.log('123 tipoas');
             store.dispatch({
-            type: '@pushactividad',
+            type: '@pushactividadED',
             payload: {
                 actividad_id: idactividad123[0].actividad_id
             }
@@ -188,7 +202,7 @@ const Estructuratarea = () => {
         if (idactividadOtros.length !==0) {  //VALIDAMOS QUE EL ARRAY idactividadOtros TENGA CONTENIDO, SI ESTO SE CUMPLE GUARDAMOS EL subtipo_tarea_id EN EL STORE
             console.log('otros');
             store.dispatch({
-                type: '@pushsubtipo_tarea',
+                type: '@pushsubtipo_tareaED',
                 payload: {
                     subtipo_tarea_id: idactividadOtros[0].actividad_id
                 }
@@ -203,7 +217,7 @@ const Estructuratarea = () => {
     const setOptionTipoActividad = (e) => {
         let idtipotarea = tipoactividadcombo.filter((u) => u.tipo_actividad == e.target.value) //filtrar el elemento seleccionado para acceder a su id y enviarlo como payload
         store.dispatch({
-            type: '@pushtipo_actividad',
+            type: '@pushtipo_actividadED',
             payload: {
                 tipo_actividad_id: idtipotarea[0].id
             }
@@ -220,7 +234,7 @@ const Estructuratarea = () => {
         console.log(e.target.value);
         SetObservacion(e.target.value)
         store.dispatch({
-            type: '@pushobservacion',
+            type: '@pushobservacionED',
             payload: {
                 observacion: e.target.value
             }
@@ -341,10 +355,11 @@ const Estructuratarea = () => {
                             </div>
                         </div>
                     </div>
+                   
                     <div className="card-footer">
-                        <button className="btn btn-primary" data-dismiss="modal" onClick={enviarDatos} >Grabar</button>
-
-                        {/* <button className="btn btn-primary" data-dismiss="modal" onClick={rehidratar} >Prueba rehidratar estado</button> */}
+                        <button type="button" class="btn btn-outline-warning" onClick={editarDatos} >Editar</button>
+                        <button type="button" class="btn btn-outline-danger" onClick={eliminarDatos}>Eliminar</button>
+                        {/* <button type="button" class="btn btn-outline-danger" >Eliminar</button> */}
                     </div>
                 </form>
             </div>
@@ -352,4 +367,4 @@ const Estructuratarea = () => {
     );
 }
 
-export default Estructuratarea;
+export default Edicioneliminacion;
