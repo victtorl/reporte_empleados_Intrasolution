@@ -1,12 +1,11 @@
 import React from 'react';
 import ModalTarea from './ModalTarea';
 
-const Registrotareas = (props) => {
+const Registrotareas = () => {
     return (
         <>
                 <div className="btn-group">
                     <ModalTarea/>
-                    {/* <button type="button" className="btn btn-outline-primary ">{props.dat}</button> */}
                 </div>    
                
 

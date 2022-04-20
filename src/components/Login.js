@@ -43,7 +43,6 @@ const Login = () => {
 
                 const infoUser = data.data.data[0]
                 // console.log(infoUser);
-
                 if (datos.name === infoUser.USER_LOGIN && datos.password === infoUser.password) {
                     store.dispatch({
                         type: '@statusLogin',
@@ -54,7 +53,6 @@ const Login = () => {
 
                     )
                     
-                    // console.log(!islogged);
                     // console.log('estas logueado');
                 } else {
                     // console.log('usuario o contraseña incorrecta');
@@ -70,7 +68,7 @@ const Login = () => {
 
                 }
                 Setvercredential('Bienvenido')
-                // console.log('asdsad'+JSON.stringify(infoUser))
+                
                 return infoUser
             })
             .then((infoUser) => {
@@ -80,7 +78,7 @@ const Login = () => {
             }
                
             )
-            .then(() => {
+            .then((e) => {
                 getComboallTipoTareas()
                 getcomboTipoTarea()
                 getcomboSubtipoTarea()
@@ -89,6 +87,7 @@ const Login = () => {
                 getcomboIncidencia()
                 getallTareas()
                 getTipoActividad()
+                console.log('credenciales correctas')
             }
             )
             .catch((e)=>{

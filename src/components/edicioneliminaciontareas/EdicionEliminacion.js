@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-
 import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import "react-datetime/css/react-datetime.css";
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { setDefaultLocale } from "react-datepicker";
-import { registroTodoTareas, wsedicionTarea, wseliminarTarea } from '../../utils/webservices';
+import { wsedicionTarea, wseliminarTarea } from '../../utils/webservices';
 
 
 
@@ -19,6 +18,7 @@ const Edicioneliminacion = () => {
     const dataUserSesion = useSelector((state) => state.dataUserSesion)
 
     const datatareaSelect = useSelector((state) => state.datatareaSelect)
+
     const dataEditDelete = useSelector((state) => state.dataEditDelete)
 
 
@@ -51,17 +51,11 @@ const Edicioneliminacion = () => {
         const fechaxdefecto = `${anio}-${mes}-${dia}`
         //validamos si hay dia seleccionado
         if (diaSelect.length === 0) {
-            return `${fechaxdefecto}T${h}.318Z`
+            return `${fechaxdefecto} ${h}`
         } else {
-            return `${diaSelect}T${h}.318Z`
+            return `${diaSelect} ${h}`
         }
     }
-
-
-
-
-
-
 
 
     const [startDatei, setStartDatei] = useState(new Date());
@@ -123,10 +117,6 @@ const editarDatos =async(e)=>{
     }
 
 
-
-
-
-
     //ELEGIR Y SETEAR EL TIPO DE TAREA
     const [opTarea, SetoptTarea] = useState(0)
 
@@ -177,10 +167,10 @@ const editarDatos =async(e)=>{
     //COMBO SUBTIPO  TAREA 
     const setOptionSubtipo = (e) => {
         let datosTareatipo123 = allcombos.filter((u) => u.tipo < 4) //FILTRAMOS LAS TAREAS CON ID  1 2 3 QUE CORRESPONDE A OTROS
-        let idactividad123 = datosTareatipo123.filter((u) => u.codigo == e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
+        let idactividad123 = datosTareatipo123.filter((u) => u.codigo === e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
      
-        let datosTareatipo4 = allcombos.filter((u) => u.tipo == 4) //FILTRAMOS LAS TAREAS CON ID 4 QUE CORRESPONDE A OTROS
-        let idactividadOtros = datosTareatipo4.filter((u) => u.codigo == e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
+        let datosTareatipo4 = allcombos.filter((u) => u.tipo === 4) //FILTRAMOS LAS TAREAS CON ID 4 QUE CORRESPONDE A OTROS
+        let idactividadOtros = datosTareatipo4.filter((u) => u.codigo === e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
 
         console.log(datosTareatipo123)
         console.log(datosTareatipo4)
@@ -215,7 +205,7 @@ const editarDatos =async(e)=>{
 
     //COMBO TIPO ACTIVIDAD
     const setOptionTipoActividad = (e) => {
-        let idtipotarea = tipoactividadcombo.filter((u) => u.tipo_actividad == e.target.value) //filtrar el elemento seleccionado para acceder a su id y enviarlo como payload
+        let idtipotarea = tipoactividadcombo.filter((u) => u.tipo_actividad === e.target.value) //filtrar el elemento seleccionado para acceder a su id y enviarlo como payload
         store.dispatch({
             type: '@pushtipo_actividadED',
             payload: {
@@ -226,7 +216,7 @@ const editarDatos =async(e)=>{
 
     }
 
-    let combodinamico = allcombos.filter((u) => u.tipo == opTarea)  //filtra el subtipo de tarea dependiendo del tipo de tarea que se escoja
+    let combodinamico = allcombos.filter((u) => u.tipo === opTarea)  //filtra el subtipo de tarea dependiendo del tipo de tarea que se escoja
 
     //campo Observacion
     const [optObservacion, SetObservacion] = useState('')
@@ -242,9 +232,6 @@ const editarDatos =async(e)=>{
         })
 
     }
-
-
-
 
     const [selected, setSelected] = useState("");
     const [selectedactividad, setSelectedactividad] = useState("");
@@ -289,8 +276,12 @@ const editarDatos =async(e)=>{
                                                 dateFormat="h:mm aa"
                                             />
                                         </div>
+                                        
                                     </div>
+                                    
                                 </div>
+                                <label className='letra-pequenia-form-edit'>Fecha Inicial: {dataEditDelete.fecha_inicio.hora_inicio}</label><br></br>
+                                <label className='letra-pequenia-form-edit'>Fecha Final: {dataEditDelete.fecha_fin.hora_fin}</label>
                                 <div className="form-group">
                                     <label>Tipo Tarea</label>
                                     <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'}>

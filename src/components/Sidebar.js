@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-// import { useSelector,useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { store } from '../redux/store';
-
 import safe from '../img/safe.png'
 import user1 from '../img/user2-160x160.jpg'
 import { useSelector } from 'react-redux';

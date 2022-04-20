@@ -1,7 +1,5 @@
 import { createStore } from 'redux'
 import { getEmpleadoReducer } from '../redux/reducers/empleadosReducer'
-import { empF } from '../services/empleadosFake'
-
 import { reordenarFecha,reordenarFechaparamostrarmodal } from '../components/registrotareas/Calendario'
 
 
@@ -57,25 +55,20 @@ const initialState = {
     },
 
 
-
-
-
     dataregistroInit:{
         idbd:{idbd:''},
-        tipo_tarea:{tipo_tarea:''},
-        segundotipo_tarea:{subtipo_tarea_id:''},
-        accion_correctiva_id:{accion_correctiva_id:''},
-        hora_inicio:{hora_inicio:reordenarFecha(fecha)},
-        hora_fin:{hora_fin:reordenarFecha(fecha)},
+        tipo_tarea_id:{tipo_tarea_id:''},
+        tipo_actividad_id:{tipo_actividad_id:''},    
+        subtipo_tarea_id:{subtipo_tarea_id:''},
+        actividad_id:{actividad_id:''},
         observacion:{observacion:''},
+        fecha_inicio:{fecha_inicio:reordenarFecha(fecha)},
+        fecha_fin:{fecha_fin:reordenarFecha(fecha)},
         responsable:{responsable:''}
     },
 
 
 //EDICION ELIMINACION UPDATE
-
-
-
 
     dataEditDelete:{
         id_bd:{id_bd:''},
@@ -90,39 +83,6 @@ const initialState = {
 
     },
 
-    dataEditDeleteInc:{
-        id_bd:{id_bd:''},
-        tipo_tarea:{tipo_tarea:''},
-        segundotipo_tarea:{incidente_id:''},
-        accion_correctiva_id:{accion_correctiva_id:''},
-        hora_inicio:{hora_inicio:''},
-        hora_fin:{hora_fin:''},
-        observacion:{observacion:''},
-        responsable:{responsable:''},
-        nombre_tipo_tarea:{nombre_tipo_tarea:''}
-    },
-    dataEditDeletePase:{
-        id_bd:{id_bd:''},
-        tipo_tarea:{tipo_tarea:''},
-        segundotipo_tarea:{pase_id:''},
-        accion_correctiva_id:{accion_correctiva_id:''},
-        hora_inicio:{hora_inicio:''},
-        hora_fin:{hora_fin:''},
-        observacion:{observacion:''},
-        responsable:{responsable:''},
-        nombre_tipo_tarea:{nombre_tipo_tarea:''}
-    },
-    dataEditDeleteAccion:{
-        id_bd:{id_bd:''},
-        tipo_tarea:{tipo_tarea:''},
-        segundotipo_tarea:{subtipo_tarea_id:''},
-        accion_correctiva_id:{accion_correctiva_id:''},
-        hora_inicio:{hora_inicio:''},
-        hora_fin:{hora_fin:''},
-        observacion:{observacion:''},
-        responsable:{responsable:''},
-        nombre_tipo_tarea:{nombre_tipo_tarea:''}
-    },  
     alertselectevent:false,
     newacces:{},
     datatareaSelect:[]

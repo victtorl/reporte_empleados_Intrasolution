@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import "react-datetime/css/react-datetime.css";
@@ -93,23 +92,7 @@ const Estructuratarea = () => {
 
 
 
-    const enviarDatos = async (e) => {
-        e.preventDefault()
-        
-
-
-        registroTodoTareas(
-                        dataregistro.tipo_tarea_id.tipo_tarea_id,
-                        dataregistro.tipo_actividad_id.tipo_actividad_id,
-                        dataregistro.subtipo_tarea_id.subtipo_tarea_id,
-                        dataregistro.actividad_id.actividad_id,
-                        dataregistro.observacion.observacion,
-                        dataregistro.fecha_inicio.hora_inicio,
-                        dataregistro.fecha_fin.hora_fin,
-                        dataUserSesion.SC_USER_ID)
-
-
-    }
+   
 
 
 
@@ -199,18 +182,18 @@ const Estructuratarea = () => {
 
     }
 
-    //COMBO TIPO ACTIVIDAD
-    const setOptionTipoActividad = (e) => {
-        let idtipotarea = tipoactividadcombo.filter((u) => u.tipo_actividad == e.target.value) //filtrar el elemento seleccionado para acceder a su id y enviarlo como payload
-        store.dispatch({
-            type: '@pushtipo_actividad',
-            payload: {
-                tipo_actividad_id: idtipotarea[0].id
-            }
+    //COMBO TIPO ACTIVIDAD  ***se usara en algún futuro***
+    // const setOptionTipoActividad = (e) => {
+    //     let idtipotarea = tipoactividadcombo.filter((u) => u.tipo_actividad == e.target.value) //filtrar el elemento seleccionado para acceder a su id y enviarlo como payload
+    //     store.dispatch({
+    //         type: '@pushtipo_actividad',
+    //         payload: {
+    //             tipo_actividad_id: idtipotarea[0].id
+    //         }
 
-        })
+    //     })
 
-    }
+    // }
 
     let combodinamico = allcombos.filter((u) => u.tipo == opTarea)  //filtra el subtipo de tarea dependiendo del tipo de tarea que se escoja
 
@@ -234,6 +217,31 @@ const Estructuratarea = () => {
 
     const [selected, setSelected] = useState("");
     const [selectedactividad, setSelectedactividad] = useState("");
+
+
+    const enviarDatos = async (e) => {
+        e.preventDefault()
+        
+
+
+        registroTodoTareas(
+                        dataregistro.tipo_tarea_id.tipo_tarea_id,
+                        
+                        dataregistro.subtipo_tarea_id.subtipo_tarea_id,
+                        dataregistro.actividad_id.actividad_id,
+                        dataregistro.observacion.observacion,
+                        dataregistro.fecha_inicio.hora_inicio,
+                        dataregistro.fecha_fin.hora_fin,
+                        dataUserSesion.SC_USER_ID)
+
+                        SetObservacion('')   
+                        setSelected("") //REFRESCA EL SUBTIPO TAREA OBLIGANDOAL USUARIO A ELEGIR UN SUBTIPO
+                         setSelectedactividad("") //REFRESCA EL SUBTIPO TAREA OBLIGANDOAL USUARIO A ELEGIR UN SUBTIPO
+
+    }
+
+
+
 
     return (
         <div>
@@ -291,13 +299,12 @@ const Estructuratarea = () => {
                         </div>
                     </div>
                     <div className="card-body pt-0 pb-0">
+                        
                         <div className="row">
                             <div className="col-md-12">
 
                                 <div className="form-group">
                                     <label>Codigo de  Tarea </label>
-                                    {/* <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'}> */}
-
                                     <select className="form-control select2" style={{ width: '100%' }} onClick={setOptionSubtipo} defaultValue={'default'}
                                         onChange={(e) => setSelected(e.target.value)} value={selected}
                                     >
@@ -311,25 +318,7 @@ const Estructuratarea = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-md-12">
 
-                                <div className="form-group">
-                                    <label>Actividad</label>
-                                    <select className="form-control select2" style={{ width: '100%' }} onClick={setOptionTipoActividad} defaultValue={'default'}
-                                        onChange={(e) => setSelectedactividad(e.target.value)} value={selectedactividad}
-                                    >
-                                        <option value='default'>--Seleccione Actividad--</option>
-                                        {
-                                            tipoactividadcombo.map(u => (
-                                                <option key={u.id} >{u.tipo_actividad}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
                         <div className="row">
                             <div className="col-md-12">
 
@@ -340,11 +329,10 @@ const Estructuratarea = () => {
 
                             </div>
                         </div>
+
                     </div>
                     <div className="card-footer">
                         <button className="btn btn-primary" data-dismiss="modal" onClick={enviarDatos} >Grabar</button>
-
-                        {/* <button className="btn btn-primary" data-dismiss="modal" onClick={rehidratar} >Prueba rehidratar estado</button> */}
                     </div>
                 </form>
             </div>

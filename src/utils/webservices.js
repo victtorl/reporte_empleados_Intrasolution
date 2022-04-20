@@ -87,7 +87,7 @@ export const getcomboSubtipoTarea =async () => {
     const datax = {
         dato: 0
     }
-    const params = new URLSearchParams()
+    const params = new URLSearchParams(datax)
     let respuesta=  await  axios.post(baseUrl,
         params,
         {
@@ -141,8 +141,6 @@ export const getcomboPase = async() => {
     return respuesta
 
 }
-
-
 
 
 export const getcomboIncidencia =async () => {
@@ -211,7 +209,7 @@ export const getcomboPlandeAccion = async() => {
 
 //NUEVO
 export const getTipoActividad = async() => {
-    const baseUrl = `http://179.43.81.213:8989/intrasolution/ws/null/calendario_tipo_actividad`;
+    const baseUrl = `${dominio}/intrasolution/ws/null/calendario_tipo_actividad`;
     const bodyform = {
         dato:0,
     
@@ -221,10 +219,9 @@ export const getTipoActividad = async() => {
         params, 
         {
             headers: {
-                
-                userLogin: 'guillermo.vergel@intrasolution',
-                userPassword:'gv22384714',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
             
@@ -232,7 +229,6 @@ export const getTipoActividad = async() => {
 
     )
         .then(data => {
-            console.log('hola');
             console.log(data)
             store.dispatch({
                 type: '@gettipoactividad',
@@ -285,50 +281,14 @@ export const getallTareas = async() => {
 
 ///REGISTRO  
 
-export const registroTarea = () => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:1,
-        id:1,
-        tipo_tarea_id: 1,
-        tipo_actividad_id:2,
-        subtipo_tarea_id:0,
-        actividad_id:50107,
-        observacion:'Prueba web',
-        fecha_inicio: '2022-03-16 19:30:00',
-        fecha_fin: '2022-03-16 20:00:00',
-        uea: 1,
-        usuario_id:16
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-    )
-        .then(data => {
-            console.log(data);
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-
-export const registroTodoTareas = (tipo_tarea_id,tipo_actividad_id,subtipo_tarea_id,actividad_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
+export const registroTodoTareas = (tipo_tarea_id,subtipo_tarea_id,actividad_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
     const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     
     const bodyform = {
         type:1,
         id:0,
         tipo_tarea_id: tipo_tarea_id,
-        tipo_actividad_id:tipo_actividad_id,
+        tipo_actividad_id:0,
         subtipo_tarea_id:subtipo_tarea_id,
         actividad_id:actividad_id,
         observacion:observacion,
@@ -367,154 +327,6 @@ export const registroTodoTareas = (tipo_tarea_id,tipo_actividad_id,subtipo_tarea
 
 }
 
-export const registroPase= (tipo_tarea,pase_id,accion_correctiva_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:1,
-        id:1,
-        tipo_tarea: tipo_tarea,
-        pase_id:pase_id,
-        accion_correctiva_id:accion_correctiva_id,
-        observacion:observacion,
-        fecha_inicio: fecha_inicio,
-        fecha_fin:fecha_fin,
-        uea: 1,
-        usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-
-
-
-
-
-export const registroOtro = (tipo_tarea,subtipo_tarea,accion_correctiva_id, observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:1,
-        id:1,
-        tipo_tarea: tipo_tarea,
-        subtipo_tarea:subtipo_tarea,
-        accion_correctiva_id:accion_correctiva_id,
-        observacion:observacion,
-        fecha_inicio: fecha_inicio,
-        fecha_fin:fecha_fin,
-        uea: 1,
-        usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-
-
-export const registroPlanDeAccion = (tipo_tarea,subtipo_tarea,accion_correctiva_id, observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:1,
-        id:1,
-        tipo_tarea: tipo_tarea,
-        subtipo_tarea:subtipo_tarea,
-        accion_correctiva_id:accion_correctiva_id,
-        observacion:observacion,
-        fecha_inicio: fecha_inicio,
-        fecha_fin:fecha_fin,
-        uea: 1,
-        usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-
-export const registroReunion = (tipo_tarea,subtipo_tarea,accion_correctiva_id, observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:1,
-        id:1,
-        tipo_tarea: tipo_tarea,
-        subtipo_tarea:subtipo_tarea,
-        accion_correctiva_id:accion_correctiva_id,
-        observacion:observacion,
-        fecha_inicio: fecha_inicio,
-        fecha_fin:fecha_fin,
-        uea: 1,
-        usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
 //EDICION 
 
 export const wsedicionTarea = (idbd,tipo_tarea_id,tipo_actividad_id,subtipo_tarea_id,actividad_id, observacion,fecha_inicio,fecha_fin,usuario_id) => {
@@ -559,131 +371,7 @@ export const wsedicionTarea = (idbd,tipo_tarea_id,tipo_actividad_id,subtipo_tare
 }
 
 
-export const edicionPase = (tipo_tarea,idbd,pase_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:2,
-        id:idbd,
-        tipo_tarea: tipo_tarea,
-        pase_id:pase_id,
-        accion_correctiva_id:'',
-        observacion:observacion,
-        fecha_inicio: fecha_inicio,
-        fecha_fin: fecha_fin,
-        uea: 1,
-        usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-            store.dispatch({
-                type: '@setalertselectevent',
-                payload: false
-            })
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-
-
-export const edicionOtro = (tipo_tarea,idbd,subtipo_tarea_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:2,
-        id:idbd,
-        tipo_tarea: tipo_tarea,
-        subtipo_tarea_id:subtipo_tarea_id,
-        accion_correctiva_id:'',
-        observacion:observacion,
-        fecha_inicio: fecha_inicio,
-        fecha_fin: fecha_fin,
-        uea: 1,
-        usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-            store.dispatch({
-                type: '@setalertselectevent',
-                payload: false
-            })
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-}
-
-
-export const edicionPlanAccion = (tipo_tarea,idbd,pase_id,observacion,fecha_inicio,fecha_fin,usuario_id) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-    const bodyform = {
-        type:2,
-        id:idbd,
-        tipo_tarea: tipo_tarea,
-        pase_id:pase_id,
-        accion_correctiva_id:'',
-        observacion:observacion,
-        fecha_inicio: fecha_inicio,
-        fecha_fin: fecha_fin,
-        uea: 1,
-        usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-            store.dispatch({
-                type: '@setalertselectevent',
-                payload: false
-            })
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
 //ELIMINACION
-
 export const wseliminarTarea = (idbd) => {
     const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
@@ -718,150 +406,8 @@ export const wseliminarTarea = (idbd) => {
         })
 
 }
-export const eliminacionPase = (idbd) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-                    
-    const bodyform = {
-        type:3,
-        id:idbd,
-        // tipo_tarea: tipo_tarea,
-        // incidente_id:incidente_id,
-        // observacion:observacion,
-        // fecha_inicio: fecha_inicio,
-        // fecha_fin: fecha_fin,
-        // uea: 1,
-        // usuario_id:usuario_id
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
 
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-            store.dispatch({
-                type: '@setalertselectevent',
-                payload: false
-            })
 
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-export const eliminacionOtro = (idbd) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-                        
-    const bodyform = {
-        type:3,
-        id:idbd,
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-            store.dispatch({
-                type: '@setalertselectevent',
-                payload: false
-            })
-
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-export const eliminacionPlanAccion = (idbd) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-                        
-    const bodyform = {
-        type:3,
-        id:idbd,
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-            store.dispatch({
-                type: '@setalertselectevent',
-                payload: false
-            })
-
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-export const eliminacionReunion = (idbd) => {
-    const baseUrl =`${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
-                        
-    const bodyform = {
-        type:3,
-        id:idbd,
-    }
-    const params = new URLSearchParams(bodyform)
-    axios.post(baseUrl,
-        params,
-        {
-            headers: {
-                userLogin: `${getInfoLocal().name}${emaildominio}`,
-                userPassword: getInfoLocal().pass,
-                systemRoot: `${systemrootdominio}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        },
-
-    )
-        .then(data => {
-            console.log(data);
-            getallTareas()
-            store.dispatch({
-                type: '@setalertselectevent',
-                payload: false
-            })
-
-        })
-        .catch(e => {
-            console.log('el error es' + e);
-        })
-
-}
-     
 export const getDataUsuario = async(usuario,passs) => {
     const baseUrl = `${dominio}/intrasolution//ws/null/pr_ws_sc_user`;
     const bodyform = {
@@ -899,9 +445,9 @@ export const getDataUsuario = async(usuario,passs) => {
 }
 
 export const getComboallTipoTareas = async() => {
-    const baseUrl = 'http://179.43.81.213:8989/intrasolution/ws/null/calendario_actividad_combos';
+    const baseUrl = `${dominio}/intrasolution/ws/null/calendario_actividad_combos`;
     const bodyform = {
-        sc_user_id:13,
+        sc_user_id:getInfoLocal().idus,
     
     }
     const params = new URLSearchParams(bodyform)
@@ -909,10 +455,9 @@ export const getComboallTipoTareas = async() => {
         params,
         {
             headers: {
-                
-                userLogin: 'guillermo.vergel@intrasolution',
-                userPassword:'gv22384714',
-                systemRoot: 'intrasolution',
+                userLogin: `${getInfoLocal().name}${emaildominio}`,
+                userPassword: getInfoLocal().pass,
+                systemRoot: `${systemrootdominio}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         },

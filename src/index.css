@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.letra-pequenia-form-edit{
+  font-size: 13px;
+  color:#555555;
+}

@@ -1,13 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-
 import Calendar from "react-awesome-calendar";
-
 import Registrotareas from './RegistroTareas';
 import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
-import ModalTarea from './ModalTarea';
-import { reordenarFecha } from './Calendario';
 import { getDataTaskCalendar } from '../../utils/webservices';
 
 export const events = [{
@@ -34,7 +30,7 @@ export const events = [{
 const Agenda = () => {
 
   const tasks = useSelector((state) => state.tasks)
-  const diaSelect = useSelector((state) => state.diaSelect)
+  // const diaSelect = useSelector((state) => state.diaSelect)
   const datatareaSelect = useSelector((state) => state.datatareaSelect)
 
 
@@ -108,7 +104,7 @@ const Agenda = () => {
   const calendar = React.createRef()
 
   useEffect(() => {
-    const details = calendar.current.getDetails();
+    // const details = calendar.current.getDetails();
 
   }, []);
 
@@ -134,35 +130,9 @@ const Agenda = () => {
     getDataTaskCalendar(tareaRecuperada.id)
 
     //para incidente
-    store.dispatch({
-      type: '@pushdataEditDeleteInc',
-      payload: {
-        id_bd: { id_bd: tareaRecuperada.id },
-        tipo_tarea: { tipo_tarea: tareaRecuperada.tipo_tarea_id },
-        segundotipo_tarea: { incidente_id: tareaRecuperada.incidencia_id },
-        accion_correctiva_id: { accion_correctiva_id: 777 },
-        hora_inicio: { hora_inicio: tareaRecuperada.hora_inicio },
-        hora_fin: { hora_fin: tareaRecuperada.hora_fin },
-        observacion: { observacion: tareaRecuperada.observacion },
-        responsable: { responsable: dataUserSesion.SC_USER_ID },
-        nombre_tipo_tarea: { nombre_tipo_tarea: tareaRecuperada.nombre_tipo_tarea }
-      }
-    })
+ 
     //para pase
-    store.dispatch({
-      type: '@pushdataEditDeletePase',
-      payload: {
-        id_bd: { id_bd: tareaRecuperada.id },
-        tipo_tarea: { tipo_tarea: tareaRecuperada.tipo_tarea_id },
-        segundotipo_tarea: { pase_id: tareaRecuperada.pase_id },
-        accion_correctiva_id: { accion_correctiva_id: 777 },
-        hora_inicio: { hora_inicio: tareaRecuperada.hora_inicio },
-        hora_fin: { hora_fin: tareaRecuperada.hora_fin },
-        observacion: { observacion: tareaRecuperada.observacion },
-        responsable: { responsable: dataUserSesion.SC_USER_ID },
-        nombre_tipo_tarea: { nombre_tipo_tarea: tareaRecuperada.nombre_tipo_tarea }
-      }
-    })
+  
     //para Otro
 
 
@@ -173,14 +143,43 @@ const Agenda = () => {
       }
     })
 
+//controlar valores que pudieran llegar nulos
+
+
+// let subtipotarea=   datatareaSelect[0].subtipo_tarea_id
+// let actividadid=   datatareaSelect[0].actividad_id
+
+const tipoactividadid =() => {
+    if(datatareaSelect[0].act_tipo_actividad_id !==null){
+      return datatareaSelect[0].act_tipo_actividad_id
+    }else{
+      return 0
+    }
+}
+const subtipotareaid =() => {
+  if(datatareaSelect[0].subtipo_tarea_id !==null){
+    return datatareaSelect[0].subtipo_tarea_id
+  }else{
+    return 0
+  }
+}
+const actividadid =() => {
+  if(datatareaSelect[0].actividad_id !==null){
+    return datatareaSelect[0].actividad_id
+  }else{
+    return 0
+  }
+}
+
+
     store.dispatch({
       type: '@pushdataEditDelete',
       payload: {
         id_bd: { id_bd:datatareaSelect[0].id },
         tipo_tarea_id: { tipo_tarea_id: datatareaSelect[0].tipo_tarea_id },
-        tipo_actividad_id: { tipo_actividad_id: datatareaSelect[0].act_tipo_actividad_id },
-        subtipo_tarea_id: { subtipo_tarea_id:datatareaSelect[0].subtipo_tarea_id },
-        actividad_id: { actividad_id: datatareaSelect[0].actividad_id},
+        tipo_actividad_id: { tipo_actividad_id: tipoactividadid() },
+        subtipo_tarea_id: { subtipo_tarea_id:subtipotareaid() },
+        actividad_id: { actividad_id: actividadid()},
         observacion: { observacion:  datatareaSelect[0].observacion },
         fecha_inicio: { hora_inicio:datatareaSelect[0].fecha_inicio },
         fecha_fin: { hora_fin: datatareaSelect[0].fecha_fin},
@@ -190,21 +189,7 @@ const Agenda = () => {
     })
 
      //para Plan de accion
-     store.dispatch({
-      type: '@pushdataEditDeleteAccion',
-      payload: {
-        id_bd: { id_bd: tareaRecuperada.id },
-        tipo_tarea: { tipo_tarea: tareaRecuperada.tipo_tarea_id },
-        segundotipo_tarea: { subtipo_tarea_id: tareaRecuperada.subtipo_tarea_id },
-        accion_correctiva_id: { accion_correctiva_id: '' },
-        hora_inicio: { hora_inicio: tareaRecuperada.hora_inicio },
-        hora_fin: { hora_fin: tareaRecuperada.hora_fin },
-        observacion: { observacion: tareaRecuperada.observacion },
-        responsable: { responsable: dataUserSesion.SC_USER_ID },
-        nombre_tipo_tarea: { nombre_tipo_tarea: tareaRecuperada.nombre_tipo_tarea }
-
-      }
-    })
+    
 
     //alertar si se pickeo un dia
     store.dispatch({
