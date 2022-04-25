@@ -19,24 +19,17 @@ const Sidebar = (props) => {
     window.localStorage.setItem(
       'islogged', JSON.stringify(!islogged)
     )
-    console.log(!islogged);
 
     window.localStorage.setItem(
       'accesws', JSON.stringify(null)
     )
     OcultarMenu()
-
   }
 
   const OcultarMenu = () => {
-    console.log('ocultar menu')
-
     setTimeout(function () {
       window.location.reload(false);
     }, 1);
-
-    //  ReactDOM.unmountComponentAtNode(document.getElementsByClassName('sidebar-mini')); 
-
 
   }
 

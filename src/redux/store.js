@@ -49,8 +49,8 @@ const initialState = {
         subtipo_tarea_id:{subtipo_tarea_id:''},
         actividad_id:{actividad_id:''},
         observacion:{observacion:''},
-        fecha_inicio:{fecha_inicio:reordenarFecha(fecha)},
-        fecha_fin:{fecha_fin:reordenarFecha(fecha)},
+        fecha_inicio:{hora_inicio:reordenarFecha(fecha)},
+        fecha_fin:{hora_fin:reordenarFecha(fecha)},
         responsable:{responsable:''}
     },
 
@@ -62,8 +62,8 @@ const initialState = {
         subtipo_tarea_id:{subtipo_tarea_id:''},
         actividad_id:{actividad_id:''},
         observacion:{observacion:''},
-        fecha_inicio:{fecha_inicio:reordenarFecha(fecha)},
-        fecha_fin:{fecha_fin:reordenarFecha(fecha)},
+        fecha_inicio:{hora_inicio:reordenarFecha(fecha)},
+        fecha_fin:{hora_fin:reordenarFecha(fecha)},
         responsable:{responsable:''}
     },
 

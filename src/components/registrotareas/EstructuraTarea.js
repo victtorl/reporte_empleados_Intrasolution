@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import "react-datetime/css/react-datetime.css";
@@ -11,8 +11,8 @@ import { registroTodoTareas } from '../../utils/webservices';
 
 setDefaultLocale('es')
 
-
-const Estructuratarea = () => {
+//este componente es la estructura del modal tarea
+const Estructuratarea = (props) => {
 
     const dataregistro = useSelector((state) => state.dataregistro)
     const dataUserSesion = useSelector((state) => state.dataUserSesion)
@@ -52,11 +52,6 @@ const Estructuratarea = () => {
             return `${diaSelect}T${h}.318Z`
         }
     }
-
-
-
-
-
 
 
 
@@ -102,8 +97,6 @@ const Estructuratarea = () => {
     const setOption = (e) => {
         console.log('valor elegido' + e.target.value)
         SetoptTarea(e.target.value)
-        
-
         store.dispatch({
             type: '@pushtipo_tarea',
             payload: {
@@ -117,7 +110,6 @@ const Estructuratarea = () => {
             payload: {
                 responsable: dataUserSesion.SC_USER_ID
             }
-
         })
         if (e.target.value < 4) { //validamos que  el tipo de tareas es OTRO entonces le enviamos el subtipo_tarea_id del subtipo elegido, si no fuese ese el caso le enviamos 0
             store.dispatch({
@@ -125,7 +117,6 @@ const Estructuratarea = () => {
                 payload: {
                     subtipo_tarea_id: 0
                 }
-
             })
         }else{
             store.dispatch({
@@ -136,26 +127,17 @@ const Estructuratarea = () => {
 
             })
         }
-        
-
-
-
         setSelected("") //REFRESCA EL SUBTIPO TAREA OBLIGANDOAL USUARIO A ELEGIR UN SUBTIPO
         setSelectedactividad("") //REFRESCA EL SUBTIPO TAREA OBLIGANDOAL USUARIO A ELEGIR UN SUBTIPO
     }
+
+
     //COMBO SUBTIPO  TAREA 
     const setOptionSubtipo = (e) => {
         let datosTareatipo123 = allcombos.filter((u) => u.tipo < 4) //FILTRAMOS LAS TAREAS CON ID  1 2 3 QUE CORRESPONDE A OTROS
         let idactividad123 = datosTareatipo123.filter((u) => u.codigo == e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
-     
         let datosTareatipo4 = allcombos.filter((u) => u.tipo == 4) //FILTRAMOS LAS TAREAS CON ID 4 QUE CORRESPONDE A OTROS
         let idactividadOtros = datosTareatipo4.filter((u) => u.codigo == e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
-
-        console.log(datosTareatipo123)
-        console.log(datosTareatipo4)
-        console.log(idactividad123);
-        console.log(idactividadOtros);
-        
         if(idactividad123.length !==0){   //VALIDAMOS QUE EL ARRAY idactividad123 TENGA CONTENIDO, SI ESTO SE CUMPLE GUARDAMOS EL subtipo_tarea_id EN EL STORE
             console.log('123 tipoas');
             store.dispatch({
@@ -166,8 +148,6 @@ const Estructuratarea = () => {
 
         })
        }
-
-
         if (idactividadOtros.length !==0) {  //VALIDAMOS QUE EL ARRAY idactividadOtros TENGA CONTENIDO, SI ESTO SE CUMPLE GUARDAMOS EL subtipo_tarea_id EN EL STORE
             console.log('otros');
             store.dispatch({
@@ -178,8 +158,6 @@ const Estructuratarea = () => {
 
             })
         }
-
-
     }
 
     //COMBO TIPO ACTIVIDAD  ***se usara en algún futuro***
@@ -221,8 +199,6 @@ const Estructuratarea = () => {
 
     const enviarDatos = async (e) => {
         e.preventDefault()
-        
-
 
         registroTodoTareas(
                         dataregistro.tipo_tarea_id.tipo_tarea_id,
@@ -241,8 +217,43 @@ const Estructuratarea = () => {
     }
 
 
+    
+
+    useEffect(() => {
+        console.log('effect Estructuratarea')
+
+        //reiniciar horas al crear una nueva tarea
+       if(startDatei){
+           setStartDatei(new Date())
+       }
+       if(startDatef){
+           setStartDatef(new Date())
+        }
+        //reiniciar tipo de tarea
+        if(opTarea!==0){
+            SetoptTarea(0)
+        }
+       //reiniciar el campo observacion
+       SetObservacion('')
+        
+         
+      },[props.useef]);
 
 
+    const tipotarea=[
+        {   id:0,
+            nombre:'--Seleccione un tipo de tarea--'},
+        {   id:1,
+            nombre:'Incidencia'},
+        {   id:2,
+            nombre:'Pase'},
+        {   id:3,
+            nombre:'Planes de Accion'},
+        {   id:4,
+            nombre:'Otros'},
+    ]  
+
+   
     return (
         <div>
             <div className="card card-primary">
@@ -287,12 +298,18 @@ const Estructuratarea = () => {
                                 </div>
                                 <div className="form-group">
                                     <label>Tipo Tarea</label>
-                                    <select className="form-control select2" style={{ width: '100%' }} onChange={setOption} defaultValue={'default'}>
-                                        <option value='default'>--Seleccione un tipo tarea--</option>
+                                    <select className="form-control select2" name='tipotarea' style={{ width: '100%' }} onChange={setOption} value={opTarea}>
+                                        {/* <option value='0' selected>--Seleccione un tipo tarea--</option>
                                         <option value='1'>Incidencia</option>
                                         <option value='2'>Pase</option>
                                         <option value='3'>Planes de Accion</option>
-                                        <option value='4'>Otros</option>
+                                        <option value='4'>Otros</option> */}
+                                        {/* <option value={opTarea}>--Seleccione un tipo de tarea--</option> */}
+                                        {
+                                            tipotarea.map((item,i) => (
+                                              <option key={i} value={item.id} >{item.nombre}</option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -324,7 +341,7 @@ const Estructuratarea = () => {
 
                                 <div className="form-group">
                                     <label>Descripción</label>
-                                    <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={optObservacion} />
+                                    <textarea onChange={setOptionObs} className="form-control" id="exampleFormControlTextarea1" rows={3} value={optObservacion} />
                                 </div>
 
                             </div>

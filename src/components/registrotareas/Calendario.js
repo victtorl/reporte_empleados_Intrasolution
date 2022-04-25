@@ -32,11 +32,7 @@ export const reordenarFechaparamostrarmodal = (v) => {
 }
 
 const Calendario = () => {
-
-  
     const alertselectevent = useSelector((state) => state.alertselectevent)
-
-
     return (
         <>
             <div className="content-wrapper p-0 calendario-pantalla-grande">
@@ -59,11 +55,6 @@ const Calendario = () => {
                 </section>
             </div>
         </>
-
-
-
-
-
     );
 }
 

@@ -13,21 +13,13 @@ setDefaultLocale('es')
 
 
 const Edicioneliminacion = () => {
-
     const dataregistro = useSelector((state) => state.dataregistro)
     const dataUserSesion = useSelector((state) => state.dataUserSesion)
-
     const datatareaSelect = useSelector((state) => state.datatareaSelect)
-
     const dataEditDelete = useSelector((state) => state.dataEditDelete)
-
-
     const diaSelect = useSelector((state) => state.diaSelect)
     const diaSelectmuestramodal = useSelector((state) => state.diaSelectmuestramodal)
-
-
     const allcombos = useSelector((state) => state.allcombos)
-    //trayendo tipo actividades
     const tipoactividadcombo = useSelector((state) => state.tipoactividad)
 
 
@@ -123,14 +115,11 @@ const editarDatos =async(e)=>{
     const setOption = (e) => {
         console.log('valor elegido' + e.target.value)
         SetoptTarea(e.target.value)
-        
-
         store.dispatch({
             type: '@pushtipo_tareaED',
             payload: {
                 tipo_tarea_id: e.target.value
             }
-
         })
         //setear el responsable
         store.dispatch({
@@ -138,7 +127,6 @@ const editarDatos =async(e)=>{
             payload: {
                 responsable: dataUserSesion.SC_USER_ID
             }
-
         })
         if (e.target.value < 4) { //validamos que  el tipo de tareas es OTRO entonces le enviamos el subtipo_tarea_id del subtipo elegido, si no fuese ese el caso le enviamos 0
             store.dispatch({
@@ -146,7 +134,6 @@ const editarDatos =async(e)=>{
                 payload: {
                     subtipo_tarea_id: 0
                 }
-
             })
         }else{
             store.dispatch({
@@ -154,41 +141,27 @@ const editarDatos =async(e)=>{
                 payload: {
                     actividad_id: 0
                 }
-
             })
         }
-        
-
-
-
         setSelected("") //REFRESCA EL SUBTIPO TAREA OBLIGANDOAL USUARIO A ELEGIR UN SUBTIPO
         setSelectedactividad("") //REFRESCA EL SUBTIPO TAREA OBLIGANDOAL USUARIO A ELEGIR UN SUBTIPO
     }
+
+
     //COMBO SUBTIPO  TAREA 
     const setOptionSubtipo = (e) => {
         let datosTareatipo123 = allcombos.filter((u) => u.tipo < 4) //FILTRAMOS LAS TAREAS CON ID  1 2 3 QUE CORRESPONDE A OTROS
         let idactividad123 = datosTareatipo123.filter((u) => u.codigo === e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
-     
         let datosTareatipo4 = allcombos.filter((u) => u.tipo === 4) //FILTRAMOS LAS TAREAS CON ID 4 QUE CORRESPONDE A OTROS
         let idactividadOtros = datosTareatipo4.filter((u) => u.codigo === e.target.value) //FILTRAMOS EL ARRAY ANTERIOR PARA OBTENER LOS DATOS DEL ELEMENTO SELECCIONADO
-
-        console.log(datosTareatipo123)
-        console.log(datosTareatipo4)
-        console.log(idactividad123);
-        console.log(idactividadOtros);
-        
         if(idactividad123.length !==0){   //VALIDAMOS QUE EL ARRAY idactividad123 TENGA CONTENIDO, SI ESTO SE CUMPLE GUARDAMOS EL subtipo_tarea_id EN EL STORE
-            console.log('123 tipoas');
             store.dispatch({
             type: '@pushactividadED',
             payload: {
                 actividad_id: idactividad123[0].actividad_id
             }
-
         })
        }
-
-
         if (idactividadOtros.length !==0) {  //VALIDAMOS QUE EL ARRAY idactividadOtros TENGA CONTENIDO, SI ESTO SE CUMPLE GUARDAMOS EL subtipo_tarea_id EN EL STORE
             console.log('otros');
             store.dispatch({
@@ -196,11 +169,8 @@ const editarDatos =async(e)=>{
                 payload: {
                     subtipo_tarea_id: idactividadOtros[0].actividad_id
                 }
-
             })
         }
-
-
     }
 
     //COMBO TIPO ACTIVIDAD
@@ -211,7 +181,6 @@ const editarDatos =async(e)=>{
             payload: {
                 tipo_actividad_id: idtipotarea[0].id
             }
-
         })
 
     }
@@ -221,16 +190,13 @@ const editarDatos =async(e)=>{
     //campo Observacion
     const [optObservacion, SetObservacion] = useState('')
     const setOptionObs = (e) => {
-        console.log(e.target.value);
         SetObservacion(e.target.value)
         store.dispatch({
             type: '@pushobservacionED',
             payload: {
                 observacion: e.target.value
             }
-
         })
-
     }
 
     const [selected, setSelected] = useState("");

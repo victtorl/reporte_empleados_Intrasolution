@@ -1,32 +1,40 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import EstructuraTarea from './EstructuraTarea'
 import { useSelector } from 'react-redux';
 import { store } from '../../redux/store';
 
 
-const ModalTarea = () => {
+
+
+const ModalTarea = (props) => {
 
 
 
 const diaSelectmuestramodal = useSelector((state) => state.diaSelectmuestramodal)
 
-  
+const [propevents,Setpropevents]=useState(true)
+
+
+const reordenarFechabtnnuevatarea = (v) => {
+    let ff = v.toLocaleString('es-PE')
+    let fff = ff.split(' ')
+    let g = fff[0].split('/')
+    let dia = g[0]
+    let mes = g[1]
+    let anio = g[2]
+    dia <= 9 ? dia = `0${dia}` : dia = dia
+    mes <= 9 ? mes = `0${mes}` : mes = mes
+    
+      return `${diaSelectmuestramodal} ${fff[1]}`
+}
+
+
+
 
 const reiniciarhoras =() => {
-    const reordenarFechabtnnuevatarea = (v) => {
-        let ff = v.toLocaleString('es-PE')
-        let fff = ff.split(' ')
-        let g = fff[0].split('/')
-        let dia = g[0]
-        let mes = g[1]
-        let anio = g[2]
-        dia <= 9 ? dia = `0${dia}` : dia = dia
-        mes <= 9 ? mes = `0${mes}` : mes = mes
-        
-          return `${diaSelectmuestramodal} ${fff[1]}`
-        
-    }
-
+    
+  Setpropevents(!propevents)
+    console.log('setpropevvents'+propevents)
     //reiniciar el dataregistro
     store.dispatch({
         type: '@pushhorainicio',
@@ -42,6 +50,9 @@ const reiniciarhoras =() => {
         }
     })
 }
+
+
+
 
 
     return (
@@ -62,8 +73,7 @@ const reiniciarhoras =() => {
                             </button>
                         </div>
                         <div className="modal-body">
-                          <EstructuraTarea/>
-                                        
+                          <EstructuraTarea useef={propevents}/>           
                         </div>
                         {/* <div className="modal-footer">
                             <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={registrarTarea}>X</button>

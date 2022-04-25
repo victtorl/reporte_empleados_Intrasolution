@@ -40,7 +40,6 @@ const Login = () => {
     const validarlogin = () => {
         getDataUsuario(datos.name,datos.password)
             .then(data => {
-
                 const infoUser = data.data.data[0]
                 // console.log(infoUser);
                 if (datos.name === infoUser.USER_LOGIN && datos.password === infoUser.password) {
@@ -52,7 +51,6 @@ const Login = () => {
                         'islogged', JSON.stringify(!statusLog)
 
                     )
-                    
                     // console.log('estas logueado');
                 } else {
                     // console.log('usuario o contraseña incorrecta');
@@ -60,15 +58,11 @@ const Login = () => {
                         type: '@statusLogin',
                         payload: false
                     })
-
                     window.localStorage.setItem(
                         'islogged', JSON.stringify(statusLog)
                         )
-                    
-
                 }
                 Setvercredential('Bienvenido')
-                
                 return infoUser
             })
             .then((infoUser) => {
@@ -76,7 +70,6 @@ const Login = () => {
                     'accesws',JSON.stringify({namews:infoUser.USER_LOGIN,passws:infoUser.password,idws:infoUser.SC_USER_ID,tokenws:infoUser.token})
                 ) 
             }
-               
             )
             .then((e) => {
                 getComboallTipoTareas()
@@ -95,7 +88,6 @@ const Login = () => {
                 Setvercredential('Usuario o Contraseña Incorrectos')
                 Setcolortext('text-danger show toggle')
             })
-
     }
 
 
@@ -112,17 +104,18 @@ const Login = () => {
     }
 
     const [Passtoogle, setPassstoogle] =useState('password');
+
     const [count,Setcount]=useState(0)
 
     const ChangeTooglepassword =(e) => {
-
         e.preventDefault()
         Setcount(count+1)
       if(count%2===0){
         setPassstoogle('text') 
-        
+        //  console.log(count)
       }else{
         setPassstoogle('password')
+        //  console.log(count)  
       }
       
     }

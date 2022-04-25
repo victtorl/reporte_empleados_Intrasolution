@@ -9,14 +9,10 @@ import { getallTareas } from '../utils/webservices';
 const GrupoPrincipal = () => {
 
   useEffect(() => {
-      
       getallTareas()
       
   }, []);  
- 
-
     const dat = useSelector((state) => state.dataUserSesion)
-
     return (
         <>
             <Navbar />

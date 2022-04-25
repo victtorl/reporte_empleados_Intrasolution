@@ -6,26 +6,7 @@ import { store } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { getDataTaskCalendar } from '../../utils/webservices';
 
-export const events = [{
-  id: 1,
-  color: '#fd3153',
-  from: '2022-03-08T13:00:00+00:00',
-  to: '2022-03-08T14:00:00+00:00',
-  title: 'alguna tarea'
 
-}, {
-  id: 2,
-  color: '#1ccb9e',
-  from: '2022-03-08T13:00:00+00:00',
-  to: '2022-03-08T14:00:00+00:00',
-  title: 'Incidencia con bnb'
-}, {
-  id: 3,
-  color: '#3694DF',
-  from: '2022-03-08T13:00:00+00:00',
-  to: '2022-03-08T20:00:00+00:00',
-  title: 'This is also another event'
-}]
 
 const Agenda = () => {
 
@@ -57,12 +38,10 @@ const Agenda = () => {
       day = `0${day}`
     }
     if (month < 10) {
-      //el calendario me devuelve un mes antes cuando seleccionas cualquier mes ejemplo enero devuelve month 0
+      //el calendario me devuelve un mes antes cuando seleccionas cualquier mes,por ejemplo enero devuelve month 0
       month = `0${month + 1}`
     }
-    //   console.log(`${year}-${month}-${day}`)
     return `${year}-${month}-${day}`
-
 
   }
 
@@ -72,11 +51,7 @@ const Agenda = () => {
     setdate(formatDat(hour, day, month, year).hour)
     console.log('verificando daylymode');
     console.log(date);
-    // store.dispatch({
-    //     type: '@getdiaSelect',
-    //     payload: date
-    // })
-
+   
   }
 
 
@@ -95,8 +70,6 @@ const Agenda = () => {
       payload: fechapickeada
     })
     //poner en la hora inicial del modal la hora del sistema y el dia del sistema 
-
-
   }
 
 
@@ -126,15 +99,7 @@ const Agenda = () => {
     console.log('#' + ev)
     console.log(tareaRecuperada)
    
-
     getDataTaskCalendar(tareaRecuperada.id)
-
-    //para incidente
- 
-    //para pase
-  
-    //para Otro
-
 
     store.dispatch({
       type: '@pushidbd',
@@ -143,11 +108,6 @@ const Agenda = () => {
       }
     })
 
-//controlar valores que pudieran llegar nulos
-
-
-// let subtipotarea=   datatareaSelect[0].subtipo_tarea_id
-// let actividadid=   datatareaSelect[0].actividad_id
 
 const tipoactividadid =() => {
     if(datatareaSelect[0].act_tipo_actividad_id !==null){
@@ -187,10 +147,7 @@ const actividadid =() => {
 
       }
     })
-
-     //para Plan de accion
-    
-
+  
     //alertar si se pickeo un dia
     store.dispatch({
       type: '@setalertselectevent',
@@ -198,10 +155,6 @@ const actividadid =() => {
     })
 
   }
-
-
-
-
 
 
   return (

@@ -5,15 +5,13 @@ import Calendario from './registrotareas/Calendario';
 import React from 'react';
 import TareasUsuario from './tablaempleados/TareasUsuario';
 import BarChart from './charts/BarChart';
-import BarChartx from './charts/BarChartx';
+import BarChartx from './charts/DashboardGraficos';
 
 const Principal = () => {
-  
     const rutaServidor="ASP_intrasolution/intrasolution_nodejs"
     return (
         <div className="wrapper"> 
-        <Routes>
-                        
+        <Routes> 
             <Route path={rutaServidor+'/tareaspendientes'} element={<TareasUsuario/>}></Route>
             <Route path={rutaServidor+'/empleados'} element={<TablaEmpleados/>}></Route>
             <Route path={rutaServidor+'/home'} element={<BarChartx/>}></Route>
