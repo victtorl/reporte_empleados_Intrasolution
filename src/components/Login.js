@@ -126,8 +126,9 @@ const Login = () => {
     const rutaServidor = "ASP_intrasolution/intrasolution_nodejs"
     return (
         <div className='login-principal'>
+
             <div className='m-0  vh-100 row justify-content-center align-items-center '>
-                <div className="login-box cuerpo-login ">
+                <div className="login-box cuerpo-login col-md-6 ">
                     <div className="card card-outline card-danger marco-login">
                         <img src={safe} className="img-fluid" alt="Responsive image"></img>
                         <div className="card-header text-center">

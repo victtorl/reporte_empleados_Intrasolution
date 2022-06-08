@@ -329,13 +329,13 @@ export const registroTodoTareas = (tipo_tarea_id,subtipo_tarea_id,actividad_id,o
 
 //EDICION 
 
-export const wsedicionTarea = (idbd,tipo_tarea_id,tipo_actividad_id,subtipo_tarea_id,actividad_id, observacion,fecha_inicio,fecha_fin,usuario_id) => {
+export const wsedicionTarea = (idbd,tipo_tarea_id,subtipo_tarea_id,actividad_id, observacion,fecha_inicio,fecha_fin,usuario_id) => {
     const baseUrl = `${dominio}/intrasolution/ws/null/pr_ws_tarea_horas_crud`;
     const bodyform = {
         type:2,
         id:idbd,
         tipo_tarea_id: tipo_tarea_id,
-        tipo_actividad_id:tipo_actividad_id,
+        tipo_actividad_id:0,
         subtipo_tarea_id:subtipo_tarea_id,
         actividad_id:actividad_id,
         observacion:observacion,
@@ -344,6 +344,24 @@ export const wsedicionTarea = (idbd,tipo_tarea_id,tipo_actividad_id,subtipo_tare
         uea: 1,
         usuario_id:usuario_id
     }
+
+   
+// registro ejemplo
+//     const bodyform = {
+//         type:1,
+//         id:0,
+//         tipo_tarea_id: tipo_tarea_id,
+//         tipo_actividad_id:0,
+//         subtipo_tarea_id:subtipo_tarea_id,
+//         actividad_id:actividad_id,
+//         observacion:observacion,
+//         fecha_inicio: fecha_inicio,
+//         fecha_fin: fecha_fin,
+//         uea: 1,
+//         usuario_id:usuario_id
+//     }
+
+
     const params = new URLSearchParams(bodyform)
     axios.post(baseUrl,
         params,
